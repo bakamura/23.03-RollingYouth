@@ -6,12 +6,21 @@ public class EntityActionsManagment : MonoBehaviour
 {
     [SerializeField] private float _decisionsTick;
     [SerializeField] private float _actionsTick;
-    [SerializeField] private BaseDecisions[] _decisions;
-    [SerializeField] private BaseActions[] _actions;
+    [SerializeField, Tooltip("the first state in the list will be the initial state")] private States[] _behaviourList;
+
     private WaitForSeconds _actionsDelay;
     private WaitForSeconds _decisionsDelay;
-    private bool _isActionsPossible;
-    private Coroutine _actionsCoroutine;
+    private States _currentState;
+
+    [System.Serializable]
+    private struct States
+    {
+        public string StateID;
+        public BaseDecisions[] Decisions;
+        public BaseActions[] Actions;
+        public string StateToGoWhenTrue;
+        public string StateToGoWhenFalse;
+    }
 
     private void Awake()
     {
@@ -20,33 +29,44 @@ public class EntityActionsManagment : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (_decisions.Length > 0)
+        if (_behaviourList.Length > 0)
         {
-            StartCoroutine(DecisionsCoroutine());
-        }
-        else
-        {
-            _actionsCoroutine = StartCoroutine(ActionsCoroutine());
-            Debug.Log($"the Entity {name} doesn't have any decisions");
+            _currentState = _behaviourList[0];
+            if (_currentState.Decisions.Length > 0) StartCoroutine(DecisionsCoroutine());
+            if (_currentState.Actions.Length > 0) StartCoroutine(ActionsCoroutine());
         }
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
-        _actionsCoroutine = null;
+    }
+
+    private void LookForState(bool decisionResult)
+    {
+        string newStateID = decisionResult ? _currentState.StateToGoWhenTrue : _currentState.StateToGoWhenFalse;
+        if (!string.IsNullOrEmpty(newStateID))
+        {
+            for (int i = 0; i < _behaviourList.Length; i++)
+            {
+                if (_behaviourList[i].StateID == newStateID)
+                {
+                    _currentState = _behaviourList[i];
+                    break;
+                }
+            }
+        }
     }
     IEnumerator ActionsCoroutine()
     {
-        while (_isActionsPossible)
+        while (true)
         {
-            for (int i = 0; i < _actions.Length; i++)
+            for (int i = 0; i < _currentState.Actions.Length; i++)
             {
-                _actions[i].ExecuteAction();
+                _currentState.Actions[i].ExecuteAction();
             }
             yield return _actionsDelay;
         }
-        _actionsCoroutine = null;
     }
 
     IEnumerator DecisionsCoroutine()
@@ -54,12 +74,11 @@ public class EntityActionsManagment : MonoBehaviour
         while (true)
         {
             byte decisionsAmount = 0;
-            for (int i = 0; i < _decisions.Length; i++)
+            for (int i = 0; i < _currentState.Decisions.Length; i++)
             {
-                if (_decisions[i].CheckDecision()) decisionsAmount++;
+                if (_currentState.Decisions[i].CheckDecision()) decisionsAmount++;
             }
-            _isActionsPossible = decisionsAmount == _decisions.Length;
-            if (_isActionsPossible && _actionsCoroutine == null) _actionsCoroutine = StartCoroutine(ActionsCoroutine());
+            LookForState(decisionsAmount == _currentState.Decisions.Length);
             yield return _decisionsDelay;
         }
     }

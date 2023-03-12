@@ -1767,7 +1767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460067956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.91, y: 0.92, z: -10.53}
+  m_LocalPosition: {x: 9.91, y: 5.97, z: -10.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1622069924}
@@ -1923,10 +1923,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _decisionsTick: 0.2
   _actionsTick: 0.02
-  _decisions:
-  - {fileID: 1495528915}
-  _actions:
-  - {fileID: 1495528914}
+  _behaviourList:
+  - StateID: MovingOnGround
+    Decisions:
+    - {fileID: 1495528915}
+    Actions:
+    - {fileID: 1495528914}
+    StateToGoWhenTrue: 
+    StateToGoWhenFalse: MovingOnAir
+  - StateID: MovingOnAir
+    Decisions:
+    - {fileID: 1495528915}
+    Actions:
+    - {fileID: 1495528914}
+    StateToGoWhenTrue: MovingOnGround
+    StateToGoWhenFalse: 
 --- !u!54 &1495528917
 Rigidbody:
   m_ObjectHideFlags: 0

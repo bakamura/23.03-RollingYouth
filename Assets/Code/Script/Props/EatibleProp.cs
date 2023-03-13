@@ -15,7 +15,17 @@ public class EatibleProp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.GetComponent<ObjectGrow>().UpdateSize(_meshFilter.mesh.bounds.extents.magnitude * transform.localScale.magnitude, _massIncrease);
+            //collision.transform.GetComponent<ObjectGrow>().UpdateSize(_meshFilter.mesh.bounds.extents.magnitude * transform.localScale.magnitude, _massIncrease);
+            collision.transform.GetComponent<ObjectGrow>().UpdateSize(transform.localScale.magnitude, _massIncrease);
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //collision.transform.GetComponent<ObjectGrow>().UpdateSize(_meshFilter.mesh.bounds.extents.magnitude * transform.localScale.magnitude, _massIncrease);
+            other.GetComponentInParent<ObjectGrow>().UpdateSize(transform.localScale.magnitude, _massIncrease);
             Destroy(gameObject);
         }
     }

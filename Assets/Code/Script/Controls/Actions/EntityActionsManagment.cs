@@ -11,6 +11,8 @@ public class EntityActionsManagment : MonoBehaviour
     private WaitForSeconds _actionsDelay;
     private WaitForSeconds _decisionsDelay;
     private States _currentState;
+    private Coroutine _decisionsCoroutine;
+    private Coroutine _actionsCoroutine;
 
     [System.Serializable]
     private struct States
@@ -32,8 +34,8 @@ public class EntityActionsManagment : MonoBehaviour
         if (_behaviourList.Length > 0)
         {
             _currentState = _behaviourList[0];
-            if (_currentState.Decisions.Length > 0) StartCoroutine(DecisionsCoroutine());
-            if (_currentState.Actions.Length > 0) StartCoroutine(ActionsCoroutine());
+            if(_currentState.Decisions.Length > 0)_decisionsCoroutine = StartCoroutine(DecisionsCoroutine());
+            if (_currentState.Actions.Length > 0) _actionsCoroutine = StartCoroutine(ActionsCoroutine());
         }
     }
 
@@ -52,6 +54,8 @@ public class EntityActionsManagment : MonoBehaviour
                 if (_behaviourList[i].StateID == newStateID)
                 {
                     _currentState = _behaviourList[i];
+                    if (_currentState.Decisions.Length > 0 && _decisionsCoroutine == null) _decisionsCoroutine = StartCoroutine(DecisionsCoroutine());
+                    if (_currentState.Actions.Length > 0 && _actionsCoroutine == null) _actionsCoroutine = StartCoroutine(ActionsCoroutine());
                     break;
                 }
             }
@@ -59,7 +63,7 @@ public class EntityActionsManagment : MonoBehaviour
     }
     IEnumerator ActionsCoroutine()
     {
-        while (true)
+        while (_currentState.Actions.Length > 0)
         {
             for (int i = 0; i < _currentState.Actions.Length; i++)
             {
@@ -67,11 +71,12 @@ public class EntityActionsManagment : MonoBehaviour
             }
             yield return _actionsDelay;
         }
+        _actionsCoroutine = null;
     }
 
     IEnumerator DecisionsCoroutine()
     {
-        while (true)
+        while (_currentState.Decisions.Length > 0)
         {
             byte decisionsAmount = 0;
             for (int i = 0; i < _currentState.Decisions.Length; i++)
@@ -81,5 +86,6 @@ public class EntityActionsManagment : MonoBehaviour
             LookForState(decisionsAmount == _currentState.Decisions.Length);
             yield return _decisionsDelay;
         }
+        _decisionsCoroutine = null;
     }
 }

@@ -1,19 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovmentByGyro : BaseActions
 {
+    private Gyroscope gyro;
+    private Vector3 _baseGravity;
     [SerializeField] private float _minGyroForce;
     [SerializeField] private float _maxAngle;
-    [SerializeField] private float _maxSpeed;
-    [SerializeField, Range(0f, 1f)] private float _massChangeInVelocityFactor = .5f;
-    [SerializeField] private bool _movmentByRotation;
-
-    private Gyroscope gyro;
-    private Vector3 _currentMovment;
-    private Vector3 _currentAngle;
-    private bool _useAttitude;
 
     private void OnEnable()
     {
@@ -21,8 +13,9 @@ public class MovmentByGyro : BaseActions
         {
             gyro = Input.gyro;
             gyro.enabled = true;
+            _baseGravity = gyro.gravity;
+
             SetTarget(transform, GetComponent<Rigidbody>());
-            _useAttitude = gyro.attitude.x != 0f || gyro.attitude.y != 0f || gyro.attitude.z != 0f || gyro.attitude.w != 0f;
         }
         else Debug.LogWarning("gyro not supported on YOUR device");
     }
@@ -34,46 +27,29 @@ public class MovmentByGyro : BaseActions
             gyro.enabled = false;
         }
     }
+    public override void ExecuteAction()
+    {
+        MoveByGyro();
+    }
 
     private void MoveByGyro()
     {
-        if (gyro != null && _rb)
+        if (gyro != null)
         {
-            if (_useAttitude)
+            Vector3 rotation = gyro.gravity - _baseGravity;
+            print(rotation);
+            if (rotation.sqrMagnitude > _minGyroForce)
             {
-                _currentTarget.rotation = gyro.attitude;
-            }
-            else
-            {
-                Vector3 gyroMovment = new Vector3(gyro.rotationRateUnbiased.y, 0, -gyro.rotationRateUnbiased.x);
-                _currentAngle += gyroMovment;
-                if (_currentAngle.magnitude >= _minGyroForce && _rb.velocity.magnitude < _maxSpeed)
-                {
-                    _currentMovment = Mathf.Clamp(_rb.mass * _massChangeInVelocityFactor, 1f, _rb.mass) * Mathf.Clamp(Vector3.Distance(Vector3.zero, _currentAngle), 0f, _maxAngle) * _currentAngle.normalized;
-                    if (_movmentByRotation) _rb.AddTorque(_sensitivity * _currentMovment, ForceMode.Force);
-                    else _rb.AddForce(_sensitivity * _currentMovment, ForceMode.Force);
-                    _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxSpeed);
-                }
-                //if (_rb.velocity.magnitude < _maxSpeed)
-                //{
-                //    if (_movmentByRotation) _rb.AddTorque(_sensitivity * _currentMovment, ForceMode.Force);
-                //    else _rb.AddForce(_sensitivity * _currentMovment, ForceMode.Force);
-                //    _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxSpeed);
-                //}
+                rotation = new Vector3(rotation.y, 0, -rotation.x);
+                rotation = Vector3.ClampMagnitude(rotation, 0.4f);
+                _rb.AddTorque(rotation * _sensitivity, ForceMode.Acceleration);
             }
         }
     }
 
     public void ResetGyroPosition()
     {
-        _currentMovment = Vector3.zero;
-        _currentAngle = Vector3.zero;
-        _rb.velocity = Vector3.zero;
-    }
-
-    public override void ExecuteAction()
-    {
-        MoveByGyro();
+        _baseGravity = gyro.gravity;
     }
 
 }

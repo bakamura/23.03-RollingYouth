@@ -24,6 +24,7 @@ public class Flipper : MonoBehaviour
     private float _currentRotation;
     private float _finalMaxAngle;
     private Rigidbody _currentRb;
+    private Vector3 _launchDirection;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class Flipper : MonoBehaviour
             _currentDelta = 0;
             _isReturning = false;
             _currentRb = rb;
+            _launchDirection = transform.forward;
             _isMoving = true;
         }
     }
@@ -59,10 +61,10 @@ public class Flipper : MonoBehaviour
                     _currentRotation = transform.eulerAngles.y;
                     _isReturning = true;
                     _currentDelta = 0;
-                    _currentRb.AddForce(_useBaseRight ? transform.right * _extraForce : -transform.right * _extraForce, ForceMode.Impulse);
+                    _currentRb.AddForce(_useBaseRight ? _launchDirection * _extraForce : -_launchDirection * _extraForce, ForceMode.Impulse);
 #if UNITY_EDITOR
-                    Debug.DrawLine(_currentRb.position, _useBaseRight ? transform.position + transform.right * _extraForce : transform.position + -transform.right * _extraForce, _debugColor, _debugDuration);
-                    Debug.Log($"Target Position {_currentRb.position}, direction {transform.right * 3f }");
+                    Debug.DrawLine(_currentRb.position, _useBaseRight ? transform.position + _launchDirection * _extraForce : transform.position + -_launchDirection * _extraForce, _debugColor, _debugDuration);
+                    Debug.Log($"Target Position {_currentRb.position}, direction {_launchDirection * 3f }");
 #endif
                 }
             }

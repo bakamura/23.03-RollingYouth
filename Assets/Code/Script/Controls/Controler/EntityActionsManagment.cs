@@ -61,6 +61,21 @@ public class EntityActionsManagment : MonoBehaviour
             }
         }
     }
+
+    public void LookForState(string stateID)
+    {
+        for (int i = 0; i < _behaviourList.Length; i++)
+        {
+            if (_behaviourList[i].StateID == stateID)
+            {
+                _currentState = _behaviourList[i];
+                if (_currentState.Decisions.Length > 0 && _decisionsCoroutine == null) _decisionsCoroutine = StartCoroutine(DecisionsCoroutine());
+                if (_currentState.Actions.Length > 0 && _actionsCoroutine == null) _actionsCoroutine = StartCoroutine(ActionsCoroutine());
+                break;
+            }
+        }
+    }
+
     IEnumerator ActionsCoroutine()
     {
         while (_currentState.Actions.Length > 0)

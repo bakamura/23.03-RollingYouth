@@ -9,20 +9,27 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Transform _cameraPosition;
     [SerializeField] private Transform _cameraRotation;
     [SerializeField] private Vector3 _initialDesiredLocation;
+    //[SerializeField] private RotateByTouch _rotateByTouch;
 #if UNITY_EDITOR
     [SerializeField] private bool _debugDraw;
     [SerializeField] private Color _color;
 #endif
     private void Update()
     {
-        _cameraPosition.position = _target.position + _initialDesiredLocation + _target.localScale.magnitude * -_cameraPosition.forward;
+        RecalculateCameraPosition();
+    }
+
+    public void RecalculateCameraPosition()
+    {
+        Vector3 pos = _target.position + _initialDesiredLocation + _target.localScale.magnitude * -_cameraPosition.forward;
+        _cameraPosition.position = pos;
     }
     
 #if UNITY_EDITOR
     public void RepositionCam()
     {
         _cameraPosition.position = _target.position + _initialDesiredLocation;
-        _cameraPosition.LookAt(_target.position, Vector3.up);
+        _cameraPosition.LookAt(_target);
     }
     private void OnDrawGizmosSelected()
     {

@@ -21,8 +21,11 @@ public class FollowTarget : MonoBehaviour
 
     public void RecalculateCameraPosition()
     {
-        Vector3 pos = _target.position + _initialDesiredLocation + _target.localScale.magnitude * -_cameraPosition.forward;
-        _cameraPosition.position = pos;
+        //_cameraRotation.position = _target.position;
+        //_cameraPosition.localPosition = _target.localScale.magnitude * -_cameraRotation.forward;
+        Vector3 pos = _target.position + _initialDesiredLocation + _target.localScale.magnitude * -_cameraRotation.forward;
+        //Vector3 pos = _initialDesiredLocation + _target.localScale.magnitude * -_cameraRotation.forward;
+        _cameraPosition.position = Vector3.positiveInfinity;
     }
     
 #if UNITY_EDITOR

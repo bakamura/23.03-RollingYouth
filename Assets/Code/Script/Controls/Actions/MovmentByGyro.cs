@@ -8,6 +8,7 @@ public class MovmentByGyro : BaseActions
     [SerializeField] private float _minGyroForce;
     [SerializeField] private float _maxAngle;
 
+    public static bool IsGyroActive = true;
     private void OnEnable()
     {
         if (SystemInfo.supportsGyroscope)
@@ -30,7 +31,7 @@ public class MovmentByGyro : BaseActions
     }
     public override void ExecuteAction()
     {
-        MoveByGyro();
+        if(IsGyroActive) MoveByGyro();
     }
 
     private void MoveByGyro()

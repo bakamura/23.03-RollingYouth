@@ -15,8 +15,8 @@ public class RotateByTouch : MonoBehaviour
 
             if (input.phase == TouchPhase.Moved && input.deltaPosition.magnitude > _dragTresHold && _currentTarget)
             {
-                // _currentTarget.eulerAngles += _sensitivity * new Vector3(0, input.deltaPosition.x, 0);
-                _currentTarget.Rotate(Vector3.up, _sensitivity,Space.Self);
+                _currentTarget.eulerAngles += _sensitivity * new Vector3(0, input.deltaPosition.x, 0);
+                //_currentTarget.Rotate(Vector3.up, _sensitivity,Space.Self);
             }
         }
     }

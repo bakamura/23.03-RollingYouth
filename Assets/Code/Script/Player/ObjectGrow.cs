@@ -24,6 +24,7 @@ public class ObjectGrow : MonoBehaviour
     //public float InitialMass => _initialMass;
     public Transform ObjectToGrow => _objectToGrow;
     public Rigidbody ObjectPhysics => _objectPhysics;
+    public Action OnObjectGrow;
 
     private void Awake()
     {
@@ -61,6 +62,7 @@ public class ObjectGrow : MonoBehaviour
             if (_objectPhysics.mass + objectMass > _initialMass) _objectPhysics.mass += objectMass;
             else _objectPhysics.mass = _initialMass;
             _currentSize = _objectToGrow.localScale.magnitude;
+            OnObjectGrow?.Invoke();
         }
     }
 }

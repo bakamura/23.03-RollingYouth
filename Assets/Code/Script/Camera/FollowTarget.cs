@@ -14,18 +14,24 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private bool _debugDraw;
     [SerializeField] private Color _color;
 #endif
-    private void Update()
+
+    private void Awake()
     {
-        RecalculateCameraPosition();
+        _target.GetComponentInParent<PlayerComponents>().ObjectGrow.OnObjectGrow += RecalculateCameraPosition;
     }
 
-    public void RecalculateCameraPosition()
+    private void Update()
+    {
+        _cameraRotation.position = _target.position;
+        //RecalculateCameraPosition();
+    }
+
+    private void RecalculateCameraPosition()
     {
         //_cameraRotation.position = _target.position;
         //_cameraPosition.localPosition = _target.localScale.magnitude * -_cameraRotation.forward;
-        Vector3 pos = _target.position + _initialDesiredLocation + _target.localScale.magnitude * -_cameraRotation.forward;
-        //Vector3 pos = _initialDesiredLocation + _target.localScale.magnitude * -_cameraRotation.forward;
-        _cameraPosition.position = Vector3.positiveInfinity;
+        //Vector3 pos = _target.position + _initialDesiredLocation + _target.localScale.magnitude * -_cameraRotation.forward;
+        _cameraPosition.localPosition += _target.localScale.magnitude * -_cameraPosition.forward;
     }
     
 #if UNITY_EDITOR

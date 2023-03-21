@@ -7,7 +7,7 @@ public class MovmentBySwipe : BaseActions
     [SerializeField] private float _dragTresHold;
     [SerializeField] private Transform _cameraRotation;
 
-    public static bool IsSwipeActive = false;
+    public bool IsSwipeActive = false;
 
     private void Awake()
     {

@@ -7,8 +7,9 @@ public class MovmentByGyro : BaseActions
     //private Vector3 _currentAngle;
     [SerializeField] private float _minGyroForce;
     [SerializeField] private float _maxAngle;
+    [SerializeField] private Transform _cameraRotation;
 
-    public static bool IsGyroActive = true;
+    public bool IsGyroActive = true;
     private void OnEnable()
     {
         if (SystemInfo.supportsGyroscope)

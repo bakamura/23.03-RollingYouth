@@ -9,29 +9,27 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Transform _cameraPosition;
     [SerializeField] private Transform _cameraRotation;
     [SerializeField] private Vector3 _initialDesiredLocation;
-    //[SerializeField] private RotateByTouch _rotateByTouch;
 #if UNITY_EDITOR
     [SerializeField] private bool _debugDraw;
     [SerializeField] private Color _color;
 #endif
 
+    private Vector3 _initialForward;
+
     private void Awake()
     {
         _target.GetComponentInParent<PlayerComponents>().ObjectGrow.OnObjectGrow += RecalculateCameraPosition;
+        _initialForward = _cameraPosition.forward;
     }
 
     private void Update()
     {
         _cameraRotation.position = _target.position;
-        //RecalculateCameraPosition();
     }
 
     private void RecalculateCameraPosition()
     {
-        //_cameraRotation.position = _target.position;
-        //_cameraPosition.localPosition = _target.localScale.magnitude * -_cameraRotation.forward;
-        //Vector3 pos = _target.position + _initialDesiredLocation + _target.localScale.magnitude * -_cameraRotation.forward;
-        _cameraPosition.localPosition += _target.localScale.magnitude * -_cameraPosition.forward;
+        _cameraPosition.localPosition += _target.localScale.magnitude * -_initialForward;
     }
     
 #if UNITY_EDITOR

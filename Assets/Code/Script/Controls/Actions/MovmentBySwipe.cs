@@ -5,13 +5,17 @@ using UnityEngine;
 public class MovmentBySwipe : BaseActions
 {
     [SerializeField] private float _dragTresHold;
+    [SerializeField, Tooltip("the maximum amount of force that the swipe will afect the movment")] private float _maxForceInDrag =1;
     [SerializeField] private Transform _cameraRotation;
+
+    private RotateByTouch _rotateByTouch;
 
     public bool IsSwipeActive = false;
 
     private void Awake()
     {
         SetTarget(transform, GetComponent<Rigidbody>());
+        _rotateByTouch = _cameraRotation.GetComponent<RotateByTouch>();
     }
 
     public override void ExecuteAction()
@@ -25,12 +29,11 @@ public class MovmentBySwipe : BaseActions
         {
             Touch input = Input.GetTouch(0);
 
-            if (input.phase == TouchPhase.Moved && input.deltaPosition.magnitude > _dragTresHold && _currentTarget)
+            if (input.phase == TouchPhase.Moved && input.deltaPosition.magnitude > _dragTresHold && !_rotateByTouch.IsRotating)
             {
-                Vector3 direction = new Vector3(input.deltaPosition.y, 0, -input.deltaPosition.x).normalized;
-                Vector3 a = Vector3.RotateTowards(direction, _cameraRotation.forward, 1f, 1f);
-                float dot = Vector3.Dot(direction, _cameraRotation.forward);
-                _rb.AddTorque(input.deltaPosition.magnitude * _sensitivity * a);
+                Vector3 direction = input.deltaPosition.y * _cameraRotation.right + -input.deltaPosition.x * _cameraRotation.forward;
+                direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
+                _rb.AddTorque(direction * _sensitivity);
             }
         }
     }

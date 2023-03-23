@@ -16,7 +16,7 @@ public class MovmentByGyro : BaseActions
         {
             gyro = Input.gyro;
             gyro.enabled = true;
-            _baseGravity = gyro.gravity;//new Vector3(gyro.gravity.y, 0, -gyro.gravity.x);
+            _baseGravity = gyro.gravity;
 
             SetTarget(transform, GetComponent<Rigidbody>());
         }
@@ -32,7 +32,7 @@ public class MovmentByGyro : BaseActions
     }
     public override void ExecuteAction()
     {
-        if(IsGyroActive) MoveByGyro();
+        if (IsGyroActive) MoveByGyro();
     }
 
     private void MoveByGyro()
@@ -43,7 +43,8 @@ public class MovmentByGyro : BaseActions
             Vector3 rotation = gyro.gravity - _baseGravity;
             if (rotation.sqrMagnitude > _minGyroForce)
             {
-                rotation = new Vector3(rotation.y, 0, -rotation.x);
+                // rotation.y = left/right, -rotation.x = up/down 
+                rotation = rotation.y * _cameraRotation.right + -rotation.x * _cameraRotation.forward;
                 rotation = Vector3.ClampMagnitude(rotation, _maxAngle);
                 _rb.AddTorque(rotation * _sensitivity, ForceMode.Acceleration);
                 //Debug.Log((rotation * _sensitivity).magnitude);
@@ -69,4 +70,10 @@ public class MovmentByGyro : BaseActions
         //_rb.velocity = Vector3.zero;
     }
 
+    [ContextMenu("directions")]
+    private void Directions()
+    {
+        Debug.Log($"forward: {_cameraRotation.forward}, right: {_cameraRotation.right}");
+        Debug.Log(gyro.gravity - _baseGravity);
+    }
 }

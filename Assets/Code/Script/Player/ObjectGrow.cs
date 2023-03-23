@@ -31,7 +31,7 @@ public class ObjectGrow : MonoBehaviour
         _currentSize = _objectToGrow.localScale.magnitude;
         _initialSize = _objectToGrow.localScale;
         _initialMass = _objectPhysics.mass;
-        _sizeIncrease = _objectToGrow.localScale.x * (1f + _sizeIncreaseFactor);
+        _sizeIncrease = _initialSize.x * (1f + _sizeIncreaseFactor);
     }
 
     public void UpdateSize(float objectSize, float objectMass = 0)

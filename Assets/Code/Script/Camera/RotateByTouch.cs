@@ -47,6 +47,6 @@ public class RotateByTouch : MonoBehaviour
     {
         _debugPanel.anchoredPosition = _dragPosition;
         _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _dragArea.x);
-        _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _dragArea.y);
+        _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _dragArea.y);        
     }    
 }

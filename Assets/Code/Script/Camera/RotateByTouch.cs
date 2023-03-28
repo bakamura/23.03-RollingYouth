@@ -9,7 +9,6 @@ public class RotateByTouch : MonoBehaviour
     [SerializeField] private Transform _currentTarget;
     [SerializeField, Range(0f, 1f)] private float _dragAreaPrecentX;
     [SerializeField, Range(0f, 1f)] private float _dragAreaPrecentY;
-    //[SerializeField] private Vector2 _dragPosition;
 #if UNITY_EDITOR
     [SerializeField, Tooltip("the pivot needs to be at the middle center for better correct calc")] private RectTransform _debugPanel;
 #endif
@@ -34,8 +33,8 @@ public class RotateByTouch : MonoBehaviour
 
     private bool CheckTouchArea()
     {
-        Debug.Log(_input.position.x);
-        _isRotating = _input.position.y < Screen.currentResolution.height * _dragAreaPrecentY && _input.position.x < Screen.currentResolution.width * ((1 - _dragAreaPrecentX) / 2 + _dragAreaPrecentX) && _input.position.x > Screen.currentResolution.width * (1 - _dragAreaPrecentX) / 2;
+        //Debug.Log(_input.position);
+        _isRotating = _input.position.y <= Screen.currentResolution.width * _dragAreaPrecentY && _input.position.x < Screen.currentResolution.height * ((1 - _dragAreaPrecentX) / 2 + _dragAreaPrecentX) && _input.position.x > Screen.currentResolution.height * (1 - _dragAreaPrecentX) / 2;
         return _isRotating;
     }
 
@@ -43,11 +42,6 @@ public class RotateByTouch : MonoBehaviour
     [ContextMenu("RecalculateDebugArea")]
     private void RecalcDebugArea()
     {
-        //_debugPanel.anchoredPosition = _dragPosition;
-        float menor = Screen.currentResolution.width * ((1 - _dragAreaPrecentY) / 2 + _dragAreaPrecentY);
-        float maior = Screen.currentResolution.width * (1 - _dragAreaPrecentY) / 2;
-        float y = Screen.currentResolution.height * _dragAreaPrecentX;
-        Debug.Log($"menor que {menor}, maior que {maior}, y {y}");
         _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Screen.currentResolution.height * _dragAreaPrecentX);
         _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Screen.currentResolution.width * _dragAreaPrecentY);
     }

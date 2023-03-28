@@ -33,7 +33,6 @@ public class RotateByTouch : MonoBehaviour
 
     private bool CheckTouchArea()
     {
-        //Debug.Log(_input.position);
         _isRotating = _input.position.y <= Screen.currentResolution.width * _dragAreaPrecentY && _input.position.x < Screen.currentResolution.height * ((1 - _dragAreaPrecentX) / 2 + _dragAreaPrecentX) && _input.position.x > Screen.currentResolution.height * (1 - _dragAreaPrecentX) / 2;
         return _isRotating;
     }

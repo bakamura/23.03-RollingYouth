@@ -135,7 +135,9 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 1.0.2
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: cab463284a343c24b926cf5ab2e2a4e2, type: 2}
+  - {fileID: 7950113519142181033, guid: ab51733a750857641b4e0208ace32f98, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -154,7 +156,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.2303BallGyro
+    Android: com.Zeta_Zash.Rolling_Youth
   buildNumber:
     Standalone: 0
     iPhone: 0

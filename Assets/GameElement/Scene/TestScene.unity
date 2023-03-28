@@ -157,11 +157,11 @@ RectTransform:
   m_Father: {fileID: 625489286}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -384}
-  m_SizeDelta: {x: 1664, y: 384}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 384}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &116807598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +442,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305448402}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -476,9 +476,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 160
+    m_FontSize: 100
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 4
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1411,7 +1411,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 454, y: 947}
+  m_SizeDelta: {x: 1080, y: 833.27997}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2074557148
 MonoBehaviour:
@@ -1575,6 +1575,16 @@ PrefabInstance:
       propertyPath: _debugPanel
       value: 
       objectReference: {fileID: 2074557147}
+    - target: {fileID: 1281917383749192120, guid: 48095bdddc90d5d43bdcbda6905fc65b,
+        type: 3}
+      propertyPath: _dragAreaPrecentX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281917383749192120, guid: 48095bdddc90d5d43bdcbda6905fc65b,
+        type: 3}
+      propertyPath: _dragAreaPrecentY
+      value: 0.434
+      objectReference: {fileID: 0}
     - target: {fileID: 1281917385452669614, guid: 48095bdddc90d5d43bdcbda6905fc65b,
         type: 3}
       propertyPath: m_RootOrder

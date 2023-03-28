@@ -5,24 +5,20 @@ using UnityEngine;
 public class RotateByTouch : MonoBehaviour
 {
     [SerializeField] private float _dragTresHold;
-    [SerializeField] private float _sensitivity;
+    [SerializeField, Range(0f, 1f)] private float _sensitivity;
     [SerializeField] private Transform _currentTarget;
-    [SerializeField] private Vector2 _dragArea;
+    [SerializeField, Range(0f, 1f)] private float _dragAreaPrecentY;
+    [SerializeField, Range(0f, 1f)] private float _dragAreaPrecentX;
     [SerializeField] private Vector2 _dragPosition;
 #if UNITY_EDITOR
-    [SerializeField, Tooltip("the pivot needs to be at the bottom-left because this point is (0, 0, 0) for the touch system")] private RectTransform _debugPanel;
+    [SerializeField, Tooltip("the pivot needs to be at the middle center for better correct calc")] private RectTransform _debugPanel;
 #endif
 
     private Touch _input;
     private bool _isRotating;
-    private Rect _dragContainer;
 
     public bool IsRotating => _isRotating;
 
-    private void Awake()
-    {
-        _dragContainer = new Rect(_dragPosition, _dragArea);
-    }
     void Update()
     {
         if (Input.touchCount > 0)
@@ -31,14 +27,14 @@ public class RotateByTouch : MonoBehaviour
 
             if (_input.phase == TouchPhase.Moved && _input.deltaPosition.magnitude > _dragTresHold && CheckTouchArea())
             {
-                _currentTarget.eulerAngles += _sensitivity * new Vector3(0, _input.deltaPosition.x, 0);
+                _currentTarget.eulerAngles += Screen.width * _sensitivity / Screen.width * new Vector3(0, _input.deltaPosition.x, 0);
             }
         }
     }
 
     private bool CheckTouchArea()
     {
-        _isRotating = _dragContainer.Contains(_input.position);
+        _isRotating = _input.position.y <= Screen.height * _dragAreaPrecentY && _input.position.x <= Screen.width * ((1 - _dragAreaPrecentX) / 2 + _dragAreaPrecentX) && _input.position.x >= Screen.width * (1 - _dragAreaPrecentX) / 2;
         return _isRotating;
     }
 
@@ -47,8 +43,8 @@ public class RotateByTouch : MonoBehaviour
     private void RecalcDebugArea()
     {
         _debugPanel.anchoredPosition = _dragPosition;
-        _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _dragArea.x);
-        _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _dragArea.y);        
+        _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Screen.width * _dragAreaPrecentX);
+        _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Screen.height * _dragAreaPrecentY);
     }
 #endif
 }

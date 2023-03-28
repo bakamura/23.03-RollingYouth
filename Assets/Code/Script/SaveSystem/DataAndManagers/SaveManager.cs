@@ -39,6 +39,7 @@ public class SaveManager : BaseSingleton<SaveManager>
         _currentData = data;
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Load")]
     private void DebugLoad()
     {
@@ -56,6 +57,7 @@ public class SaveManager : BaseSingleton<SaveManager>
     {
         PlayerPrefs.DeleteKey(_dataKey);
     }
+#endif
 }
 public class SaveData
 {

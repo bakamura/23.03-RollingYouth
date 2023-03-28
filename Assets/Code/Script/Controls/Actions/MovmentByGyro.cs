@@ -69,11 +69,4 @@ public class MovmentByGyro : BaseActions
         //_currentAngle = Vector3.zero;
         //_rb.velocity = Vector3.zero;
     }
-
-    [ContextMenu("directions")]
-    private void Directions()
-    {
-        Debug.Log($"forward: {_cameraRotation.forward}, right: {_cameraRotation.right}");
-        Debug.Log(gyro.gravity - _baseGravity);
-    }
 }

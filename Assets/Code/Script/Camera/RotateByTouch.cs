@@ -42,11 +42,13 @@ public class RotateByTouch : MonoBehaviour
         return _isRotating;
     }
 
+#if UNITY_EDITOR
     [ContextMenu("RecalculateDebugArea")]
     private void RecalcDebugArea()
     {
         _debugPanel.anchoredPosition = _dragPosition;
         _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _dragArea.x);
         _debugPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _dragArea.y);        
-    }    
+    }
+#endif
 }

@@ -27,6 +27,7 @@ public class PlayerSaveData : MonoBehaviour, ISaveObject
         else Debug.LogError("inspector reference is empty");
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Save")]
     private void Save()
     {
@@ -38,4 +39,5 @@ public class PlayerSaveData : MonoBehaviour, ISaveObject
     {
         LoadData();
     }
+#endif
 }

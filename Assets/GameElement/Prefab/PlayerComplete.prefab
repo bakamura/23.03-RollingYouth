@@ -66,9 +66,8 @@ MonoBehaviour:
   _dragTresHold: 10
   _sensitivity: 0.02
   _currentTarget: {fileID: 1281917383749192122}
-  _dragAreaPrecentY: 1
   _dragAreaPrecentX: 1
-  _dragPosition: {x: 0, y: 0}
+  _dragAreaPrecentY: 0.2
   _debugPanel: {fileID: 0}
 --- !u!1 &1281917384312629522
 GameObject:

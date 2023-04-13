@@ -33,7 +33,7 @@ public class ObjectGrow : MonoBehaviour
         //Debug.Log($"current size {_currentSize} , required size {objectSize * _minRequiredSizeToEatPercentage}");
         if (_currentSize >= objectSize * _minRequiredSizeToEatPercentage)
         {
-            float finalVolume = objectSize * .476f;
+            float finalVolume = Mathf.Pow(objectSize + Mathf.Pow(_objectToGrow.localScale.x, 3), (float)1/3);
             if (objectSize < 0)
             {
                 _objectToGrow.localScale = new Vector3(
@@ -44,9 +44,9 @@ public class ObjectGrow : MonoBehaviour
             else
             {                
                 _objectToGrow.localScale = new Vector3(
-                Mathf.Clamp(_objectToGrow.localScale.x + finalVolume, _minSize, _maxSize),
-                Mathf.Clamp(_objectToGrow.localScale.y + finalVolume, _minSize, _maxSize),
-                Mathf.Clamp(_objectToGrow.localScale.z + finalVolume, _minSize, _maxSize));
+                Mathf.Clamp(finalVolume, _minSize, _maxSize),
+                Mathf.Clamp(finalVolume, _minSize, _maxSize),
+                Mathf.Clamp(finalVolume, _minSize, _maxSize));
             }
             if (_objectPhysics.mass + objectMass > _initialMass) _objectPhysics.mass += finalVolume * _sizeIncreaseFactor;
             else _objectPhysics.mass = _initialMass;

@@ -12,6 +12,7 @@ public class FollowTarget : MonoBehaviour
 #if UNITY_EDITOR
     [SerializeField] private bool _debugDraw;
     [SerializeField] private Color _color;
+    [SerializeField] private Vector3 _cameraLookOffset;
 #endif
 
     private Vector3 _initialForward;
@@ -36,14 +37,16 @@ public class FollowTarget : MonoBehaviour
     public void RepositionCam()
     {
         _cameraPosition.position = _target.position + _initialDesiredLocation;
-        _cameraPosition.LookAt(_target);
+        _cameraPosition.LookAt(_target.position + _cameraLookOffset);
     }
     private void OnDrawGizmosSelected()
     {
         if (_debugDraw && _target)
         {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(_target.position + _cameraLookOffset, .5f);
             Gizmos.color = _color;
-            Gizmos.DrawLine(_target.position, _initialDesiredLocation + _target.position);
+            Gizmos.DrawLine(_target.position + _cameraLookOffset, _initialDesiredLocation + _target.position);
             Gizmos.DrawSphere(_initialDesiredLocation + _target.position, .5f);
         }
     }

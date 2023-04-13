@@ -8,9 +8,8 @@ public class EatibleProp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            other.GetComponentInParent<ObjectGrow>().UpdateSize(transform.localScale.x * transform.localScale.y * transform.localScale.z, _massIncrease);
+        if (other.CompareTag("Player") && other.GetComponentInParent<ObjectGrow>().UpdateSize(transform.localScale.x * transform.localScale.y * transform.localScale.z, _massIncrease))
+        {            
             Destroy(gameObject);
         }
     }

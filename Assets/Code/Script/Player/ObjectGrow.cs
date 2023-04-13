@@ -28,7 +28,7 @@ public class ObjectGrow : MonoBehaviour
         _initialMass = _objectPhysics.mass;
     }
 
-    public void UpdateSize(float objectSize, float objectMass = 0)
+    public bool UpdateSize(float objectSize, float objectMass = 0)
     {
         //Debug.Log($"current size {_currentSize} , required size {objectSize * _minRequiredSizeToEatPercentage}");
         if (_currentSize >= objectSize * _minRequiredSizeToEatPercentage)
@@ -52,6 +52,8 @@ public class ObjectGrow : MonoBehaviour
             else _objectPhysics.mass = _initialMass;
             _currentSize = _objectToGrow.localScale.magnitude;
             OnObjectGrow?.Invoke();
+            return true;
         }
+        return false;
     }
 }

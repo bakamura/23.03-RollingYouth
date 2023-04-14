@@ -15,22 +15,41 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Vector3 _cameraLookOffset;
 #endif
 
+    private Vector3 _targetPosition => _target.position + _cameraLookOffset;
     private Vector3 _initialForward;
+    private Vector3 _currentCamPosition;
+    private float _currentMaxDistance;
 
     private void Awake()
     {
         _target.GetComponentInParent<PlayerComponents>().ObjectGrow.OnObjectGrow += RecalculateCameraPosition;
         _initialForward = _cameraPosition.forward;
+        _currentCamPosition = _cameraPosition.localPosition;
+        _currentMaxDistance = Vector3.Distance(_targetPosition, _cameraPosition.position);
     }
 
     private void Update()
     {
-        _cameraRotation.position = _target.position;
+        _cameraRotation.position = _targetPosition;
+        UpdateCameraLocation();
     }
 
     private void RecalculateCameraPosition()
     {
-        _cameraPosition.localPosition += _target.localScale.magnitude * -_initialForward;
+        _currentCamPosition += _target.localScale.magnitude * -_initialForward;
+        _currentMaxDistance = Vector3.Distance(_targetPosition, _cameraPosition.position);
+    }
+
+    private void UpdateCameraLocation()
+    {
+        if (Physics.Raycast(_targetPosition, -_cameraPosition.forward, out RaycastHit hit, _currentMaxDistance))
+        {
+            _cameraPosition.position = hit.point;
+        }
+        else
+        {
+            _cameraPosition.localPosition = _currentCamPosition;
+        }
     }
     
 #if UNITY_EDITOR
@@ -43,10 +62,10 @@ public class FollowTarget : MonoBehaviour
     {
         if (_debugDraw && _target)
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(_target.position + _cameraLookOffset, .5f);
+            Gizmos.color = Color.red;            
+            Gizmos.DrawSphere(_targetPosition, .5f);
             Gizmos.color = _color;
-            Gizmos.DrawLine(_target.position + _cameraLookOffset, _initialDesiredLocation + _target.position);
+            Gizmos.DrawLine(_targetPosition, _initialDesiredLocation + _target.position);
             Gizmos.DrawSphere(_initialDesiredLocation + _target.position, .5f);
         }
     }

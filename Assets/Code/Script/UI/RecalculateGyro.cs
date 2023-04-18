@@ -8,6 +8,7 @@ public class RecalculateGyro : MonoBehaviour
 
     public void ResetGyro()
     {
+        Debug.Log("reset gyro");
         _movmentByGyro.ResetGyroPosition();
     }
 }

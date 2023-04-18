@@ -23,7 +23,8 @@ public class FollowTarget : MonoBehaviour
     private void Awake()
     {
         _target.GetComponentInParent<PlayerComponents>().ObjectGrow.OnObjectGrow += RecalculateCameraPosition;
-        _initialForward = _cameraPosition.forward;
+        _initialForward = new Vector3(0, _cameraPosition.forward.y, _cameraPosition.forward.z);
+        //_initialForward = _cameraPosition.forward;
         _currentCamPosition = _cameraPosition.localPosition;
         _currentMaxDistance = Vector3.Distance(_targetPosition, _cameraPosition.position);
     }
@@ -36,6 +37,7 @@ public class FollowTarget : MonoBehaviour
 
     private void RecalculateCameraPosition()
     {
+        Debug.Log(_target.localScale.magnitude * -_initialForward);
         _currentCamPosition += _target.localScale.magnitude * -_initialForward;
         _currentMaxDistance = Vector3.Distance(_targetPosition, _cameraPosition.position);
     }

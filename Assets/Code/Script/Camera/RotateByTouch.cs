@@ -9,7 +9,10 @@ public class RotateByTouch : MonoBehaviour
     [SerializeField] private Transform _currentTarget;
     [SerializeField, Range(0f, 1f)] private float _dragAreaPrecentX;
     [SerializeField, Range(0f, 1f)] private float _dragAreaPrecentY;
+
+#if UNITY_EDITOR
     [SerializeField] private RectTransform _area;
+#endif
 
     private Touch _input;
     private bool _isRotating;
@@ -24,14 +27,14 @@ public class RotateByTouch : MonoBehaviour
 
             if (_input.phase == TouchPhase.Moved && _input.deltaPosition.magnitude > _dragTresHold && CheckTouchArea())
             {
-                _currentTarget.eulerAngles += _sensitivity * Time.deltaTime * new Vector3(0, _input.deltaPosition.x, 0);
+                _currentTarget.eulerAngles += _sensitivity * Time.deltaTime * new Vector3(0, _input.deltaPosition.x, 0) / Screen.currentResolution.width;
             }
         }
     }
 
     private bool CheckTouchArea()
     {
-        _isRotating = _area.rect.Contains(_input.position);
+        _isRotating = _input.position.y < Screen.currentResolution.width * _dragAreaPrecentY && _input.position.x < Screen.currentResolution.height * _dragAreaPrecentX;
         return _isRotating;
     }
 

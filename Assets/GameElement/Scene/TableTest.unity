@@ -4713,6 +4713,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 783834119704554650, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834119704554650, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 384
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834119704554651, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834119704554653, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 783834120058801206, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4792,7 +4812,22 @@ PrefabInstance:
     - target: {fileID: 783834120613186338, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: _sensitivity
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120613186338, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: _dragTresHold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120613186338, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: _dragAreaPrecentX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120613186338, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: _dragAreaPrecentY
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 783834120613186339, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}

@@ -9,10 +9,10 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Transform _cameraPosition;
     [SerializeField] private Transform _cameraRotation;
     [SerializeField] private Vector3 _initialDesiredLocation;
+    [SerializeField] private Vector3 _cameraLookOffset;
 #if UNITY_EDITOR
     [SerializeField] private bool _debugDraw;
     [SerializeField] private Color _color;
-    [SerializeField] private Vector3 _cameraLookOffset;
 #endif
 
     private Vector3 _targetPosition => _target.position + _cameraLookOffset;

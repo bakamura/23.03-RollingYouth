@@ -12,6 +12,10 @@ public class MovmentBySwipe : BaseActions
 
     public bool IsSwipeActive = false;
 
+#if UNITY_EDITOR
+    [SerializeField] private bool _useKeyboard;
+#endif
+
     private void Awake()
     {
         SetTarget(transform, GetComponent<Rigidbody>());
@@ -25,6 +29,14 @@ public class MovmentBySwipe : BaseActions
 
     private void SwipeMovment()
     {
+#if UNITY_EDITOR
+        if (_useKeyboard && _rb)
+        {
+            Vector3 direction = Input.GetAxis("Vertical") * _cameraRotation.right;
+            direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
+            _rb.AddTorque(direction * _sensitivity);
+        }
+#endif
         if (Input.touchCount > 0)
         {
             Touch input = Input.GetTouch(0);

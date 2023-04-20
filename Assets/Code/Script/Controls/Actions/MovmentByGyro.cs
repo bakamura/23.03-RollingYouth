@@ -10,15 +10,18 @@ public class MovmentByGyro : BaseActions
     [SerializeField] private Transform _cameraRotation;
 
     public bool IsGyroActive = true;
+
+#if UNITY_EDITOR
+    [SerializeField] private bool _useKeyboard;
+#endif
     private void OnEnable()
     {
+        SetTarget(transform, GetComponent<Rigidbody>());
         if (SystemInfo.supportsGyroscope)
         {
             gyro = Input.gyro;
             gyro.enabled = true;
             _baseGravity = gyro.gravity;
-
-            SetTarget(transform, GetComponent<Rigidbody>());
         }
         else Debug.LogWarning("gyro not supported on YOUR device");
     }
@@ -49,7 +52,6 @@ public class MovmentByGyro : BaseActions
                 _rb.AddTorque(rotation * _sensitivity, ForceMode.Acceleration);
                 //Debug.Log((rotation * _sensitivity).magnitude);
             }
-
             //vini
             //Vector3 gyroMovment = new Vector3(gyro.rotationRateUnbiased.y, 0, -gyro.rotationRateUnbiased.x);
             //_currentAngle += gyroMovment;
@@ -61,6 +63,14 @@ public class MovmentByGyro : BaseActions
             //    Debug.Log(total.magnitude);
             //}
         }
+#if UNITY_EDITOR
+        if (_useKeyboard && _rb)
+        {
+            Vector3 direction = Input.GetAxis("Vertical") * _cameraRotation.right;
+            direction = Vector3.ClampMagnitude(direction, _maxAngle);
+            _rb.AddTorque(direction * _sensitivity);
+        }
+#endif
     }
 
     public void ResetGyroPosition()

@@ -35,13 +35,14 @@ public class Plunger : CameraUser
     {
         base.Awake();
         _initialPosition = _leaver.position;
-        _screenFactor = Screen.currentResolution.width;
+        _screenFactor = Screen.width;
     }
 
     void Update()
     {
         if (_isTargetInside && !_lerpCamera.IsAnimating)
         {
+            //checking for player to push the plunger and moving the leaver
             if (Input.touchCount > 0)
             {
                 Touch input = Input.GetTouch(0);
@@ -57,6 +58,7 @@ public class Plunger : CameraUser
                     }
                 }
             }
+            //check to see if player pushed enought the leaver to launch
             else
             {
                 if (Vector3.Distance(_leaver.position, _initialPosition) >= _maxPushDistance)

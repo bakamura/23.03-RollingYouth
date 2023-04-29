@@ -12,6 +12,7 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Vector3 _cameraLookOffset;
 #if UNITY_EDITOR
     [SerializeField] private bool _debugDraw;
+    [SerializeField] private float _cameraTargetPointSize = .5f;
     [SerializeField] private Color _color;
 #endif
 
@@ -32,7 +33,7 @@ public class FollowTarget : MonoBehaviour
     private void Update()
     {
         _cameraRotation.position = _cameraFocusPosition;
-        //UpdateCameraLocation();
+        UpdateCameraLocation();
     }
 
     private void RecalculateCameraPosition()
@@ -65,7 +66,7 @@ public class FollowTarget : MonoBehaviour
         if (_debugDraw && _playerPosition)
         {
             Gizmos.color = Color.red;            
-            Gizmos.DrawSphere(_cameraFocusPosition, .5f);
+            Gizmos.DrawSphere(_cameraFocusPosition, _cameraTargetPointSize);
             Gizmos.color = _color;
             Gizmos.DrawLine(_cameraFocusPosition, _initialDesiredLocation + _playerPosition.position);
             Gizmos.DrawSphere(_initialDesiredLocation + _playerPosition.position, .5f);

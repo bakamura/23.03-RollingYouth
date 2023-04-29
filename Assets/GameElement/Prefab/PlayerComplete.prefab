@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1281917383749192122}
   - component: {fileID: 1281917383749192121}
   - component: {fileID: 1281917383749192120}
+  - component: {fileID: 155264696001095928}
   m_Layer: 0
   m_Name: CameraRotation
   m_TagString: Untagged
@@ -45,11 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8b18e6f4742a34ead010d82f46db21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1281917385343864482}
+  _playerPosition: {fileID: 1281917385343864482}
   _cameraPosition: {fileID: 1281917384312629521}
   _cameraRotation: {fileID: 1281917383749192122}
   _initialDesiredLocation: {x: 0, y: 9, z: -10}
+  _cameraLookOffset: {x: 0, y: 0, z: 0}
   _debugDraw: 1
+  _cameraTargetPointSize: 0.5
   _color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &1281917383749192120
 MonoBehaviour:
@@ -63,12 +66,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488797f6f008d974b9e8fa7f88a8073e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dragTresHold: 10
-  _sensitivity: 0.02
+  _sensitivity: 10000
   _currentTarget: {fileID: 1281917383749192122}
   _dragAreaPrecentX: 1
   _dragAreaPrecentY: 0.2
-  _debugPanel: {fileID: 0}
+  _area: {fileID: 0}
+  _useKeyboard: 0
+--- !u!114 &155264696001095928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281917383749192123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05873e4c9a91c7442a1a4ca925b4900c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPosition: {fileID: 1281917385343864482}
+  _layersToCollideWith:
+    serializedVersion: 2
+    m_Bits: 1
+  _cameraTransform: {fileID: 1281917384312629521}
+  _checkFrequence: 0.5
+  _raycastCheckRadius: 0.2
+  _fadeMaterial: {fileID: 2100000, guid: e187e7eceb5417c4eacfab25536571f7, type: 2}
 --- !u!1 &1281917384312629522
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +448,7 @@ MonoBehaviour:
     Actions: []
     StateToGoWhenTrue: MovingGround
     StateToGoWhenFalse: 
-  - StateID: InPlunger
+  - StateID: InLauncher
     Decisions:
     - {fileID: 1281917385487999240}
     Actions: []
@@ -487,6 +510,7 @@ MonoBehaviour:
   _maxAngle: 1
   _cameraRotation: {fileID: 1281917383749192122}
   IsGyroActive: 1
+  _useKeyboard: 0
 --- !u!114 &1281917385487999242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,3 +528,4 @@ MonoBehaviour:
   _maxForceInDrag: 1
   _cameraRotation: {fileID: 1281917383749192122}
   IsSwipeActive: 0
+  _useKeyboard: 0

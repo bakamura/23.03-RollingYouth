@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d736eb77d3afc53468bf37fca6304b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stateID: InPlunger
+  _stateID: InLauncher
 --- !u!114 &5856405440605401106
 MonoBehaviour:
   m_ObjectHideFlags: 0

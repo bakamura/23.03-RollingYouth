@@ -108,9 +108,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1281917383749192120, guid: 48095bdddc90d5d43bdcbda6905fc65b,
         type: 3}
+      propertyPath: _area
+      value: 
+      objectReference: {fileID: 783834119704554650}
+    - target: {fileID: 1281917383749192120, guid: 48095bdddc90d5d43bdcbda6905fc65b,
+        type: 3}
       propertyPath: _debugPanel
       value: 
       objectReference: {fileID: 783834119704554650}
+    - target: {fileID: 1281917383749192121, guid: 48095bdddc90d5d43bdcbda6905fc65b,
+        type: 3}
+      propertyPath: _cameraTargetPointSize
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1281917383749192121, guid: 48095bdddc90d5d43bdcbda6905fc65b,
         type: 3}
       propertyPath: _initialDesiredLocation.y

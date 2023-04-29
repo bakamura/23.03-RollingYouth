@@ -83,12 +83,16 @@ public class FadeObjectsInSight : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (UnityEditor.EditorApplication.isPlaying)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawLine(_cameraTransform.position, _cameraTransform.position + _rayDirection);
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(_cameraTransform.position + _rayDirection, _raycastCheckRadius);
         }
     }
+#endif
 }

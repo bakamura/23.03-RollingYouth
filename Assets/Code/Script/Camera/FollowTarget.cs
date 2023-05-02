@@ -10,6 +10,7 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Transform _cameraRotation;
     [SerializeField] private Vector3 _initialDesiredLocation;
     [SerializeField] private Vector3 _cameraLookOffset;
+    [SerializeField] private bool _cameraColideWithObjects = true;
 #if UNITY_EDITOR
     [SerializeField] private bool _debugDraw;
     [SerializeField] private float _cameraTargetPointSize = .5f;
@@ -45,7 +46,7 @@ public class FollowTarget : MonoBehaviour
 
     private void UpdateCameraLocation()
     {
-        if (Physics.Raycast(_cameraFocusPosition, -_cameraPosition.forward, out RaycastHit hit, _currentMaxDistance))
+        if (Physics.Raycast(_cameraFocusPosition, -_cameraPosition.forward, out RaycastHit hit, _currentMaxDistance) && _cameraColideWithObjects)
         {
             _cameraPosition.position = hit.point;
         }

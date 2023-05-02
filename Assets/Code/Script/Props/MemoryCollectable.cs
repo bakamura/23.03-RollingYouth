@@ -11,7 +11,7 @@ public class MemoryCollectable : MonoBehaviour, ISaveObject
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) Collect();
+        /*if (other.CompareTag("Player"))*/ Collect();
     }
 
     private void Collect()

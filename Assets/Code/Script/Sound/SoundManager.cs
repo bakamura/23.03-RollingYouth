@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public class SoundManager : BaseSingleton<SoundManager>
@@ -53,6 +54,7 @@ public class SoundManager : BaseSingleton<SoundManager>
     /// <returns></returns>
     private IEnumerator SoundLerp(bool transitionCompletely, AudioClip clip, AudioSource audioSource, float volume, float transitionDuration = 0)
     {
+        Contract.Invariant(volume < 0);
         bool operationCompleted = false;
         float duration = transitionDuration > 0 ? transitionDuration : _defaultMusicTransitionDuration;
         float delta = 0;

@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/GameElement/Scene/TableTest.unity
+    path: Assets/GameElement/Scene/2.Table.unity
     guid: d539c746ee34d20459f6024d2fc562d8
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ab51733a750857641b4e0208ace32f98,

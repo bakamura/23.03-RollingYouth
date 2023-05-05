@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadSceneOnStart: 1
-  _initialScene: 0.MainMenu
+  _initialScene: 0.RoomBase
   _fadeUi: {fileID: 1492368447}
 --- !u!1 &429888306
 GameObject:
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -579,4 +579,4 @@ MonoBehaviour:
   _defaultMusicTransitionDuration: 1
   _sfxMixerGroup: {fileID: 3659376866744960543, guid: 223a6466b86046147b3e49befe6f766e,
     type: 2}
-  _debugMessages: 0
+  _debugMessages: 1

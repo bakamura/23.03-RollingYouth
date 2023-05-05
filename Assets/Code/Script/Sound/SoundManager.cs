@@ -14,57 +14,52 @@ public class SoundManager : BaseSingleton<SoundManager>
     private const float _musicLerpTick = .02f;
     private WaitForSeconds _delay;
     private List<AudioSource> _sfxAudioSources = new List<AudioSource>();
-    private Queue<MusicAudioData> _musicQueue = new Queue<MusicAudioData>();
+    //private Queue<MusicAudioData> _musicQueue = new Queue<MusicAudioData>();
 
     #region "AudioDatas"
+    //[System.Serializable]
+    //public struct MusicAudioData
+    //{
+    //    public bool TransitionCompletely;
+    //    public AudioClip Clip;
+    //    public float Volume;
+    //    public float TransitionDuration;
+    //    public AudioSource AudioSource;
+
+    //    public MusicAudioData(bool transitionCompletely, AudioClip clip, float volume, AudioSource audioSource, float transitionDuration = 0)
+    //    {
+    //        Contract.Ensures(volume >= 0 && volume <= 1);
+    //        TransitionCompletely = transitionCompletely;
+    //        TransitionDuration = transitionDuration;
+    //        Clip = clip;
+    //        Volume = volume;
+    //        AudioSource = audioSource;
+    //    }
+    //}
+
     [System.Serializable]
-    public struct MusicAudioData
-    {
-        public bool TransitionCompletely;
-        public AudioClip Clip;
-        public float Volume;
-        public float TransitionDuration;
-
-        public MusicAudioData(bool transitionCompletely, AudioClip clip, float volume, float transitionDuration = 0)
-        {
-            Contract.Ensures(volume >= 0 && volume <= 1);
-            TransitionCompletely = transitionCompletely;
-            TransitionDuration = transitionDuration;
-            Clip = clip;
-            Volume = volume;
-        }
-    }
-
-    [System.Serializable]    
     public struct SfxAudioData
     {
         public AudioClip Clip;
         public float Volume;
-        public Vector3 SoundOrigin;
         public bool IsSoundSpatial;
         public float[] RandomizePitch;
-        public AudioSource AudioSource;
-        //public float AudioInterval;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clip"></param>
         /// <param name="volume"></param>
-        /// <param name="soundOrigin"></param>
         /// <param name="isSoundSpatial"></param>
         /// <param name="randomizePitch">an array with the size of 2. 0 = min value, 1 = max value</param>
         /// <param name="audioSource"></param>
-        public SfxAudioData(AudioClip clip, float volume, Vector3 soundOrigin, /*float audioInterval,*/ bool isSoundSpatial = true, float[] randomizePitch = null, AudioSource audioSource = null)
+        public SfxAudioData(AudioClip clip, float volume, bool isSoundSpatial = true, float[] randomizePitch = null)
         {
             Contract.Ensures(volume >= 0 && volume <= 1);
             Contract.Ensures(randomizePitch.Length == 2);
             Clip = clip;
             Volume = volume;
-            SoundOrigin = soundOrigin;
             IsSoundSpatial = isSoundSpatial;
             RandomizePitch = randomizePitch;
-            AudioSource = audioSource;
-            //AudioInterval = audioInterval;
         }
     }
 
@@ -91,15 +86,16 @@ public class SoundManager : BaseSingleton<SoundManager>
     /// <param name="volume"></param>
     /// <param name="randomizePitch">an array with the size of 2. 0 = min value, 1 = max value </param>
     /// <param name="audioSource"></param>
-    public void PlaySoundEffectInComponent(float volume, bool overrideCurrentSoundEffect, float[] randomizePitch = null, AudioSource audioSource = null)
+    public void PlaySoundEffectInComponent(float volume, bool overrideCurrentSoundEffect, AudioClip clip, float[] randomizePitch = null, AudioSource audioSource = null)
     {
         Contract.Ensures(volume >= 0 && volume <= 1);
         Contract.Ensures(randomizePitch.Length == 2);
         if (!audioSource.isPlaying || overrideCurrentSoundEffect)
         {
             if (audioSource.isPlaying) audioSource.Stop();
+            audioSource.clip = clip;
             audioSource.volume = volume;
-            audioSource.pitch = randomizePitch != null ? Random.Range(randomizePitch[0], randomizePitch[1]) : Random.Range(-3f, 3f);
+            audioSource.pitch = randomizePitch.Length == 2 ? Random.Range(randomizePitch[0], randomizePitch[1]) : Random.Range(-3f, 3f);
             audioSource.Play();
         }
 #if UNITY_EDITOR
@@ -110,15 +106,8 @@ public class SoundManager : BaseSingleton<SoundManager>
         }
 #endif
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="clip"></param>
-    /// <param name="volume"></param>
-    /// <param name="soundOrigin"></param>
-    /// <param name="isSoundSpatial"></param>
-    /// <param name="randomizePitch">an array with the size of 2. 0 = min value, 1 = max value</param>
-    public void PlaySoundEffect(SfxAudioData data/*AudioClip clip, float volume, Vector3 soundOrigin, bool isSoundSpatial = true, float[] randomizePitch = null*/)
+
+    public void PlaySoundEffect(SfxAudioData data, Vector3 soundOrigin, float minSoundRange, float maxSoundDistance)
     {
         Contract.Ensures(data.Volume >= 0 && data.Volume <= 1);
         Contract.Ensures(data.RandomizePitch.Length == 2);
@@ -128,9 +117,15 @@ public class SoundManager : BaseSingleton<SoundManager>
         audioSource.clip = data.Clip;
         audioSource.volume = data.Volume;
         audioSource.spatialBlend = data.IsSoundSpatial ? 1 : 0;
-        audioSource.pitch = data.RandomizePitch != null ? Random.Range(data.RandomizePitch[0], data.RandomizePitch[1]) : Random.Range(-3f, 3f);
-        audioSource.gameObject.transform.position = data.SoundOrigin;
+        audioSource.maxDistance = maxSoundDistance;
+        audioSource.minDistance = minSoundRange;
+        audioSource.pitch = data.RandomizePitch.Length == 2 ? Random.Range(data.RandomizePitch[0], data.RandomizePitch[1]) : Random.Range(-3f, 3f);
+        audioSource.gameObject.transform.position = soundOrigin;
         audioSource.Play();
+#if UNITY_EDITOR
+        if (_debugMessages)
+            Debug.Log($"playing the sound {audioSource.clip.name} at position {soundOrigin}");
+#endif
     }
 
     private AudioSource GetAvailableSfxSoundPlayer()
@@ -149,44 +144,57 @@ public class SoundManager : BaseSingleton<SoundManager>
         return audioSource;
     }
 
-    public void PlayMusic(MusicAudioData data)
-    {
-        _musicQueue.Enqueue(data);
-        if (_musicLerp == null) _musicLerp = StartCoroutine(MusicSoundLerp(_musicQueue.Dequeue()));
-    }
+    //public void PlayMusic(MusicAudioData data)
+    //{
+    //    _musicQueue.Enqueue(data);
+    //    if (_musicLerp == null) _musicLerp = StartCoroutine(MusicSoundLerp(_musicQueue.Dequeue()));
+    //}
 
-    private IEnumerator MusicSoundLerp(MusicAudioData data)
-    {
-        bool operationCompleted = false;
-        float duration = data.TransitionDuration > 0 ? data.TransitionDuration : _defaultMusicTransitionDuration;
-        float delta = 0;
-        float currentVolume = _musicAudioSource.volume;
-        float tempVolume = data.TransitionCompletely ? 0 : data.Volume;
-        while (!operationCompleted)
-        {
-            _musicAudioSource.volume = Mathf.Lerp(currentVolume, tempVolume, delta);
-            delta += _musicLerpTick * duration;
-            if (delta >= 1)
-            {
-                if (data.TransitionCompletely)
-                {
-                    currentVolume = _musicAudioSource.volume;
-                    tempVolume = data.Volume;
-                    data.TransitionCompletely = false;
-                    delta = 0;
-                }
-                else
-                {
-                    operationCompleted = true;
-                }
-                _musicAudioSource.clip = data.Clip;
-            }
-            yield return _delay;
-        }
-        _musicLerp = null;
-        if (_musicQueue.Count > 0)
-        {
-            PlayMusic(_musicQueue.Dequeue());
-        }
-    }
+//    private IEnumerator MusicSoundLerp(MusicAudioData data)
+//    {
+//#if UNITY_EDITOR
+//        if (_debugMessages)
+//            Debug.Log($"starting music blend from {_musicAudioSource.clip} to {data.Clip}");
+//#endif
+//        bool operationCompleted = false;
+//        float duration = data.TransitionDuration > 0 ? data.TransitionDuration : _defaultMusicTransitionDuration;
+//        float delta = 0;
+//        float currentVolume = _musicAudioSource.volume;
+//        float tempVolume = data.TransitionCompletely ? 0 : data.Volume;
+//        while (!operationCompleted)
+//        {
+//            _musicAudioSource.volume = Mathf.Lerp(currentVolume, tempVolume, delta);
+//            delta += _musicLerpTick * duration;
+//            if (delta >= 1)
+//            {
+//                if (data.TransitionCompletely)
+//                {
+//                    currentVolume = _musicAudioSource.volume;
+//                    tempVolume = data.Volume;
+//                    data.TransitionCompletely = false;
+//                    delta = 0;
+//                }
+//                else
+//                {
+//                    operationCompleted = true;
+//                }
+//                _musicAudioSource.clip = data.Clip;
+//                if (!_musicAudioSource.isPlaying) _musicAudioSource.Play();
+//            }
+//            yield return _delay;
+//        }
+//        _musicLerp = null;
+//#if UNITY_EDITOR
+//        if (_debugMessages)
+//            Debug.Log($"music blend endend, now playing {data.Clip}");
+//#endif
+//        if (_musicQueue.Count > 0)
+//        {
+//#if UNITY_EDITOR
+//            if (_debugMessages)
+//                Debug.Log($"there are {_musicQueue.Count} in request");
+//#endif
+//            PlayMusic(_musicQueue.Dequeue());
+//        }
+//    }
 }

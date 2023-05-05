@@ -24,10 +24,11 @@ public class LevelManager : BaseSingleton<LevelManager>
         }
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         operation.completed += FadeIn;
+        _currentLevelName = sceneName;
     }
 
     private void FadeIn(AsyncOperation operation)
     {
-        _fadeUi.UpdateFade(FadeUi.FadeTypes.FADEIN, null);
+        _fadeUi.UpdateFade(FadeUi.FadeTypes.FADEOUT, null);
     }
 }

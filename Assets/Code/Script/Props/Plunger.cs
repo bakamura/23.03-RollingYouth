@@ -64,7 +64,7 @@ public class Plunger : CameraUser
                 if (Vector3.Distance(_leaver.position, _initialPosition) >= _maxPushDistance)
                 {
                     EndCameraUse();
-                    _playerComponents.ObjectGrow.ObjectPhysics.AddForce(transform.up * _force, ForceMode.Impulse);
+                    _playerComponents.PlayerRigidbody.AddForce(transform.up * _force, ForceMode.Impulse);
                     _leaver.position = _initialPosition;
                 }
                 else if (_currentDelta < 1)
@@ -81,7 +81,7 @@ public class Plunger : CameraUser
         if (other.CompareTag("Player") && !_isTargetInside)
         {
             PlayerComponents temp = other.GetComponent<PlayerComponents>();
-            temp.ObjectGrow.UpdateSize(-temp.ObjectGrow.ObjectToGrow.localScale.x, -temp.ObjectGrow.ObjectPhysics.mass);
+            temp.ObjectGrow.UpdateSize(-temp.ObjectGrow.ObjectToGrow.localScale.x, -temp.PlayerRigidbody.mass);
             BeginCameraUse(temp, temp.Camera.position, temp.Camera.rotation);
             UpdatePlayerPosition();
         }
@@ -94,16 +94,16 @@ public class Plunger : CameraUser
     }
     protected override void EndCameraUse(Action OnEndLerp = null)
     {
-        _playerComponents.ObjectGrow.ObjectPhysics.constraints = RigidbodyConstraints.None;
-        _playerComponents.ObjectGrow.ObjectPhysics.useGravity = true;
+        _playerComponents.PlayerRigidbody.constraints = RigidbodyConstraints.None;
+        _playerComponents.PlayerRigidbody.useGravity = true;
         base.EndCameraUse(OnEndLerp);
         _isTargetInside = false;
     }
     private void UpdatePlayerPosition()
     {
         _playerComponents.PlayerTransform.position = transform.position + _playerPosition;
-        _playerComponents.ObjectGrow.ObjectPhysics.constraints = RigidbodyConstraints.FreezeAll;
-        _playerComponents.ObjectGrow.ObjectPhysics.useGravity = false;
+        _playerComponents.PlayerRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        _playerComponents.PlayerRigidbody.useGravity = false;
     }
 
 #if UNITY_EDITOR

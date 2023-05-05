@@ -37,11 +37,12 @@ public class FadeUi : MonoBehaviour
     IEnumerator FadeUI(FadeTypes fadeType, Action OnFadeEnd, float fadeDuration)
     {
         float delta = 0;
-        Color currentColor = _fadeImage.color;
+        float durationFactor = fadeDuration > 0 ? fadeDuration : _defaultFadeDuration;
+        Color currentColor = fadeType == FadeTypes.FADEIN ? Color.clear : Color.black;        
         while (delta < 1)
         {
             _fadeImage.color = Color.Lerp(currentColor, fadeType == FadeTypes.FADEIN ? Color.black : Color.clear, delta);
-            delta += _fadeUpdateFrequency * fadeDuration > 0 ? fadeDuration : _defaultFadeDuration;
+            delta += _fadeUpdateFrequency * durationFactor;
             yield return _delay;
         }
         _fadeImage.raycastTarget = fadeType == FadeTypes.FADEIN;

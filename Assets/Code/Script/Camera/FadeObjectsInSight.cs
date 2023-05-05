@@ -12,7 +12,7 @@ public class FadeObjectsInSight : MonoBehaviour
     [SerializeField] private Material _fadeMaterial;
 
     private WaitForSeconds _delay;
-    private RaycastHit[] _previousHits;
+    private List<MeshRenderer> _previousHits = new List<MeshRenderer>();
     //private GameObject _currentTarget;
     //private Material _previousMaterial;
     private List<Material> _previousMaterials =  new List<Material>();
@@ -61,24 +61,29 @@ public class FadeObjectsInSight : MonoBehaviour
         // for multiple objects
         while (true)
         {
-            if (_previousHits != null)
-            {
-                for (int i = 0; i < _previousHits.Length; i++)
+            //if (_previousHits.Count > 0)
+            //{
+                for (int i = 0; i < _previousHits.Count; i++)
                 {
-                    _previousHits[i].collider.GetComponent<MeshRenderer>().material = _previousMaterials[i];
+                    _previousHits[i].material = _previousMaterials[i];
                 }
                 _previousMaterials.Clear();
-            }
+                _previousHits.Clear();
+            //}
 
-            RaycastHit[] hits = Physics.SphereCastAll(_cameraTransform.position, _raycastCheckRadius, _rayDirection, _rayDirection.magnitude, _layersToCollideWith);
+            RaycastHit[] hits = Physics.SphereCastAll(_cameraTransform.position, _raycastCheckRadius, _rayDirection, _rayDirection.magnitude * .9f, _layersToCollideWith);
             for (int i = 0; i < hits.Length; i++)
             {
-                _previousMaterials.Add(hits[i].collider.GetComponent<MeshRenderer>().material);
-                _instanceFadeMat.SetTexture("_MainTex", hits[i].collider.GetComponent<MeshRenderer>().material.GetTexture("_MainTex"));
-                _instanceFadeMat.SetTexture("_MetallicGlossMap", hits[i].collider.GetComponent<MeshRenderer>().material.GetTexture("_MetallicGlossMap"));
-                hits[i].collider.GetComponent<MeshRenderer>().material = _instanceFadeMat;
+                MeshRenderer temp = hits[i].collider.GetComponent<MeshRenderer>();
+                if (temp)
+                {
+                    _previousHits.Add(temp);
+                    _previousMaterials.Add(temp.material);
+                    _instanceFadeMat.SetTexture("_MainTex", hits[i].collider.GetComponent<MeshRenderer>().material.GetTexture("_MainTex"));
+                    _instanceFadeMat.SetTexture("_MetallicGlossMap", hits[i].collider.GetComponent<MeshRenderer>().material.GetTexture("_MetallicGlossMap"));
+                    hits[i].collider.GetComponent<MeshRenderer>().material = _instanceFadeMat;
+                }
             }
-            _previousHits = hits;
             yield return _delay;
         }
     }

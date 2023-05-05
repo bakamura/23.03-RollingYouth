@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class PlayerSaveData : MonoBehaviour, ISaveObject
 {
-    [SerializeField] private ObjectGrow _playerGrow;
+    [SerializeField] private PlayerComponents _playerComponents;
+
+    //private void Awake()
+    //{
+    //    LoadData();
+    //}
 
     public void LoadData()
     {
         SaveData temp = SaveManager.Instance.LoadedData;
-        _playerGrow.ObjectPhysics.transform.position = temp.PlayerPosition;
-        _playerGrow.ObjectPhysics.mass = temp.PlayerMass;
-        _playerGrow.ObjectToGrow.localScale = temp.PlayerScale;
+        _playerComponents.PlayerTransform.position = temp.PlayerPosition;
+        _playerComponents.PlayerRigidbody.mass = temp.PlayerMass;
+        _playerComponents.ObjectGrow.ObjectToGrow.localScale = temp.PlayerScale;
     }
 
     public void UpdateSavedData()
     {
-        if (_playerGrow)
+        if (_playerComponents)
         {
             SaveData newData = SaveManager.Instance.LoadedData;
-            newData.PlayerPosition = _playerGrow.ObjectPhysics.transform.position;
-            newData.PlayerScale = _playerGrow.ObjectToGrow.localScale;
-            newData.PlayerMass = _playerGrow.ObjectPhysics.mass;
+            newData.PlayerPosition = _playerComponents.PlayerTransform.position;
+            newData.PlayerScale = _playerComponents.ObjectGrow.ObjectToGrow.localScale;
+            newData.PlayerMass = _playerComponents.PlayerRigidbody.mass;
             SaveManager.Instance.UpdateCurrentData(newData);
         }
         else Debug.LogError("inspector reference is empty");

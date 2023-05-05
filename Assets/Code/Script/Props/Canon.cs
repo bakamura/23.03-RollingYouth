@@ -100,17 +100,17 @@ public class Canon : MonoBehaviour
     {
         _playerComponents = target.GetComponent<PlayerComponents>();
         _entityStateChanger.UpdateState(_playerComponents.PlayerActionsManagment);
-        _playerComponents.ObjectGrow.ObjectPhysics.constraints = RigidbodyConstraints.FreezeAll;
-        _playerComponents.ObjectGrow.ObjectPhysics.useGravity = false;
+        _playerComponents.PlayerRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        _playerComponents.PlayerRigidbody.useGravity = false;
         _isPlayerInside = true;
         _playerComponents.PlayerTransform.position = _playerPositionInsideCanon + transform.position;
     }
 
     private void Launch()
     {
-        _playerComponents.ObjectGrow.ObjectPhysics.constraints = RigidbodyConstraints.None;
-        _playerComponents.ObjectGrow.ObjectPhysics.useGravity = true;
-        _playerComponents.ObjectGrow.ObjectPhysics.AddForce(transform.forward * _launchForce, ForceMode.Impulse);
+        _playerComponents.PlayerRigidbody.constraints = RigidbodyConstraints.None;
+        _playerComponents.PlayerRigidbody.useGravity = true;
+        _playerComponents.PlayerRigidbody.AddForce(transform.forward * _launchForce, ForceMode.Impulse);
         _isPlayerInside = false;
     }
 

@@ -8,7 +8,7 @@ public abstract class CameraUser : MonoBehaviour
 {
     [Header("Camera Values")]
     [SerializeField, Tooltip("The camera will always look to the forward vector (+Z)")] protected Transform _cameraTransform;
-    [SerializeField] private float _cameraSpeed;
+    [SerializeField] private float _cameraLerpDuration;
 
     protected LerpCamera _lerpCamera;
     protected PlayerComponents _playerComponents;
@@ -28,14 +28,14 @@ public abstract class CameraUser : MonoBehaviour
     protected virtual void EndCameraUse(Action OnEndLerp = null)
     {
         _isBegining = false;
-        _lerpCamera.LerpCam(_playerComponents.Camera, _initialCameraPosition, _initialCameraRotation, _cameraSpeed, OnEndLerp);        
+        _lerpCamera.LerpCam(_playerComponents.Camera, _initialCameraPosition, _initialCameraRotation, _cameraLerpDuration, OnEndLerp);        
     }
 
     protected virtual void BeginCameraUse(PlayerComponents playerComponents, Vector3 initialCamPos, Quaternion initialCamRot, Action OnEndLerp = null)
     {
         _isBegining = true;
         CollectCameraData(playerComponents, initialCamPos, initialCamRot);
-        _lerpCamera.LerpCam(playerComponents.Camera, _cameraTransform.position, _cameraTransform.rotation, _cameraSpeed, OnEndLerp);
+        _lerpCamera.LerpCam(playerComponents.Camera, _cameraTransform.position, _cameraTransform.rotation, _cameraLerpDuration, OnEndLerp);
     }
 
     private void CollectCameraData(PlayerComponents playerComponents, Vector3 initialCamPos, Quaternion initialCamRot)

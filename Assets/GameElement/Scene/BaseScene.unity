@@ -167,8 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadSceneOnStart: 1
-  _initialScene: 0.RoomBase
-  _fadeUi: {fileID: 1492368447}
+  _initialScene: 0.MainMenu
 --- !u!1 &429888306
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +246,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &429888310
 RectTransform:
@@ -579,4 +578,5 @@ MonoBehaviour:
   _defaultMusicTransitionDuration: 1
   _sfxMixerGroup: {fileID: 3659376866744960543, guid: 223a6466b86046147b3e49befe6f766e,
     type: 2}
-  _debugMessages: 1
+  _masterMixer: {fileID: 24100000, guid: 223a6466b86046147b3e49befe6f766e, type: 2}
+  _debugMessages: 0

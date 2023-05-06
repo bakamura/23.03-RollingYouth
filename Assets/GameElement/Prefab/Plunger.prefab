@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraTransform: {fileID: 5856405441402321331}
-  _cameraSpeed: 1
+  _cameraLerpDuration: 2
   _dragTresHold: 3
   _maxPushDistance: 3
   _returnPlungerSpeed: 1

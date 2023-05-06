@@ -7,7 +7,6 @@ public class LevelManager : BaseSingleton<LevelManager>
 {
     [SerializeField] private bool _loadSceneOnStart = true;
     [SerializeField] private string _initialScene;
-    [SerializeField] private FadeUi _fadeUi;
 
     private string _currentLevelName;
 
@@ -23,12 +22,12 @@ public class LevelManager : BaseSingleton<LevelManager>
             SceneManager.UnloadSceneAsync(_currentLevelName);
         }
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        operation.completed += FadeIn;
+        operation.completed += FadeOut;
         _currentLevelName = sceneName;
     }
 
-    private void FadeIn(AsyncOperation operation)
+    private void FadeOut(AsyncOperation operation)
     {
-        _fadeUi.UpdateFade(FadeUi.FadeTypes.FADEOUT, null);
+        FadeUi.Instance.UpdateFade(FadeUi.FadeTypes.FADEOUT, null);
     }
 }

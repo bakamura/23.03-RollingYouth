@@ -9,7 +9,7 @@ public class LerpCamera : MonoBehaviour
     private Transform _targetTransform;
     private Vector3 _finalPosition;
     private Quaternion _finalRotation;
-    private float _currentSpeed;
+    private float _lerpDuration;
     private Vector3 _initialPosition;
     private Quaternion _initialRotation;
     private bool _isAnimating;
@@ -29,7 +29,7 @@ public class LerpCamera : MonoBehaviour
     {
         if(_isAnimating)
         {
-            _currentDelta += Time.deltaTime * _currentSpeed;
+            _currentDelta += Time.deltaTime / _lerpDuration;
             _targetTransform.SetPositionAndRotation(Vector3.Lerp(_initialPosition, _finalPosition, _currentDelta), Quaternion.Lerp(_initialRotation, _finalRotation, _currentDelta));
             if (_currentDelta >= 1f)
             {
@@ -49,7 +49,7 @@ public class LerpCamera : MonoBehaviour
             _finalRotation = finalRotation;
             _initialPosition = camera.position;
             _initialRotation = camera.rotation;
-            _currentSpeed = speed;
+            _lerpDuration = speed;
             _currentDelta = 0f;
             _onEndLerp = null;
             _onEndLerp += OnEndLerp;

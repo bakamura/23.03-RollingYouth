@@ -4,26 +4,35 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : UI {
 
-    [SerializeField] private Container configContainer;
-    [SerializeField] private Container socialContainer;
-    [SerializeField] private float containerAnimDuration;
+    [SerializeField] private string _baseSceneName;
+    [SerializeField] private float _containerAnimDuration;
+    [SerializeField] private Container _configContainer;
+    [SerializeField] private Container _socialContainer;
 
     private void Start() {
         RoundButton();
     }
 
     public void Play() {
-        SceneManager.LoadScene(1); // Provisory
+        FadeUi.Instance.UpdateFade(FadeUi.FadeTypes.FADEIN, LoadMainScene);
     }
 
-    public void Container(Container container) {
-        StartCoroutine(ExpandContainer(container.rectTransform, container.openSize, containerAnimDuration));
+    public void SocialMedias()
+    {
+        UpdateContainer(_socialContainer);
     }
-}
 
-[Serializable]
-public class Container {
-    public RectTransform rectTransform;
-    public Vector2 closedSize;
-    public Vector2 openSize;
+    public void Configurations()
+    {
+        UpdateContainer(_configContainer);
+    }
+
+    private void UpdateContainer(Container container) {
+        if(!container.IsAnimating) StartCoroutine(ExpandContainer(container, container.IsOpen ? container.closedSize : container.openSize, _containerAnimDuration));
+    }
+
+    private void LoadMainScene()
+    {
+        LevelManager.Instance.LoadLevel(_baseSceneName);
+    }
 }

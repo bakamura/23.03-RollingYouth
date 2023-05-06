@@ -331,6 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1281917385452669614}
   - component: {fileID: 1281917385452669613}
+  - component: {fileID: 9017721594443953784}
   m_Layer: 0
   m_Name: PlayerComplete
   m_TagString: Untagged
@@ -367,6 +368,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerComponents: {fileID: 1281917385343864481}
+--- !u!114 &9017721594443953784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281917385452669615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ba4b0602f4e9a42a8e4adf09e66b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movmentByGyro: {fileID: 1281917385487999241}
+  _movmentBySwipe: {fileID: 1281917385487999242}
 --- !u!1 &1281917385487999254
 GameObject:
   m_ObjectHideFlags: 0

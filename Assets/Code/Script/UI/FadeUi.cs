@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class FadeUi : MonoBehaviour
+public class FadeUi : BaseSingleton<FadeUi>
 {
     [SerializeField, Min(0f)] private float _defaultFadeDuration = 1f;
 
@@ -19,8 +19,9 @@ public class FadeUi : MonoBehaviour
         FADEOUT
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _fadeImage = GetComponent<Image>();
         _delay = new WaitForSeconds(_fadeUpdateFrequency);
     }
@@ -42,7 +43,7 @@ public class FadeUi : MonoBehaviour
         while (delta < 1)
         {
             _fadeImage.color = Color.Lerp(currentColor, fadeType == FadeTypes.FADEIN ? Color.black : Color.clear, delta);
-            delta += _fadeUpdateFrequency * durationFactor;
+            delta += _fadeUpdateFrequency / durationFactor;
             yield return _delay;
         }
         _fadeImage.raycastTarget = fadeType == FadeTypes.FADEIN;

@@ -20,10 +20,14 @@ public class GeneralSoundTriggerInspector : Editor
         EditorGUILayout.PropertyField(soundType, new GUIContent("Sound Type"));
 
         EditorGUILayout.PropertyField(playSoundOnTriggerEnter, new GUIContent("Play On Trigger Enter"));
-        EditorGUILayout.PropertyField(playSoundOnTriggerExit, new GUIContent("Play On Trigger Exit"));        
+        EditorGUILayout.PropertyField(playSoundOnTriggerExit, new GUIContent("Play On Trigger Exit"));
+
+        GeneralSoundTrigger temp = (GeneralSoundTrigger)serializedObject.targetObject;
 
         if (soundType.enumValueIndex == (int)SoundManager.SoundTypes.SFX)
         {
+            if (temp.gameObject.GetComponent<AudioSource>()) DestroyImmediate(temp.gameObject.GetComponent<AudioSource>());
+
             EditorGUILayout.PropertyField(baseAudioSourceRangeMultiplyer, new GUIContent("Audio range Multiplyer"));
             EditorGUILayout.PropertyField(playSoundOnCollisionEnter, new GUIContent("Play On Collision Enter"));
             EditorGUILayout.PropertyField(soundBasedOnVelocity, new GUIContent("Sound Based On Velocity", "if true the volume will be based on the velocity of the object that will colide with this object. The Volume Values doesn't affect anything if true"));
@@ -50,6 +54,8 @@ public class GeneralSoundTriggerInspector : Editor
         //the trigger activates music
         else
         {
+            if (!temp.gameObject.GetComponent<AudioSource>()) temp.gameObject.AddComponent<AudioSource>();
+
             if (playSoundOnTriggerEnter.boolValue)
             {
                 GUILayout.Label("Music Trigger Enter Configurations", EditorStyles.largeLabel);
@@ -68,7 +74,7 @@ public class GeneralSoundTriggerInspector : Editor
         }
 
         serializedObject.ApplyModifiedProperties();
-    }
+    }  
 
     public void OnEnable()
     {
@@ -89,6 +95,6 @@ public class GeneralSoundTriggerInspector : Editor
         playSoundOnCollisionEnter = serializedObject.FindProperty("_playSoundOnCollisionEnter");
         //musicConfigOnCollisionEnter = serializedObject.FindProperty("_musicConfigOnCollisionEnter");
         sfxConfigOnCollisionEnter = serializedObject.FindProperty("_sfxConfigOnCollisionEnter");
-    }
+    }    
 }
 #endif

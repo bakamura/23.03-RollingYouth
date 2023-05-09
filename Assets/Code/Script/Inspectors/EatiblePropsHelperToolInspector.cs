@@ -21,6 +21,11 @@ public class EatiblePropsHelperToolInspector : Editor
         {
             script.ResizeProps();
         }
+
+        if(GUILayout.Button("Randomize Materials"))
+        {
+            script.RandomizeMaterials();
+        }
     }
 }
 #endif

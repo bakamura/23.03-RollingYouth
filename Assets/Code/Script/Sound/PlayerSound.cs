@@ -15,6 +15,7 @@ public class PlayerSound : MonoBehaviour
         public PhysicMaterial SurfaceType;
         public float[] RandomizePicth;
         public AudioClip AudioClip;
+        [Min(1f)] public float VolumeMultiplier;
         //public SoundManager.SfxAudioData AudioData;
     }
 
@@ -44,7 +45,7 @@ public class PlayerSound : MonoBehaviour
             if(_soundsConfigurations[i].SurfaceType == physicMaterial)
             {
                 //Debug.Log($"play sound with volume {volume}");
-                SoundManager.Instance.PlaySoundEffectInComponent(volume, false, _soundsConfigurations[i].AudioClip, _soundsConfigurations[i].RandomizePicth, _audioSource);
+                SoundManager.Instance.PlaySoundEffectInComponent(volume * _soundsConfigurations[i].VolumeMultiplier, false, _soundsConfigurations[i].AudioClip, _soundsConfigurations[i].RandomizePicth, _audioSource);
                 //SoundManager.Instance.PlaySoundEffect(_soundsConfigurations[i].AudioData);
                 break;
             }

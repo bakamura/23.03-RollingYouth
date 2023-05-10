@@ -12,7 +12,7 @@ public class SoundManager : BaseSingleton<SoundManager>
     [SerializeField] private AudioMixer _masterMixer;
 
     //private Coroutine _musicLerp;
-    private const float _musicLerpTick = .02f;
+    //private const float _musicLerpTick = .02f;
     //private WaitForSeconds _delay;
     private List<AudioSource> _sfxAudioSources = new List<AudioSource>();
     //private Queue<MusicAudioData> _musicQueue = new Queue<MusicAudioData>();
@@ -44,7 +44,7 @@ public class SoundManager : BaseSingleton<SoundManager>
         public AudioClip Clip;
         public float Volume;
         public bool IsSoundSpatial;
-        public float[] RandomizePitch;
+        [Range(.1f, 3f)] public float[] RandomizePitch;
         /// <summary>
         /// 
         /// </summary>
@@ -55,7 +55,7 @@ public class SoundManager : BaseSingleton<SoundManager>
         /// <param name="audioSource"></param>
         public SfxAudioData(AudioClip clip, float volume, bool isSoundSpatial = true, float[] randomizePitch = null)
         {
-            Contract.Ensures(volume >= 0 && volume <= 1);
+            //Contract.Ensures(volume >= 0 && volume <= 1);
             Contract.Ensures(randomizePitch.Length == 2);
             Clip = clip;
             Volume = volume;
@@ -96,7 +96,7 @@ public class SoundManager : BaseSingleton<SoundManager>
             if (audioSource.isPlaying) audioSource.Stop();
             audioSource.clip = clip;
             audioSource.volume = volume;
-            audioSource.pitch = randomizePitch.Length == 2 ? Random.Range(randomizePitch[0], randomizePitch[1]) : Random.Range(-3f, 3f);
+            audioSource.pitch = randomizePitch.Length == 2 ? Random.Range(randomizePitch[0], randomizePitch[1]) : Random.Range(.1f, 3f);
             audioSource.Play();
         }
 #if UNITY_EDITOR

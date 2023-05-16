@@ -8,11 +8,12 @@ using System.Linq;
 public class HUD : UI
 {
     [SerializeField] private float _containerAnimDuration;
-    [SerializeField] private Sprite[] _pauseIcons = new Sprite[2];
-    [SerializeField] private ControlIconsData[] _controlIcons = new ControlIconsData[2];
     [SerializeField] private Image _pauseImageBtn;
     [SerializeField] private Image _controlImageBtn;
     [SerializeField] private Image _backgroundImage;
+    [SerializeField] private GameObject _controlsUI;
+    [SerializeField] private Sprite[] _pauseIcons = new Sprite[2];
+    [SerializeField] private ControlIconsData[] _controlIcons = new ControlIconsData[2];
     [SerializeField] private Container _pauseContainer;
     [SerializeField] private Container _settingsContainer;
 
@@ -84,5 +85,10 @@ public class HUD : UI
     private void UpdateBackground(bool isMenuOpen)
     {
         _backgroundImage.enabled = isMenuOpen;
+    }
+
+    public void ToggleControlUI(bool isActive)
+    {
+        _controlsUI.SetActive(isActive);
     }
 }

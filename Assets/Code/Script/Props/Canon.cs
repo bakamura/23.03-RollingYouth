@@ -10,7 +10,7 @@ public class Canon : MonoBehaviour
     private struct CanonPositions
     {
         public Quaternion Angles;
-        [Tooltip("the time it will wait to start a new rotation")]public float WaitTimeToNextAngle;
+        [Tooltip("the time it will wait to start a new rotation")] public float WaitTimeToNextAngle;
         [Tooltip("the time it takes to rotate from the current CanonPosition to the next")] public float NextAngleTransitionTime;
     }
     [Header("CanonValues")]
@@ -54,7 +54,7 @@ public class Canon : MonoBehaviour
         if (_isPlayerInside && Input.touchCount > 0)
         {
             Touch input = Input.GetTouch(0);
-            if(input.phase == TouchPhase.Began)
+            if (input.phase == TouchPhase.Began)
             {
                 Launch();
                 StartCoroutine(CanonBehaviour());
@@ -64,36 +64,26 @@ public class Canon : MonoBehaviour
 
     private IEnumerator CanonBehaviour()
     {
-        //while (true)
-        //{
-            float delta = 0;
-            byte currentPositionIndex = 0;
-            Quaternion currentRotation = transform.rotation;
-            while (!_isPlayerInside)
+        float delta = 0;
+        byte currentPositionIndex = 0;
+        Quaternion currentRotation = transform.rotation;
+        while (!_isPlayerInside)
+        {
+            if (delta >= 1f)
             {
-                if (delta >= 1f)
-                {
-                    yield return new WaitForSeconds(_canonPositions[currentPositionIndex].WaitTimeToNextAngle);
-                    currentRotation = transform.rotation;
-                    currentPositionIndex = (byte)(currentPositionIndex == _canonPositions.Length - 1 ? 0 : currentPositionIndex + 1);
-                    delta = 0;
-                }
-                else
-                {
-                    //PERGUNTAR PARA O REINALDO COMO FAZER RODAR RELATIVO A ROTAÇÃO ANTERIOR
-                    //transform.rotation = Quaternion.Lerp(currentRotation, Quaternion.Euler(
-                    //    _canonPositions[currentPositionIndex].Angles.eulerAngles.x + transform.rotation.eulerAngles.x,
-                    //    _canonPositions[currentPositionIndex].Angles.eulerAngles.y + transform.rotation.eulerAngles.y,
-                    //    _canonPositions[currentPositionIndex].Angles.eulerAngles.z + transform.rotation.eulerAngles.z), delta);
-                    transform.rotation = Quaternion.Lerp(currentRotation, _canonPositions[currentPositionIndex].Angles, delta);
-                    float temp = _tickFrequency / _canonPositions[currentPositionIndex].NextAngleTransitionTime;
-                    delta += temp;
-                    yield return new WaitForSeconds(_tickFrequency);
-                }
+                yield return new WaitForSeconds(_canonPositions[currentPositionIndex].WaitTimeToNextAngle);
+                currentRotation = transform.rotation;
+                currentPositionIndex = (byte)(currentPositionIndex == _canonPositions.Length - 1 ? 0 : currentPositionIndex + 1);
+                delta = 0;
             }
-            //yield return new WaitForSeconds(_delayToShootPlayer);
-            //Launch();
-        //}
+            else
+            {
+                transform.rotation = Quaternion.Lerp(currentRotation, _canonPositions[currentPositionIndex].Angles, delta);
+                float temp = _tickFrequency / _canonPositions[currentPositionIndex].NextAngleTransitionTime;
+                delta += temp;
+                yield return new WaitForSeconds(_tickFrequency);
+            }
+        }
     }
 
     private void LaunchSetup(Collider target)
@@ -104,6 +94,7 @@ public class Canon : MonoBehaviour
         _playerComponents.PlayerRigidbody.useGravity = false;
         _isPlayerInside = true;
         _playerComponents.PlayerTransform.position = _playerPositionInsideCanon + transform.position;
+        _playerComponents.PlayerUI.ToggleControlUI(false);
     }
 
     private void Launch()
@@ -112,13 +103,14 @@ public class Canon : MonoBehaviour
         _playerComponents.PlayerRigidbody.useGravity = true;
         _playerComponents.PlayerRigidbody.AddForce(transform.forward * _launchForce, ForceMode.Impulse);
         _isPlayerInside = false;
+        _playerComponents.PlayerUI.ToggleControlUI(true);
     }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = _playerPositionPointColor;
-        Gizmos.DrawSphere(transform.position + _playerPositionInsideCanon, _playerPositionPointSize);        
+        Gizmos.DrawSphere(transform.position + _playerPositionInsideCanon, _playerPositionPointSize);
     }
 #endif
 }

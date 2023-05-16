@@ -82,6 +82,7 @@ public class Plunger : CameraUser
         {
             PlayerComponents temp = other.GetComponent<PlayerComponents>();
             temp.ObjectGrow.UpdateSize(-temp.ObjectGrow.ObjectToGrow.localScale.x, -temp.PlayerRigidbody.mass);
+            temp.PlayerUI.ToggleControlUI(false);
             BeginCameraUse(temp, temp.Camera.position, temp.Camera.rotation);
             UpdatePlayerPosition();
         }
@@ -98,6 +99,7 @@ public class Plunger : CameraUser
         _playerComponents.PlayerRigidbody.useGravity = true;
         base.EndCameraUse(OnEndLerp);
         _isTargetInside = false;
+        _playerComponents.PlayerUI.ToggleControlUI(true);
     }
     private void UpdatePlayerPosition()
     {

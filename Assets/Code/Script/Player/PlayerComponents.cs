@@ -10,5 +10,6 @@ public class PlayerComponents : MonoBehaviour
     public Transform Camera;
     public EntityActionsManagment PlayerActionsManagment;
     public Transform PlayerTransform;
+    public HUD PlayerUI;
     public Rigidbody PlayerRigidbody => ObjectGrow.ObjectPhysics;
 }

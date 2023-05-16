@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1380661418980954499}
   - component: {fileID: 3117143257700455516}
   - component: {fileID: 272134530315872371}
+  - component: {fileID: 6922049639794406129}
   m_Layer: 6
   m_Name: MemoryCollectable
   m_TagString: Untagged
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3190964491857807368}
-  m_Mesh: {fileID: -2432090755550338912, guid: 33fa4af15b7bd6e4ca41cf9d55453d8a, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: 0ec1db7cd38834444b8bb5b743162603, type: 3}
 --- !u!23 &1380661418980954499
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 96ca4c545b4d3d442bd4131aa9dd0723, type: 2}
+  - {fileID: 2100000, guid: b02fc9da6a244204197521b00c63b45e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,4 +109,18 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.25
-  m_Center: {x: 0, y: -0.00013650209, z: 0.122369}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6922049639794406129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190964491857807368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df32019cd5cab2442a6bea2e886ccae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tickFrequence: 0.05
+  _rotationSpeed: 1

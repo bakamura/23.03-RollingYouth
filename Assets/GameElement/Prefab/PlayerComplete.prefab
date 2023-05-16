@@ -49,9 +49,12 @@ MonoBehaviour:
   _playerPosition: {fileID: 1281917385343864482}
   _cameraPosition: {fileID: 1281917384312629521}
   _cameraRotation: {fileID: 1281917383749192122}
-  _initialDesiredLocation: {x: 0, y: 9, z: -10}
+  _initialDesiredLocation: {x: 0, y: 3, z: -5}
   _cameraLookOffset: {x: 0, y: 0, z: 0}
   _cameraColideWithObjects: 1
+  _cameraColissionLayers:
+    serializedVersion: 2
+    m_Bits: 65
   _debugDraw: 1
   _cameraTargetPointSize: 0.5
   _color: {r: 0, g: 0, b: 0, a: 1}

@@ -28,7 +28,7 @@ public class MainMenu : UI {
     }
 
     private void UpdateContainer(Container container) {
-        if(!container.IsAnimating) StartCoroutine(ExpandContainer(container, container.IsOpen ? container.closedSize : container.openSize, _containerAnimDuration));
+        if(!container.IsAnimating) StartCoroutine(ExpandContainer(container, container.IsOpen ? container.ClosedSize : container.OpenSize, _containerAnimDuration));
     }
 
     private void LoadMainScene()

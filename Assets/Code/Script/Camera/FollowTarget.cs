@@ -11,6 +11,7 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Vector3 _initialDesiredLocation;
     [SerializeField] private Vector3 _cameraLookOffset;
     [SerializeField] private bool _cameraColideWithObjects = true;
+    [SerializeField] private LayerMask _cameraColissionLayers;
 #if UNITY_EDITOR
     [SerializeField] private bool _debugDraw;
     [SerializeField] private float _cameraTargetPointSize = .5f;
@@ -21,6 +22,7 @@ public class FollowTarget : MonoBehaviour
     private Vector3 _initialForward;
     private Vector3 _currentCamPosition;
     private float _currentMaxDistance;
+    private float _lastPlayerSize;
 
     private void Awake()
     {
@@ -40,13 +42,14 @@ public class FollowTarget : MonoBehaviour
     private void RecalculateCameraPosition()
     {
         //Debug.Log(_target.localScale.magnitude * -_initialForward);
-        _currentCamPosition += _playerPosition.localScale.magnitude * -_initialForward;
+        _currentCamPosition += (_playerPosition.localScale.sqrMagnitude - _lastPlayerSize) * -_initialForward;
         _currentMaxDistance = Vector3.Distance(_cameraFocusPosition, _cameraPosition.position);
+        _lastPlayerSize = _playerPosition.localScale.sqrMagnitude;
     }
 
     private void UpdateCameraLocation()
     {
-        if (Physics.Raycast(_cameraFocusPosition, -_cameraPosition.forward, out RaycastHit hit, _currentMaxDistance) && _cameraColideWithObjects)
+        if (Physics.Raycast(_cameraFocusPosition, -_cameraPosition.forward, out RaycastHit hit, _currentMaxDistance, _cameraColissionLayers) && _cameraColideWithObjects)
         {
             _cameraPosition.position = hit.point;
         }

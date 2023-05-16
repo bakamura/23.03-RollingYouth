@@ -8,11 +8,13 @@ using System.Linq;
 public class HUD : UI
 {
     [SerializeField] private float _containerAnimDuration;
-    [SerializeField] private Container _pauseContainer;
     [SerializeField] private Sprite[] _pauseIcons = new Sprite[2];
     [SerializeField] private ControlIconsData[] _controlIcons = new ControlIconsData[2];
     [SerializeField] private Image _pauseImageBtn;
     [SerializeField] private Image _controlImageBtn;
+    [SerializeField] private Image _backgroundImage;
+    [SerializeField] private Container _pauseContainer;
+    [SerializeField] private Container _settingsContainer;
 
     public static bool IsGamePaused;
 
@@ -34,8 +36,13 @@ public class HUD : UI
     {
         Time.timeScale = IsGamePaused ? 1f : 0f;
         IsGamePaused = !IsGamePaused;
+
+        //graphics update
         if (!_pauseContainer.IsAnimating) _pauseImageBtn.sprite = _pauseContainer.IsOpen ? _pauseIcons[0] : _pauseIcons[1];
-        UpdateContainer(_pauseContainer);
+        UpdateBackground(true);
+
+        if (_settingsContainer.IsOpen) SettingsBtn();
+        UpdateContainer(_pauseContainer, UpdateBackground);
     }
 
     public void SfxSoundButton()
@@ -54,11 +61,16 @@ public class HUD : UI
         UpdateControlBtnImage();
     }
 
-    private void UpdateContainer(Container container)
+    public void SettingsBtn()
+    {
+        UpdateContainer(_settingsContainer);
+    }
+
+    private void UpdateContainer(Container container, Action<bool> onTransitionEnd = null)
     {
         if (!container.IsAnimating)
         {
-            StartCoroutine(ExpandContainer(container, container.IsOpen ? container.closedSize : container.openSize, _containerAnimDuration));
+            StartCoroutine(ExpandContainer(container, container.IsOpen ? container.ClosedSize : container.OpenSize, _containerAnimDuration, onTransitionEnd));
         }
     }
 
@@ -67,5 +79,10 @@ public class HUD : UI
         _currentControlActive++;
         _currentControlActive = (int)_currentControlActive >= Enum.GetNames(typeof(PlayerControlers.ControlTypes)).Length ? 0 : _currentControlActive;
         _controlImageBtn.sprite = _controlIcons.Where(x => x.ControlType == _currentControlActive).ToArray()[0].Icon;
+    }
+
+    private void UpdateBackground(bool isMenuOpen)
+    {
+        _backgroundImage.enabled = isMenuOpen;
     }
 }

@@ -35,8 +35,7 @@ public class MovmentBySwipe : BaseActions
         if (_useKeyboard && _rb)
         {
             Vector3 direction = Input.GetAxis("Vertical") * _cameraRotation.right;
-            //direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
-            _rb.AddTorque(direction * _sensitivity);
+            _rb.AddTorque(direction * _sensitivity, ForceMode.Acceleration);
         }
 #endif
         if (Input.touchCount > 0)
@@ -46,8 +45,7 @@ public class MovmentBySwipe : BaseActions
             if (input.phase == TouchPhase.Moved && input.deltaPosition.magnitude > _dragTresHold && !_rotateByTouch.IsRotating)
             {
                 Vector3 direction = input.deltaPosition.y * _cameraRotation.right + -input.deltaPosition.x * _cameraRotation.forward;
-                //direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
-                _rb.AddTorque(direction * _sensitivity);
+                _rb.AddTorque(direction * _sensitivity, ForceMode.Acceleration);
             }
         }
     }

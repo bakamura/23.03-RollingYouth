@@ -122,11 +122,6 @@ PrefabInstance:
       propertyPath: _cameraTargetPointSize
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1281917383749192121, guid: 48095bdddc90d5d43bdcbda6905fc65b,
-        type: 3}
-      propertyPath: _initialDesiredLocation.y
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1281917384312629521, guid: 48095bdddc90d5d43bdcbda6905fc65b,
         type: 3}
       propertyPath: m_LocalPosition.y

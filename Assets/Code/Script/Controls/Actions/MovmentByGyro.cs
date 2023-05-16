@@ -56,33 +56,18 @@ public class MovmentByGyro : BaseActions
     {
         if (gyro != null)
         {
-            // naka
             Vector3 rotation = gyro.gravity - _baseGravity;
             if (rotation.sqrMagnitude > _minGyroForce)
             {
-                // rotation.y = left/right, -rotation.x = up/down 
                 rotation = rotation.y * _cameraRotation.right + -rotation.x * _cameraRotation.forward;
-                //rotation = Vector3.ClampMagnitude(rotation, _maxAngle);
                 _rb.AddTorque(rotation * _sensitivity, ForceMode.Acceleration);
-                //Debug.Log((rotation * _sensitivity).magnitude);
             }
-            //vini
-            //Vector3 gyroMovment = new Vector3(gyro.rotationRateUnbiased.y, 0, -gyro.rotationRateUnbiased.x);
-            //_currentAngle += gyroMovment;
-            //if (_currentAngle.magnitude >= _minGyroForce)
-            //{
-            //    Vector3 direction = gyro.gravity - _baseGravity;
-            //    direction = new Vector3(direction.y, 0, -direction.x);
-            //    _rb.AddTorque(_currentAngle.magnitude * direction * _sensitivity, ForceMode.Acceleration);
-            //    Debug.Log(total.magnitude);
-            //}
         }
 #if UNITY_EDITOR
         if (_useKeyboard && _rb)
         {
             Vector3 direction = Input.GetAxis("Vertical") * _cameraRotation.right;
-            direction = Vector3.ClampMagnitude(direction, _maxVelocity);
-            _rb.AddTorque(direction * _sensitivity);
+            _rb.AddTorque(direction * _sensitivity, ForceMode.Acceleration);
         }
 #endif
     }
@@ -90,8 +75,6 @@ public class MovmentByGyro : BaseActions
     public void ResetGyroPosition()
     {
         _baseGravity = gyro.gravity;
-        //_currentAngle = Vector3.zero;
-        //_rb.velocity = Vector3.zero;
     }
 
     private void UpdateCurrentInputMode(bool isActive)

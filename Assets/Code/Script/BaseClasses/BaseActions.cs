@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseActions : MonoBehaviour
 {
-    [SerializeField, Range(0f, 50f)] protected float _sensitivity;
+    [SerializeField, Range(0f, 1000f)] protected float _sensitivity;
 
     protected Transform _currentTarget;
     protected Rigidbody _rb;

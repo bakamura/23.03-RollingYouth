@@ -248,7 +248,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281917385343864494}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2432090755550338912, guid: ee80378b8d879e945ac0435cc2c85c4b, type: 3}
 --- !u!23 &1281917385343864492
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e52d5a48c4394b4eb69d67322d74e67, type: 2}
+  - {fileID: 2100000, guid: 96ca4c545b4d3d442bd4131aa9dd0723, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -523,11 +523,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2d7268670045d4e9d9e1e81d5279da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensitivity: 40
+  _sensitivity: 75
   _minGyroForce: 0.1
-  _maxAngle: 1
+  _maxVelocity: 100
   _cameraRotation: {fileID: 1281917383749192122}
-  IsGyroActive: 1
+  _isGyroActive: 1
   _useKeyboard: 0
 --- !u!114 &1281917385487999242
 MonoBehaviour:
@@ -541,11 +541,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4619a0ea82c2d40a2f99db241a9bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensitivity: 10
+  _sensitivity: 75
   _dragTresHold: 5
-  _maxForceInDrag: 1
   _cameraRotation: {fileID: 1281917383749192122}
-  IsSwipeActive: 0
+  _maxVelocity: 100
+  _isSwipeActive: 0
   _useKeyboard: 0
 --- !u!114 &4923876025424812368
 MonoBehaviour:

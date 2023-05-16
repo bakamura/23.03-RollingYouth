@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 305789183998019188}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305789184389780087}
+        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+        m_MethodName: ChangeControlersBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &305789184062931208
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +557,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 305789184491552254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305789184389780087}
+        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+        m_MethodName: SfxSoundButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &305789184522350780
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +902,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 305789184760978259}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305789184389780087}
+        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+        m_MethodName: MusicSoundButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &305789185032385415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,7 +1193,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 305789185408999293}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 305789184389780084}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &305789185606801466
 GameObject:
   m_ObjectHideFlags: 0

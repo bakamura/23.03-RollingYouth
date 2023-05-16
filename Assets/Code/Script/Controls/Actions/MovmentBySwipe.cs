@@ -5,12 +5,14 @@ using UnityEngine;
 public class MovmentBySwipe : BaseActions
 {
     [SerializeField] private float _dragTresHold;
-    [SerializeField, Tooltip("the maximum amount of force that the swipe will afect the movment")] private float _maxForceInDrag =1;
+    //[SerializeField, Tooltip("the maximum amount of force that the swipe will afect the movment")] private float _maxForceInDrag =1;
     [SerializeField] private Transform _cameraRotation;
+    [SerializeField] private float _maxVelocity;
+    [SerializeField] private bool _isSwipeActive;
 
     private RotateByTouch _rotateByTouch;
 
-    public bool IsSwipeActive = false;
+    public bool IsSwipeActive { get { return _isSwipeActive; } set { UpdateCurrentInputMode(value); } }
 
 #if UNITY_EDITOR
     [SerializeField] private bool _useKeyboard;
@@ -24,7 +26,7 @@ public class MovmentBySwipe : BaseActions
 
     public override void ExecuteAction()
     {
-        if(IsSwipeActive)SwipeMovment();
+        if (IsSwipeActive) SwipeMovment();
     }
 
     private void SwipeMovment()
@@ -33,7 +35,7 @@ public class MovmentBySwipe : BaseActions
         if (_useKeyboard && _rb)
         {
             Vector3 direction = Input.GetAxis("Vertical") * _cameraRotation.right;
-            direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
+            //direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
             _rb.AddTorque(direction * _sensitivity);
         }
 #endif
@@ -44,9 +46,15 @@ public class MovmentBySwipe : BaseActions
             if (input.phase == TouchPhase.Moved && input.deltaPosition.magnitude > _dragTresHold && !_rotateByTouch.IsRotating)
             {
                 Vector3 direction = input.deltaPosition.y * _cameraRotation.right + -input.deltaPosition.x * _cameraRotation.forward;
-                direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
+                //direction = Vector3.ClampMagnitude(direction, _maxForceInDrag);
                 _rb.AddTorque(direction * _sensitivity);
             }
         }
+    }
+
+    private void UpdateCurrentInputMode(bool isActive)
+    {
+        _isSwipeActive = isActive;
+        if (isActive) _rb.maxAngularVelocity = _maxVelocity;
     }
 }

@@ -10,7 +10,7 @@ public class HUD : UI
 
     private void Start()
     {
-        RoundButton();
+        //RoundButton();
     }
 
     public void PauseMenu()

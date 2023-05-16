@@ -6,17 +6,31 @@ public class MovmentByGyro : BaseActions
     private Vector3 _baseGravity;
     //private Vector3 _currentAngle;
     [SerializeField] private float _minGyroForce;
-    [SerializeField] private float _maxAngle;
+    [SerializeField] private float _maxVelocity;
     [SerializeField] private Transform _cameraRotation;
+    [SerializeField] private bool _isGyroActive = true;
 
-    public bool IsGyroActive = true;
+    public bool IsGyroActive
+    {
+        get { return _isGyroActive; }
+        set
+        {
+            UpdateCurrentInputMode(value);
+        }
+    }
 
 #if UNITY_EDITOR
     [SerializeField] private bool _useKeyboard;
 #endif
-    private void OnEnable()
+
+    private void Awake()
     {
         SetTarget(transform, GetComponent<Rigidbody>());
+    }
+
+    private void OnEnable()
+    {
+        _rb.maxAngularVelocity = _maxVelocity;
         if (SystemInfo.supportsGyroscope)
         {
             gyro = Input.gyro;
@@ -48,7 +62,7 @@ public class MovmentByGyro : BaseActions
             {
                 // rotation.y = left/right, -rotation.x = up/down 
                 rotation = rotation.y * _cameraRotation.right + -rotation.x * _cameraRotation.forward;
-                rotation = Vector3.ClampMagnitude(rotation, _maxAngle);
+                //rotation = Vector3.ClampMagnitude(rotation, _maxAngle);
                 _rb.AddTorque(rotation * _sensitivity, ForceMode.Acceleration);
                 //Debug.Log((rotation * _sensitivity).magnitude);
             }
@@ -67,7 +81,7 @@ public class MovmentByGyro : BaseActions
         if (_useKeyboard && _rb)
         {
             Vector3 direction = Input.GetAxis("Vertical") * _cameraRotation.right;
-            direction = Vector3.ClampMagnitude(direction, _maxAngle);
+            direction = Vector3.ClampMagnitude(direction, _maxVelocity);
             _rb.AddTorque(direction * _sensitivity);
         }
 #endif
@@ -78,5 +92,11 @@ public class MovmentByGyro : BaseActions
         _baseGravity = gyro.gravity;
         //_currentAngle = Vector3.zero;
         //_rb.velocity = Vector3.zero;
+    }
+
+    private void UpdateCurrentInputMode(bool isActive)
+    {
+        _isGyroActive = isActive;
+        if (isActive) _rb.maxAngularVelocity = _maxVelocity;
     }
 }

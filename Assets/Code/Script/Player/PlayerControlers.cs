@@ -7,6 +7,12 @@ public class PlayerControlers : BaseSingleton<PlayerControlers>
     [SerializeField] private MovmentByGyro _movmentByGyro;
     [SerializeField] private MovmentBySwipe _movmentBySwipe;
 
+    public enum ControlTypes
+    {
+        GYROSCOPE,
+        SWIPE
+    }
+
     public void UpdateControlers()
     {
         _movmentByGyro.IsGyroActive = !_movmentByGyro.IsGyroActive;

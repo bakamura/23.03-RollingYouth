@@ -5,7 +5,7 @@ using System;
 
 public class UI : MonoBehaviour
 {
-    private WaitForSeconds _delay;
+    private WaitForSecondsRealtime _delay;
     private const float _tickFrequency = .02f;
 
     [Serializable]
@@ -19,8 +19,8 @@ public class UI : MonoBehaviour
     }
 
     private void Awake()
-    {
-        _delay = new WaitForSeconds(_tickFrequency);
+    {        
+        _delay = new WaitForSecondsRealtime(_tickFrequency);
     }
 
     protected void RoundButton()
@@ -37,7 +37,7 @@ public class UI : MonoBehaviour
         float time = 0;
         while (time < 1)
         {
-            time += Time.fixedDeltaTime / animDuration;
+            time += _tickFrequency / animDuration;
             containerToUpdate.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Lerp(initSize.x, goalSize.x, time));
             containerToUpdate.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Mathf.Lerp(initSize.y, goalSize.y, time));
             yield return _delay;

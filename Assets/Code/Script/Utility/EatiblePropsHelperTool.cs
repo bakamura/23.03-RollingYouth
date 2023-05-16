@@ -10,11 +10,12 @@ public class EatiblePropsHelperTool : MonoBehaviour
 
     public void ResizeProps()
     {
-        EatibleProp[] props = FindObjectsOfType<EatibleProp>();
-        for (int i = 0; i < props.Length; i++)
-        {
-            props[i].transform.localScale = new Vector3(_newSize, _newSize, _newSize);
-        }
+        //EatibleProp[] props = FindObjectsOfType<EatibleProp>();
+        //for (int i = 0; i < props.Length; i++)
+        //{
+        //    props[i].transform.localScale = new Vector3(_newSize, _newSize, _newSize);
+        //}
+        transform.localScale = Vector3.one * _newSize;
     }
 
     public void RepositionProps()

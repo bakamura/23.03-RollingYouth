@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class EatiblePropsHelperTool : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class EatiblePropsHelperTool : MonoBehaviour
         //{
         //    props[i].transform.localScale = new Vector3(_newSize, _newSize, _newSize);
         //}
-        transform.localScale = Vector3.one * _newSize;
+        for (int i = 0; i < Selection.transforms.Length; i++)
+        {
+            Selection.transforms[i].localScale = new Vector3(_newSize, _newSize, _newSize);
+        }
+        //transform.localScale = Vector3.one * _newSize;        
     }
 
     public void RepositionProps()

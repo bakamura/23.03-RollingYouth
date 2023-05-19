@@ -6,10 +6,16 @@ public class PlayerSaveData : MonoBehaviour, ISaveObject
 {
     [SerializeField] private PlayerComponents _playerComponents;
 
-    //private void Awake()
-    //{
-    //    LoadData();
-    //}
+#if UNITY_EDITOR
+    [SerializeField] private bool _canLoadData;
+#endif
+    private void Start()
+    {
+#if UNITY_EDITOR
+        if (!_canLoadData) return;
+#endif
+        if(SaveManager.Instance.LoadedData != null) LoadData();
+    }
 
     public void LoadData()
     {

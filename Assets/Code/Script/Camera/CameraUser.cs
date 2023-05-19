@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(LerpCamera), typeof(EntityStateChanger))]
+[RequireComponent(typeof(EntityStateChanger))]
 public abstract class CameraUser : MonoBehaviour
 {
     [Header("Camera Values")]
-    [SerializeField, Tooltip("The camera will always look to the forward vector (+Z)")] protected Transform _cameraTransform;
     [SerializeField] private float _cameraLerpDuration;
+    [SerializeField] private AnimationCurve _cameraAnimationCurve;
 
-    protected LerpCamera _lerpCamera;
     protected PlayerComponents _playerComponents;
     protected Vector3 _initialCameraPosition;
     protected Quaternion _initialCameraRotation;
@@ -20,22 +19,44 @@ public abstract class CameraUser : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _lerpCamera = GetComponent<LerpCamera>();
         _entityStateChanger = GetComponent<EntityStateChanger>();
-        _cameraTransform.LookAt(transform);
     }
 
-    protected virtual void EndCameraUse(Action OnEndLerp = null)
-    {
-        _isBegining = false;
-        _lerpCamera.LerpCam(_playerComponents.Camera, _initialCameraPosition, _initialCameraRotation, _cameraLerpDuration, OnEndLerp);        
-    }
 
-    protected virtual void BeginCameraUse(PlayerComponents playerComponents, Vector3 initialCamPos, Quaternion initialCamRot, Action OnEndLerp = null)
+    protected virtual void BeginCameraUseWithFixedPoints(PlayerComponents playerComponents, Vector3 targetCamPos, Quaternion targetCamRot)
     {
         _isBegining = true;
-        CollectCameraData(playerComponents, initialCamPos, initialCamRot);
-        _lerpCamera.LerpCam(playerComponents.Camera, _cameraTransform.position, _cameraTransform.rotation, _cameraLerpDuration, OnEndLerp);
+        CollectCameraData(playerComponents, playerComponents.CurrentCameraPosition.position, playerComponents.CurrentCameraPosition.rotation);
+        LerpCamera.Instance.LerpCamWithFixedPoints(_cameraAnimationCurve, playerComponents.CurrentCameraPosition, targetCamPos, targetCamRot, _cameraLerpDuration, OnEndCameraLerp);
+    }
+
+    protected virtual void BeginCameraUseWithDynamicPoints(PlayerComponents playerComponents, Transform targetPositionAndRotation)
+    {
+        _isBegining = true;
+        CollectCameraData(playerComponents, playerComponents.CurrentCameraPosition.position, playerComponents.CurrentCameraPosition.rotation);
+        LerpCamera.Instance.LerpCamWithDynamicPoints(_cameraAnimationCurve, playerComponents.CurrentCameraPosition, targetPositionAndRotation, _cameraLerpDuration, OnEndCameraLerp);
+    }
+
+    protected virtual void ContinueCameraLerpWithFixedPoints(Vector3 targetCamPos, Quaternion targetCamRot)
+    {
+        LerpCamera.Instance.LerpCamWithFixedPoints(_cameraAnimationCurve, _playerComponents.CurrentCameraPosition, targetCamPos, targetCamRot, _cameraLerpDuration);
+    }
+
+    protected virtual void ContinueCameraLerpWithDynamicPoints(Transform targetPositionAndRotation)
+    {
+        LerpCamera.Instance.LerpCamWithDynamicPoints(_cameraAnimationCurve, _playerComponents.CurrentCameraPosition, targetPositionAndRotation, _cameraLerpDuration);
+    }
+
+    protected virtual void EndCameraUseWithFixedPoints()
+    {
+        _isBegining = false;
+        LerpCamera.Instance.LerpCamWithFixedPoints(_cameraAnimationCurve, _playerComponents.CurrentCameraPosition, _initialCameraPosition, _initialCameraRotation, _cameraLerpDuration, OnEndCameraLerp);        
+    }
+
+    protected virtual void EndCameraUseWithDynamicPoints(Transform targetPositionAndRotation)
+    {
+        _isBegining = false;
+        LerpCamera.Instance.LerpCamWithDynamicPoints(_cameraAnimationCurve, _playerComponents.CurrentCameraPosition, targetPositionAndRotation, _cameraLerpDuration, OnEndCameraLerp);
     }
 
     private void CollectCameraData(PlayerComponents playerComponents, Vector3 initialCamPos, Quaternion initialCamRot)
@@ -48,10 +69,15 @@ public abstract class CameraUser : MonoBehaviour
     /// <summary>
     /// Will make the Entity go to the state defined in the EntityStateChanger attached to the CameraUser script, will always happend on the end of a CameraLerp
     /// </summary>
-    public void UpdateEntityState(bool isBegining)
+    private void UpdateEntityState()
     {
         _entityStateChanger.UpdateState(_playerComponents.PlayerActionsManagment);
-        _playerComponents.CameraFollow.enabled = !isBegining;
-        _playerComponents.CameraRotate.enabled = !isBegining;
+        _playerComponents.CameraFollow.enabled = !_isBegining;
+        _playerComponents.CameraRotate.enabled = !_isBegining;
+    }
+
+    protected virtual void OnEndCameraLerp()
+    {
+        UpdateEntityState();
     }
 }

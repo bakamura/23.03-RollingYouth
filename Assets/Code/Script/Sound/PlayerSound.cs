@@ -54,7 +54,7 @@ public class PlayerSound : MonoBehaviour
 
     private void RecalculateAudioSourceRange()
     {
-        float range = Vector3.Distance(_playerComponents.PlayerTransform.position, _playerComponents.Camera.position);
+        float range = Vector3.Distance(_playerComponents.PlayerTransform.position, _playerComponents.CurrentCameraPosition.position);
         _audioSource.maxDistance = range;
         _audioSource.minDistance = range;
     }

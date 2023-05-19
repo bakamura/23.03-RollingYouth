@@ -7,7 +7,8 @@ public class PlayerComponents : MonoBehaviour
     public ObjectGrow ObjectGrow;
     public FollowTarget CameraFollow;
     public RotateByTouch CameraRotate;
-    public Transform Camera;
+    public Transform CurrentCameraPosition;
+    public Transform CalculatedCameraPosition;
     public EntityActionsManagment PlayerActionsManagment;
     public Transform PlayerTransform;
     public HUD PlayerUI;

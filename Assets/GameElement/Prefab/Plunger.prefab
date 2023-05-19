@@ -106,7 +106,6 @@ GameObject:
   - component: {fileID: 5856405440605401119}
   - component: {fileID: 5856405440605401118}
   - component: {fileID: 5856405440605401105}
-  - component: {fileID: 5856405440605401104}
   - component: {fileID: 5856405440605401107}
   - component: {fileID: 5856405440605401106}
   - component: {fileID: 5856405440605401117}
@@ -183,18 +182,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5856405440605401104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5856405440605401109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39851d1da45a1bb43a89c38a06f5c6ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5856405440605401107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,17 +207,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2fcdca8f9d241b49b94fd6bcc93ef34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTransform: {fileID: 5856405441402321331}
   _cameraLerpDuration: 2
+  _cameraAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _dragTresHold: 3
   _maxPushDistance: 3
   _returnPlungerSpeed: 1
   _sensitivity: 3
   _playerPosition: {x: 0, y: 0, z: 0}
   _leaver: {fileID: 5856405439881020959}
+  _cameraPoint: {fileID: 5856405441402321331}
   _force: 50
+  _launchDuration: 1
+  _landingPoint: {x: 0, y: 0, z: 0}
   _debugDraw: 0
-  _debugColor: {r: 1, g: 0, b: 0, a: 1}
+  _debugColorPlayerPosition: {r: 0, g: 0, b: 0, a: 0}
+  _debugColorLandingPoint: {r: 0, g: 0, b: 0, a: 1}
+  _debugLandingPointSize: 0.2
 --- !u!64 &5856405440605401117
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -281,7 +296,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5856405441402321330}
-  m_LocalRotation: {x: 0.28652462, y: -0, z: -0, w: -0.9580729}
+  m_LocalRotation: {x: -0.29900768, y: -0, z: -0, w: 0.9542507}
   m_LocalPosition: {x: 0, y: -5.33, z: -7.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

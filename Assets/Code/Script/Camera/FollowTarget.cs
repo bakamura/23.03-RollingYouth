@@ -7,6 +7,7 @@ public class FollowTarget : MonoBehaviour
     [Header("Values")]
     [SerializeField] private Transform _playerPosition;
     [SerializeField] private Transform _cameraPosition;
+    [SerializeField] private Transform _cameraCalculatedPosition;
     [SerializeField] private Transform _cameraRotation;
     [SerializeField] private Vector3 _initialDesiredLocation;
     [SerializeField] private Vector3 _cameraLookOffset;
@@ -62,8 +63,9 @@ public class FollowTarget : MonoBehaviour
 #if UNITY_EDITOR
     public void RepositionCam()
     {
-        _cameraPosition.position = _playerPosition.position + _initialDesiredLocation;
+        _cameraPosition.position = _playerPosition.position + _initialDesiredLocation;        
         _cameraPosition.LookAt(_playerPosition.position + _cameraLookOffset);
+        _cameraCalculatedPosition.SetPositionAndRotation(_cameraPosition.position, _cameraPosition.rotation);
     }
     private void OnDrawGizmosSelected()
     {

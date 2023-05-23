@@ -27,7 +27,7 @@ public class LerpCamera : BaseSingleton<LerpCamera>
         _delay = new WaitForSeconds(_tickFrequence);
     }
 
-    public void LerpCamWithFixedPoints(AnimationCurve animationCurve, Transform camera, Vector3 finalPosition, Quaternion finalRotation, float speed, Action OnEndLerp = null)
+    public void LerpCamWithFixedPoints(AnimationCurve animationCurve, Transform camera, Vector3 finalPosition, Quaternion finalRotation, float speed, bool applytoLocalPosition, bool applyToLocalRotation, Action OnEndLerp = null)
     {
         if (!_isAnimating)
         {
@@ -41,11 +41,11 @@ public class LerpCamera : BaseSingleton<LerpCamera>
             //_onEndLerp = null;
             //_onEndLerp += OnEndLerp;
             _isAnimating = true;
-            StartCoroutine(LerpWithFixedPointsCoroutine(animationCurve, camera, finalPosition, finalRotation, speed, OnEndLerp));
+            StartCoroutine(LerpWithFixedPointsCoroutine(animationCurve, camera, finalPosition, finalRotation, speed, applytoLocalPosition, applyToLocalRotation, OnEndLerp));
         }
     }
 
-    public void LerpCamWithDynamicPoints(AnimationCurve animationCurve, Transform camera, Transform finalPosition, Transform finalRotation, float speed, Vector3 extraPosOffset, Action OnEndLerp = null)
+    public void LerpCamWithDynamicPoints(AnimationCurve animationCurve, Transform camera, Transform finalPosition, Quaternion finalRotation, float speed, Vector3 extraPosOffset, bool applytoLocalPosition, bool applyToLocalRotation, Action OnEndLerp = null)
     {
         if (!_isAnimating)
         {
@@ -59,11 +59,11 @@ public class LerpCamera : BaseSingleton<LerpCamera>
             //_onEndLerp = null;
             //_onEndLerp += OnEndLerp;
             _isAnimating = true;
-            StartCoroutine(LerpWithDynamicPoints(animationCurve, camera, finalPosition, finalRotation, speed, extraPosOffset, OnEndLerp));
+            StartCoroutine(LerpWithDynamicPoints(animationCurve, camera, finalPosition, finalRotation, speed, extraPosOffset, applytoLocalPosition, applyToLocalRotation, OnEndLerp));
         }
     }
 
-    private IEnumerator LerpWithFixedPointsCoroutine(AnimationCurve animationCurve, Transform camera, Vector3 finalPosition, Quaternion finalRotation, float speed, Action OnEndLerp = null)
+    private IEnumerator LerpWithFixedPointsCoroutine(AnimationCurve animationCurve, Transform camera, Vector3 finalPosition, Quaternion finalRotation, float speed, bool applytoLocalPosition, bool applyToLocalRotation, Action OnEndLerp = null)
     {
         float delta = 0;
         Vector3 initialPos = camera.position;
@@ -71,14 +71,20 @@ public class LerpCamera : BaseSingleton<LerpCamera>
         while (delta < 1)
         {
             delta += _tickFrequence / speed;
-            camera.SetPositionAndRotation(Vector3.Lerp(initialPos, finalPosition, animationCurve.Evaluate(delta)), Quaternion.Lerp(initialRot, finalRotation, animationCurve.Evaluate(delta)));
+
+            if (applytoLocalPosition) camera.localPosition = Vector3.Lerp(initialPos, finalPosition, animationCurve.Evaluate(delta));
+            else camera.position = Vector3.Lerp(initialPos, finalPosition, animationCurve.Evaluate(delta));
+
+            if (applyToLocalRotation) camera.localRotation = Quaternion.Lerp(initialRot, finalRotation, animationCurve.Evaluate(delta));
+            else camera.rotation = Quaternion.Lerp(initialRot, finalRotation, animationCurve.Evaluate(delta));
+
             yield return _delay;
         }
         _isAnimating = false;
         OnEndLerp?.Invoke();
     }
 
-    private IEnumerator LerpWithDynamicPoints(AnimationCurve animationCurve, Transform camera, Transform finalPosition, Transform finalRotation, float speed, Vector3 extraPosOffset, Action OnEndLerp = null)
+    private IEnumerator LerpWithDynamicPoints(AnimationCurve animationCurve, Transform camera, Transform finalPosition, Quaternion finalRotation, float speed, Vector3 extraPosOffset, bool applytoLocalPosition, bool applyToLocalRotation, Action OnEndLerp = null)
     {
         float delta = 0;
         Vector3 initialPos = camera.position;
@@ -86,7 +92,13 @@ public class LerpCamera : BaseSingleton<LerpCamera>
         while (delta < 1)
         {
             delta += _tickFrequence / speed;
-            camera.SetPositionAndRotation(Vector3.Lerp(initialPos, finalPosition.position + extraPosOffset, animationCurve.Evaluate(delta)), Quaternion.Lerp(initialRot, finalRotation.rotation, animationCurve.Evaluate(delta)));
+
+            if(applytoLocalPosition) camera.localPosition = Vector3.Lerp(initialPos, finalPosition.position + extraPosOffset, animationCurve.Evaluate(delta));
+            else camera.position = Vector3.Lerp(initialPos, finalPosition.position + extraPosOffset, animationCurve.Evaluate(delta));
+
+            if(applyToLocalRotation) camera.localRotation = Quaternion.Lerp(initialRot, finalRotation, animationCurve.Evaluate(delta));
+            else camera.rotation = Quaternion.Lerp(initialRot, finalRotation, animationCurve.Evaluate(delta));
+
             yield return _delay;
         }
         _isAnimating = false;

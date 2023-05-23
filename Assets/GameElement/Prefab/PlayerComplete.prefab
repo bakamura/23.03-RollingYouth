@@ -105,7 +105,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1281917384312629521}
-  - {fileID: 269292581521467137}
   m_Father: {fileID: 1281917385452669614}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -123,7 +122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPosition: {fileID: 1281917385343864482}
   _cameraPosition: {fileID: 1281917384312629521}
-  _cameraCalculatedPosition: {fileID: 269292581521467137}
   _cameraRotation: {fileID: 1281917383749192122}
   _initialDesiredLocation: {x: 0, y: 3, z: -5}
   _cameraLookOffset: {x: 0, y: 0, z: 0}
@@ -398,8 +396,7 @@ MonoBehaviour:
   ObjectGrow: {fileID: 1281917385487999252}
   CameraFollow: {fileID: 1281917383749192121}
   CameraRotate: {fileID: 1281917383749192120}
-  CurrentCameraPosition: {fileID: 1281917384539883135}
-  CalculatedCameraPosition: {fileID: 269292581521467137}
+  CameraPosition: {fileID: 1281917384312629521}
   PlayerActionsManagment: {fileID: 1281917385487999243}
   PlayerTransform: {fileID: 1281917385487999253}
   PlayerUI: {fileID: 0}
@@ -742,33 +739,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &2701756089642021773
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 269292581521467137}
-  m_Layer: 0
-  m_Name: CalculatedCameraPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &269292581521467137
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2701756089642021773}
-  m_LocalRotation: {x: 0.26693353, y: -0, z: -0, w: 0.96371496}
-  m_LocalPosition: {x: 0, y: 2.9999998, z: -5.000001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1281917383749192122}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -49.62, y: 4.99, z: 0}

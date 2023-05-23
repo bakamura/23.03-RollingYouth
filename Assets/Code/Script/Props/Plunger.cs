@@ -69,7 +69,7 @@ public class Plunger : CameraUser
             {
                 if (Vector3.Distance(_leaver.position, _initialLeaverPosition) >= _maxPushDistance)
                 {
-                    EndCameraUseWithDynamicPoints(_playerComponents.CalculatedCameraPosition);
+                    EndCameraUseWithDynamicPoints(_playerComponents.PlayerTransform, _playerComponents.CalculatedCameraPosition, Vector3.zero);
                     _leaver.position = _initialLeaverPosition;
                     //_playerComponents.PlayerRigidbody.AddForce(transform.up * _force, ForceMode.Impulse);
                     LerpObject.Instance.SlerpObjectPosition(_playerComponents.PlayerTransform, _launchDuration, _playerComponents.PlayerTransform.position + _landingPoint, OnEndLaunchSlerp);
@@ -101,9 +101,9 @@ public class Plunger : CameraUser
         _isTargetInside = true;
     }
 
-    protected override void EndCameraUseWithDynamicPoints(Transform targetPositionAndRotation)
-    {        
-        base.EndCameraUseWithDynamicPoints(targetPositionAndRotation);
+    protected override void EndCameraUseWithDynamicPoints(Transform targetPosition, Transform targetRotation, Vector3 extraPosOffset)
+    {
+        base.EndCameraUseWithDynamicPoints(targetPosition, targetRotation, extraPosOffset);
         _isTargetInside = false;
         _playerComponents.PlayerUI.ToggleControlUI(true);
     }

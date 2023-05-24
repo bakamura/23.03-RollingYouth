@@ -20,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameElement/Scene/2.Floor.unity
     guid: 09558378c2781784fb25abe9d7916a5e
-  - enabled: 1
-    path: Assets/GameElement/Scene/New Scene.unity
-    guid: 6ca4b4bc0144ef54ea256c7096ce08a1
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ab51733a750857641b4e0208ace32f98,
       type: 2}

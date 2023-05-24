@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class MainMenu : UI {
 
     [SerializeField] private string _baseSceneName;
     [SerializeField] private float _containerAnimDuration;
-    [SerializeField] private Container _configContainer;
-    [SerializeField] private Container _socialContainer;
+    [SerializeField, FormerlySerializedAs("ConfigurationContainer")] private Container _configContainer;
+    [SerializeField, FormerlySerializedAs("SocialContainer")] private Container _socialContainer;
 
     private void Start() {
         RoundButton();

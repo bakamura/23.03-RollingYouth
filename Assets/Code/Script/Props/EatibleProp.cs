@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EatibleProp : MonoBehaviour
 {
-    [SerializeField] private float _massIncrease;
+    [SerializeField, Tooltip("with the current calc for player mass, this value is not being used")] private float _massIncrease;
 
     private void OnTriggerEnter(Collider other)
     {

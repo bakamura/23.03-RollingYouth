@@ -119,7 +119,9 @@ public class Plunger : CameraUser
     private void OnEndLaunchSlerp()
     {
         _playerComponents.PlayerRigidbody.constraints = RigidbodyConstraints.None;
-        _playerComponents.PlayerRigidbody.useGravity = true;        
+        _playerComponents.PlayerRigidbody.useGravity = true;
+        _playerComponents.PlayerSaveData.UpdateSavedData();
+        SaveManager.Instance.Save();
     }
 
 #if UNITY_EDITOR

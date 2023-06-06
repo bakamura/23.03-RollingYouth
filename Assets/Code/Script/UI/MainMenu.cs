@@ -8,12 +8,22 @@ public class MainMenu : UI {
     [SerializeField] private float _containerAnimDuration;
     [SerializeField, FormerlySerializedAs("ConfigurationContainer")] private Container _configContainer;
     [SerializeField, FormerlySerializedAs("SocialContainer")] private Container _socialContainer;
-
+    [SerializeField] private GameObject _initialCutscene;
     private void Start() {
         RoundButton();
     }
 
     public void Play() {
+        if(SaveManager.Instance.LoadedData == null)
+        {
+            _initialCutscene.SetActive(true);
+            return;
+        }
+        OpenMainScene();
+    }
+
+    public void OpenMainScene()
+    {
         FadeUi.Instance.UpdateFade(FadeUi.FadeTypes.FADEIN, LoadMainScene);
     }
 

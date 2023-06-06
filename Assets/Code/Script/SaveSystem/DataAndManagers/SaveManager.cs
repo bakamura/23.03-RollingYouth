@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SaveManager : BaseSingleton<SaveManager>
 {
+    [SerializeField] private bool _debugText;
     private const string _dataKey = "save";
     private SaveData _currentData;
     public SaveData LoadedData => _currentData;
@@ -24,13 +25,13 @@ public class SaveManager : BaseSingleton<SaveManager>
         if (PlayerPrefs.HasKey(_dataKey))
         {
             _currentData = DataSerializer.Deserialize<SaveData>(PlayerPrefs.GetString(_dataKey));
-            Debug.Log(DataSerializer.Serialize<SaveData>(_currentData));
+            if(_debugText) Debug.Log(DataSerializer.Serialize<SaveData>(_currentData));
         }
         else
         {
             _currentData = new SaveData();
             Save();
-            Debug.Log("save doesn't exist, creating a new save");
+            if (_debugText) Debug.Log("save doesn't exist, creating a new save");
         }        
     }
 

@@ -11,5 +11,6 @@ public class PlayerComponents : MonoBehaviour
     public EntityActionsManagment PlayerActionsManagment;
     public Transform PlayerTransform;
     public HUD PlayerUI;
+    public PlayerSaveData PlayerSaveData;
     public Rigidbody PlayerRigidbody => ObjectGrow.ObjectPhysics;
 }

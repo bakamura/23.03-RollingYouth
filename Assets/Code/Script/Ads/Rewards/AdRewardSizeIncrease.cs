@@ -8,6 +8,6 @@ public class AdRewardSizeIncrease : AdRewardBehaviour
     [SerializeField] private float _massIncrease;
     public override void ApplyReward()
     {
-        PlayerAcessForAds.Instance.PlayerComponents.ObjectGrow.UpdateSize(_sizeIncrease, _massIncrease, false);
+        PlayerReference.Instance.PlayerComponents.ObjectGrow.UpdateSize(_sizeIncrease, _massIncrease, false);
     }
 }

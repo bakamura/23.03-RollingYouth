@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAcessForAds : BaseSingleton<PlayerAcessForAds>
+public class PlayerReference : BaseSingleton<PlayerReference>
 {
     [SerializeField] private PlayerComponents _playerComponents;
     public PlayerComponents PlayerComponents => _playerComponents;

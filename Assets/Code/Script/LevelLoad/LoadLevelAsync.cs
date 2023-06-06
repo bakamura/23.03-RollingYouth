@@ -13,7 +13,7 @@ public class LoadLevelAsync : MonoBehaviour
     {
         //if (other.CompareTag("Player")){
         if (!_isSceneLoaded)
-        {
+        {            
             AsyncOperation operation = SceneManager.LoadSceneAsync(SceneToLoad, LoadSceneMode.Additive);
             operation.completed += OnSceneLoaded;
         }

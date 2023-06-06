@@ -9,11 +9,11 @@ public class GeneralSoundTriggerInspector : Editor
     //general variables
     SerializedProperty soundType, sfxSoundInterval, soundBasedOnVelocity, baseAudioSourceRangeMultiplyer;
     //trigger enter variables
-    SerializedProperty playSoundOnTriggerEnter, /*musicConfigOnTriggerEnter,*/ sfxConfigOnTriggerEnter;
+    SerializedProperty playSoundOnTriggerEnter, musicConfigOnTriggerEnter, sfxConfigOnTriggerEnter;
     //trigger exit variables
-    SerializedProperty playSoundOnTriggerExit, /*musicConfigOnTriggerExit,*/ sfxConfigOnTriggerExit;
+    SerializedProperty playSoundOnTriggerExit, musicConfigOnTriggerExit, sfxConfigOnTriggerExit;
     //collision enter variables
-    SerializedProperty playSoundOnCollisionEnter, /*musicConfigOnCollisionEnter,*/ sfxConfigOnCollisionEnter;
+    SerializedProperty playSoundOnCollisionEnter, musicConfigOnCollisionEnter, sfxConfigOnCollisionEnter;
 
     public override void OnInspectorGUI()
     {
@@ -22,11 +22,11 @@ public class GeneralSoundTriggerInspector : Editor
         EditorGUILayout.PropertyField(playSoundOnTriggerEnter, new GUIContent("Play On Trigger Enter"));
         EditorGUILayout.PropertyField(playSoundOnTriggerExit, new GUIContent("Play On Trigger Exit"));
 
-        GeneralSoundTrigger temp = (GeneralSoundTrigger)serializedObject.targetObject;
+        //GeneralSoundTrigger temp = (GeneralSoundTrigger)serializedObject.targetObject;
 
         if (soundType.enumValueIndex == (int)SoundManager.SoundTypes.SFX)
         {
-            if (temp.gameObject.GetComponent<AudioSource>()) DestroyImmediate(temp.gameObject.GetComponent<AudioSource>());
+            //if (temp.gameObject.GetComponent<AudioSource>()) DestroyImmediate(temp.gameObject.GetComponent<AudioSource>());
 
             EditorGUILayout.PropertyField(baseAudioSourceRangeMultiplyer, new GUIContent("Audio range Multiplyer"));
             EditorGUILayout.PropertyField(playSoundOnCollisionEnter, new GUIContent("Play On Collision Enter"));
@@ -54,22 +54,22 @@ public class GeneralSoundTriggerInspector : Editor
         //the trigger activates music
         else
         {
-            if (!temp.gameObject.GetComponent<AudioSource>()) temp.gameObject.AddComponent<AudioSource>();
+            //if (!temp.gameObject.GetComponent<AudioSource>()) temp.gameObject.AddComponent<AudioSource>();
 
             if (playSoundOnTriggerEnter.boolValue)
             {
                 GUILayout.Label("Music Trigger Enter Configurations", EditorStyles.largeLabel);
-                //EditorGUILayout.PropertyField(musicConfigOnTriggerEnter, new GUIContent("Music Sounds Cofigurations"));
+                EditorGUILayout.PropertyField(musicConfigOnTriggerEnter, new GUIContent("Music Sounds Cofigurations"));
             }
             if (playSoundOnTriggerExit.boolValue)
             {
                 GUILayout.Label("Music Trigger Exit Configurations", EditorStyles.largeLabel);
-                //EditorGUILayout.PropertyField(musicConfigOnTriggerExit, new GUIContent("Music Sounds Cofigurations"));
+                EditorGUILayout.PropertyField(musicConfigOnTriggerExit, new GUIContent("Music Sounds Cofigurations"));
             }
             if (playSoundOnCollisionEnter.boolValue)
             {
                 GUILayout.Label("Music Collision Enter Configurations", EditorStyles.largeLabel);
-                //EditorGUILayout.PropertyField(musicConfigOnCollisionEnter, new GUIContent("Music Sounds Cofigurations"));
+                EditorGUILayout.PropertyField(musicConfigOnCollisionEnter, new GUIContent("Music Sounds Cofigurations"));
             }
         }
 
@@ -85,15 +85,15 @@ public class GeneralSoundTriggerInspector : Editor
         baseAudioSourceRangeMultiplyer = serializedObject.FindProperty("_baseAudioSourceRangeMultiplyer");
         //trigger enter
         playSoundOnTriggerEnter = serializedObject.FindProperty("_playSoundOnTriggerEnter");
-        //musicConfigOnTriggerEnter = serializedObject.FindProperty("_musicConfigOnTriggerEnter");
+        musicConfigOnTriggerEnter = serializedObject.FindProperty("_musicConfigOnTriggerEnter");
         sfxConfigOnTriggerEnter = serializedObject.FindProperty("_sfxConfigOnTriggerEnter");
         //trigger exit
         playSoundOnTriggerExit = serializedObject.FindProperty("_playSoundOnTriggerExit");
-        //musicConfigOnTriggerExit = serializedObject.FindProperty("_musicConfigOnTriggerExit");
+        musicConfigOnTriggerExit = serializedObject.FindProperty("_musicConfigOnTriggerExit");
         sfxConfigOnTriggerExit = serializedObject.FindProperty("_sfxConfigOnTriggerExit");
         //collision enter
         playSoundOnCollisionEnter = serializedObject.FindProperty("_playSoundOnCollisionEnter");
-        //musicConfigOnCollisionEnter = serializedObject.FindProperty("_musicConfigOnCollisionEnter");
+        musicConfigOnCollisionEnter = serializedObject.FindProperty("_musicConfigOnCollisionEnter");
         sfxConfigOnCollisionEnter = serializedObject.FindProperty("_sfxConfigOnCollisionEnter");
     }    
 }

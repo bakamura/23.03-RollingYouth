@@ -10,19 +10,19 @@ public class GeneralSoundTrigger : MonoBehaviour
     [SerializeField] private float _baseAudioSourceRangeMultiplyer = 2f;
 
     [SerializeField] private bool _playSoundOnTriggerEnter;
-    //[SerializeField] private SoundManager.MusicAudioData _musicConfigOnTriggerEnter;
+    [SerializeField] private SoundManager.MusicAudioData _musicConfigOnTriggerEnter;
     [SerializeField, Tooltip("if more than 1 the sound played will be randomized")] private SoundManager.SfxAudioData[] _sfxConfigOnTriggerEnter;
 
     [SerializeField] private bool _playSoundOnTriggerExit;
-    //[SerializeField] private SoundManager.MusicAudioData _musicConfigOnTriggerExit;
+    [SerializeField] private SoundManager.MusicAudioData _musicConfigOnTriggerExit;
     [SerializeField, Tooltip("if more than 1 the sound played will be randomized")] private SoundManager.SfxAudioData[] _sfxConfigOnTriggerExit;
 
     [SerializeField] private bool _playSoundOnCollisionEnter;
-    //[SerializeField] private SoundManager.MusicAudioData _musicConfigOnCollisionEnter;
+    [SerializeField] private SoundManager.MusicAudioData _musicConfigOnCollisionEnter;
     [SerializeField, Tooltip("if more than 1 the sound played will be randomized")] private SoundManager.SfxAudioData[] _sfxConfigOnCollisionEnter;
 
     private float _lastTimeSfxPlayed;
-    private AudioSource _musicAudioSource;
+    //private AudioSource _musicAudioSource;
 
     private enum TriggerTypes
     {
@@ -33,7 +33,7 @@ public class GeneralSoundTrigger : MonoBehaviour
 
     private void Awake()
     {
-        _musicAudioSource = GetComponent<AudioSource>();
+        //_musicAudioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,8 +71,8 @@ public class GeneralSoundTrigger : MonoBehaviour
             case TriggerTypes.TriggerEnter:
                 if (_soundType == SoundManager.SoundTypes.MUSIC)
                 {
-                    _musicAudioSource.Play();
-                    //SoundManager.Instance.PlayMusic(_musicConfigOnTriggerEnter);
+                    //_musicAudioSource.Play();
+                    SoundManager.Instance.PlayMusic(_musicConfigOnTriggerEnter);
                     break;
                 }
                 if (Time.time - _lastTimeSfxPlayed >= _sfxSoundInterval)
@@ -88,8 +88,8 @@ public class GeneralSoundTrigger : MonoBehaviour
             case TriggerTypes.TriggerExit:
                 if (_soundType == SoundManager.SoundTypes.MUSIC)
                 {
-                    _musicAudioSource.Stop();
-                    //SoundManager.Instance.PlayMusic(_musicConfigOnTriggerExit);
+                    //_musicAudioSource.Stop();
+                    SoundManager.Instance.PlayMusic(_musicConfigOnTriggerExit);
                     break;
                 }
                 if (Time.time - _lastTimeSfxPlayed >= _sfxSoundInterval)
@@ -105,7 +105,7 @@ public class GeneralSoundTrigger : MonoBehaviour
             case TriggerTypes.CollisionEnter:
                 if (_soundType == SoundManager.SoundTypes.MUSIC)
                 {
-                    //SoundManager.Instance.PlayMusic(_musicConfigOnCollisionEnter);
+                    SoundManager.Instance.PlayMusic(_musicConfigOnCollisionEnter);
                     break;
                 }
                 if (Time.time - _lastTimeSfxPlayed >= _sfxSoundInterval)

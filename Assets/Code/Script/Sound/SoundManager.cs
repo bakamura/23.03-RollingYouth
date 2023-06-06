@@ -11,32 +11,33 @@ public class SoundManager : BaseSingleton<SoundManager>
     [SerializeField] private AudioMixerGroup _sfxMixerGroup;
     [SerializeField] private AudioMixer _masterMixer;
 
-    //private Coroutine _musicLerp;
-    //private const float _musicLerpTick = .02f;
-    //private WaitForSeconds _delay;
+    private Coroutine _musicLerp;
+    private const float _musicLerpTick = .02f;
+    private WaitForSeconds _delay;
     private List<AudioSource> _sfxAudioSources = new List<AudioSource>();
-    //private Queue<MusicAudioData> _musicQueue = new Queue<MusicAudioData>();
+    private Queue<MusicAudioData> _musicQueue = new Queue<MusicAudioData>();
 
     #region "AudioDatas"
-    //[System.Serializable]
-    //public struct MusicAudioData
-    //{
-    //    public bool TransitionCompletely;
-    //    public AudioClip Clip;
-    //    public float Volume;
-    //    public float TransitionDuration;
-    //    public AudioSource AudioSource;
+    [System.Serializable]
+    public struct MusicAudioData
+    {
+        //use this if the music will transition to another and there is still a music playing
+        //public bool TransitionCompletely;
+        public AudioClip Clip;
+        public float Volume;
+        public float TransitionDuration;
+        //public AudioSource AudioSource;
 
-    //    public MusicAudioData(bool transitionCompletely, AudioClip clip, float volume, AudioSource audioSource, float transitionDuration = 0)
-    //    {
-    //        Contract.Ensures(volume >= 0 && volume <= 1);
-    //        TransitionCompletely = transitionCompletely;
-    //        TransitionDuration = transitionDuration;
-    //        Clip = clip;
-    //        Volume = volume;
-    //        AudioSource = audioSource;
-    //    }
-    //}
+        public MusicAudioData(/*bool transitionCompletely,*/ AudioClip clip, float volume, /*AudioSource audioSource,*/ float transitionDuration = 0)
+        {
+            Contract.Ensures(volume >= 0 && volume <= 1);
+            //TransitionCompletely = transitionCompletely;
+            TransitionDuration = transitionDuration;
+            Clip = clip;
+            Volume = volume;
+            //AudioSource = audioSource;
+        }
+    }
 
     [System.Serializable]
     public struct SfxAudioData
@@ -78,7 +79,7 @@ public class SoundManager : BaseSingleton<SoundManager>
     protected override void Awake()
     {
         base.Awake();
-        //_delay = new WaitForSeconds(_musicLerpTick);
+        _delay = new WaitForSeconds(_musicLerpTick);
     }
     #region "Sfx"
     /// <summary>
@@ -147,59 +148,62 @@ public class SoundManager : BaseSingleton<SoundManager>
     #endregion
 
     #region "Music"
-    //public void PlayMusic(MusicAudioData data)
-    //{
-    //    _musicQueue.Enqueue(data);
-    //    if (_musicLerp == null) _musicLerp = StartCoroutine(MusicSoundLerp(_musicQueue.Dequeue()));
-    //}
+    public void PlayMusic(MusicAudioData data)
+    {
+        _musicQueue.Enqueue(data);
+        if (_musicLerp == null) _musicLerp = StartCoroutine(MusicSoundLerp(_musicQueue.Dequeue()));
+    }
 
-    //    private IEnumerator MusicSoundLerp(MusicAudioData data)
-    //    {
-    //#if UNITY_EDITOR
-    //        if (_debugMessages)
-    //            Debug.Log($"starting music blend from {_musicAudioSource.clip} to {data.Clip}");
-    //#endif
-    //        bool operationCompleted = false;
-    //        float duration = data.TransitionDuration > 0 ? data.TransitionDuration : _defaultMusicTransitionDuration;
-    //        float delta = 0;
-    //        float currentVolume = _musicAudioSource.volume;
-    //        float tempVolume = data.TransitionCompletely ? 0 : data.Volume;
-    //        while (!operationCompleted)
-    //        {
-    //            _musicAudioSource.volume = Mathf.Lerp(currentVolume, tempVolume, delta);
-    //            delta += _musicLerpTick / duration;
-    //            if (delta >= 1)
-    //            {
-    //                if (data.TransitionCompletely)
-    //                {
-    //                    currentVolume = _musicAudioSource.volume;
-    //                    tempVolume = data.Volume;
-    //                    data.TransitionCompletely = false;
-    //                    delta = 0;
-    //                }
-    //                else
-    //                {
-    //                    operationCompleted = true;
-    //                }
-    //                _musicAudioSource.clip = data.Clip;
-    //                if (!_musicAudioSource.isPlaying) _musicAudioSource.Play();
-    //            }
-    //            yield return _delay;
-    //        }
-    //        _musicLerp = null;
-    //#if UNITY_EDITOR
-    //        if (_debugMessages)
-    //            Debug.Log($"music blend endend, now playing {data.Clip}");
-    //#endif
-    //        if (_musicQueue.Count > 0)
-    //        {
-    //#if UNITY_EDITOR
-    //            if (_debugMessages)
-    //                Debug.Log($"there are {_musicQueue.Count} in request");
-    //#endif
-    //            PlayMusic(_musicQueue.Dequeue());
-    //        }
-    //    }
+    private IEnumerator MusicSoundLerp(MusicAudioData data)
+    {
+#if UNITY_EDITOR
+        if (_debugMessages)
+            Debug.Log($"starting music blend from {_musicAudioSource.clip} to {data.Clip}");
+#endif
+        //bool operationCompleted = false;
+        float duration = data.TransitionDuration > 0 ? data.TransitionDuration : _defaultMusicTransitionDuration;
+        float delta = 0;
+        float currentVolume = _musicAudioSource.volume;
+        //float tempVolume = data.TransitionCompletely ? 0 : data.Volume;
+        _musicAudioSource.clip = data.Clip;
+        if (!_musicAudioSource.isPlaying && data.Volume > 0) _musicAudioSource.Play();
+        while (delta < 1/*!operationCompleted*/)
+        {
+            _musicAudioSource.volume = Mathf.Lerp(currentVolume, data.Volume/*tempVolume*/, delta);
+            delta += _musicLerpTick / duration;
+            //if (delta >= 1)
+            //{
+            //    if (data.TransitionCompletely)
+            //    {
+            //        currentVolume = _musicAudioSource.volume;
+            //        tempVolume = data.Volume;
+            //        data.TransitionCompletely = false;
+            //        delta = 0;
+            //    }
+            //    else
+            //    {
+            //        operationCompleted = true;
+            //    }
+            //    _musicAudioSource.clip = data.Clip;
+            //    if (!_musicAudioSource.isPlaying) _musicAudioSource.Play();
+            //}
+            yield return _delay;
+        }
+        if (data.Volume <= 0) _musicAudioSource.Stop();
+        _musicLerp = null;
+#if UNITY_EDITOR
+        if (_debugMessages)
+            Debug.Log($"music blend endend, now playing {data.Clip}");
+#endif
+        if (_musicQueue.Count > 0)
+        {
+#if UNITY_EDITOR
+            if (_debugMessages)
+                Debug.Log($"there are {_musicQueue.Count} in request");
+#endif
+            PlayMusic(_musicQueue.Dequeue());
+        }
+    }
     #endregion
 
     #region "Configurations"

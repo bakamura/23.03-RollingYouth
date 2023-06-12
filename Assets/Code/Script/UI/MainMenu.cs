@@ -14,7 +14,7 @@ public class MainMenu : UI {
     }
 
     public void Play() {
-        if(SaveManager.Instance.IsCreatingNewFile)
+        if(SaveManager.Instance.LoadedData == null)
         {
             _initialCutscene.SetActive(true);
             return;

@@ -19,7 +19,7 @@ public class PlayerSaveData : MonoBehaviour, ISaveObject
 
     public void LoadData()
     {
-        SaveData temp = SaveManager.Instance.LoadedData;
+        SaveData temp = SaveManager.Instance.GenerateData();
         _playerComponents.PlayerTransform.position = temp.PlayerPosition;
         _playerComponents.PlayerRigidbody.mass = temp.PlayerMass;
         _playerComponents.ObjectGrow.ObjectToGrow.localScale = temp.PlayerScale;

@@ -22,7 +22,7 @@ public class MemoryCollectable : MonoBehaviour, ISaveObject
 
     public void UpdateSavedData()
     {
-        SaveData newData = SaveManager.Instance.LoadedData;
+        SaveData newData = SaveManager.Instance.GenerateData();
         if (!newData.MemoryCollectables.Contains(_memoryID)) newData.MemoryCollectables.Add(_memoryID);
         else Debug.LogWarning($"the object with the ID {_memoryID} is already registered, change the ID for the GameObject {gameObject.name}");
         SaveManager.Instance.UpdateCurrentData(newData);

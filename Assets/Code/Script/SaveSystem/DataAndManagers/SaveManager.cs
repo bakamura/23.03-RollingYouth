@@ -7,12 +7,12 @@ public class SaveManager : BaseSingleton<SaveManager>
     [SerializeField] private bool _debugText;
     private const string _dataKey = "save";
     private SaveData _currentData;
-    private bool _newFile;
+    //private bool _newFile;
 #if UNITY_EDITOR
     [SerializeField] private bool _canLoadData;
 #endif
     public SaveData LoadedData => _currentData;
-    public bool IsCreatingNewFile => _newFile;
+    //public bool IsCreatingNewFile => _newFile;
     protected override void Awake()
     {
         base.Awake();
@@ -24,7 +24,14 @@ public class SaveManager : BaseSingleton<SaveManager>
 
     public void Save()
     {
-        PlayerPrefs.SetString(_dataKey, DataSerializer.Serialize<SaveData>(_currentData));
+        if(_currentData != null)
+        {
+            PlayerPrefs.SetString(_dataKey, DataSerializer.Serialize<SaveData>(_currentData));
+        }
+        else
+        {
+            if (_debugText) Debug.LogError("trying to save before generating save data, always Call GenerateData before saving");
+        }
     }
 
     public void Load()
@@ -36,11 +43,20 @@ public class SaveManager : BaseSingleton<SaveManager>
         }
         else
         {
-            _currentData = new SaveData();
-            Save();
-            _newFile = true;
-            if (_debugText) Debug.Log("save doesn't exist, creating a new save");
+            //_currentData = new SaveData();
+            //Save();
+            //_newFile = true;
+            if (_debugText) Debug.Log("save doesn't currently exist");
         }        
+    }
+
+    public SaveData GenerateData()
+    {
+        if (_currentData == null)
+        {
+            _currentData = new SaveData();
+        }
+        return _currentData;
     }
 
     public void UpdateCurrentData(SaveData data)

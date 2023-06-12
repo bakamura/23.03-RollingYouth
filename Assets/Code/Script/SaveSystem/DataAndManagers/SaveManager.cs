@@ -7,11 +7,12 @@ public class SaveManager : BaseSingleton<SaveManager>
     [SerializeField] private bool _debugText;
     private const string _dataKey = "save";
     private SaveData _currentData;
+    private bool _newFile;
 #if UNITY_EDITOR
     [SerializeField] private bool _canLoadData;
 #endif
     public SaveData LoadedData => _currentData;
-
+    public bool IsCreatingNewFile => _newFile;
     protected override void Awake()
     {
         base.Awake();
@@ -37,6 +38,7 @@ public class SaveManager : BaseSingleton<SaveManager>
         {
             _currentData = new SaveData();
             Save();
+            _newFile = true;
             if (_debugText) Debug.Log("save doesn't exist, creating a new save");
         }        
     }

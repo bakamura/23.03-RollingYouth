@@ -40,7 +40,7 @@ public class GeneralSoundTrigger : MonoBehaviour
     {
         if (_playSoundOnTriggerEnter)
         {
-            float soundRange = Vector3.Distance(other.attachedRigidbody.position, other.GetComponent<PlayerComponents>().CameraPosition.position);
+            float soundRange = Vector3.Distance(other.attachedRigidbody.position, other.GetComponent<PlayerComponents>() ? other.GetComponent<PlayerComponents>().CameraPosition.position : PlayerReference.Instance.PlayerComponents.CameraPosition.position);
             PlayAudio(TriggerTypes.TriggerEnter, other.attachedRigidbody.velocity.sqrMagnitude, other.attachedRigidbody.position, soundRange * _baseAudioSourceRangeMultiplyer, soundRange * _baseAudioSourceRangeMultiplyer * 1.5f);
         }
     }
@@ -49,7 +49,7 @@ public class GeneralSoundTrigger : MonoBehaviour
     {
         if (_playSoundOnTriggerExit)
         {
-            float soundRange = Vector3.Distance(other.attachedRigidbody.position, other.GetComponent<PlayerComponents>().CameraPosition.position);
+            float soundRange = Vector3.Distance(other.attachedRigidbody.position, other.GetComponent<PlayerComponents>() ? other.GetComponent<PlayerComponents>().CameraPosition.position : PlayerReference.Instance.PlayerComponents.CameraPosition.position);
             PlayAudio(TriggerTypes.TriggerExit, other.attachedRigidbody.velocity.sqrMagnitude, other.attachedRigidbody.position, soundRange * _baseAudioSourceRangeMultiplyer, soundRange * _baseAudioSourceRangeMultiplyer * 1.5f);
         }
     }
@@ -59,7 +59,7 @@ public class GeneralSoundTrigger : MonoBehaviour
         if (_playSoundOnCollisionEnter)
         {
             Debug.Log(collision.rigidbody.velocity.sqrMagnitude);
-            float soundRange = Vector3.Distance(collision.GetContact(0).point, collision.collider.GetComponent<PlayerComponents>().CameraPosition.position);
+            float soundRange = Vector3.Distance(collision.GetContact(0).point, collision.collider.GetComponent<PlayerComponents>() ? collision.collider.GetComponent<PlayerComponents>().CameraPosition.position : PlayerReference.Instance.PlayerComponents.CameraPosition.position);
             PlayAudio(TriggerTypes.CollisionEnter, collision.rigidbody.velocity.sqrMagnitude, collision.GetContact(0).point, soundRange * _baseAudioSourceRangeMultiplyer, soundRange * _baseAudioSourceRangeMultiplyer * 1.5f);
         }
     }

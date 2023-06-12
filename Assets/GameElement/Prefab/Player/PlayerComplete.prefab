@@ -258,7 +258,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 50
   field of view: 40
   orthographic: 0
   orthographic size: 5
@@ -400,6 +400,7 @@ MonoBehaviour:
   PlayerActionsManagment: {fileID: 1281917385487999243}
   PlayerTransform: {fileID: 1281917385487999253}
   PlayerUI: {fileID: 0}
+  PlayerSaveData: {fileID: 0}
 --- !u!1 &1281917385452669615
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +605,7 @@ MonoBehaviour:
   _minSize: 1
   _maxSize: 100
   _minRequiredSizeToEatPercentage: 0.9
-  _sizeIncreaseFactor: 0.1
+  _massIncreaseFactor: 1
 --- !u!114 &1281917385487999241
 MonoBehaviour:
   m_ObjectHideFlags: 0

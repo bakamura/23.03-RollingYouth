@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ff945063e79d04a9f71badaf188128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugText: 0
 --- !u!1 &194361578
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,6 +294,7 @@ MonoBehaviour:
   _androidGameId: 5297105
   _iOSGameId: 5297104
   _testMode: 1
+  _debugText: 0
 --- !u!4 &239986806
 Transform:
   m_ObjectHideFlags: 0
@@ -557,6 +559,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 783834119252198631, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: far clip plane
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 783834120199791504, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: _useKeyboard
@@ -577,6 +584,11 @@ PrefabInstance:
       propertyPath: _useKeyboard
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 783834120613186339, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: _cameraColideWithObjects
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8018522883061671700, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: m_Name
@@ -590,7 +602,7 @@ PrefabInstance:
     - target: {fileID: 8881611685473227034, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.37
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8881611685473227034, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
@@ -600,7 +612,7 @@ PrefabInstance:
     - target: {fileID: 8881611685473227034, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.57
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8881611685473227034, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
@@ -878,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ff945063e79d04a9f71badaf188128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugText: 0
 --- !u!4 &1283341285
 Transform:
   m_ObjectHideFlags: 0
@@ -1773,7 +1786,7 @@ PrefabInstance:
     - target: {fileID: 8409470837822376959, guid: 525c0666f372f7146ac8c0e8051b1b59,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.04
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: 8409470837822376959, guid: 525c0666f372f7146ac8c0e8051b1b59,
         type: 3}

@@ -7,12 +7,18 @@ public class SaveManager : BaseSingleton<SaveManager>
     [SerializeField] private bool _debugText;
     private const string _dataKey = "save";
     private SaveData _currentData;
+#if UNITY_EDITOR
+    [SerializeField] private bool _canLoadData;
+#endif
     public SaveData LoadedData => _currentData;
 
     protected override void Awake()
     {
         base.Awake();
-        //Load();
+#if UNITY_EDITOR
+        if (!_canLoadData) return;
+#endif
+        Load();
     }
 
     public void Save()

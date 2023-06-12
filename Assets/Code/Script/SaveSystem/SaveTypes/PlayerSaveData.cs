@@ -14,22 +14,28 @@ public class PlayerSaveData : MonoBehaviour, ISaveObject
 #if UNITY_EDITOR
         if (!_canLoadData) return;
 #endif
-        if(SaveManager.Instance.LoadedData != null) LoadData();
+        LoadData();
     }
 
     public void LoadData()
     {
-        SaveData temp = SaveManager.Instance.GenerateData();
-        _playerComponents.PlayerTransform.position = temp.PlayerPosition;
-        _playerComponents.PlayerRigidbody.mass = temp.PlayerMass;
-        _playerComponents.ObjectGrow.ObjectToGrow.localScale = temp.PlayerScale;
+        if (SaveManager.Instance.LoadedData != null)
+        {
+            SaveData temp = SaveManager.Instance.LoadedData;
+            if(temp.PlayerMass > 0)
+            {
+                _playerComponents.PlayerTransform.position = temp.PlayerPosition;
+                _playerComponents.PlayerRigidbody.mass = temp.PlayerMass;
+                _playerComponents.ObjectGrow.ObjectToGrow.localScale = temp.PlayerScale;
+            }
+        }
     }
 
     public void UpdateSavedData()
     {
         if (_playerComponents)
         {
-            SaveData newData = SaveManager.Instance.LoadedData;
+            SaveData newData = SaveManager.Instance.GenerateData();
             newData.PlayerPosition = _playerComponents.PlayerTransform.position;
             newData.PlayerScale = _playerComponents.ObjectGrow.ObjectToGrow.localScale;
             newData.PlayerMass = _playerComponents.PlayerRigidbody.mass;

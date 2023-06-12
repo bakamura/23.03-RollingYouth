@@ -6,12 +6,13 @@ public class MemoryCollectable : MonoBehaviour, ISaveObject
 
     private void Start()
     {
-        if(SaveManager.Instance.LoadedData != null) LoadData();
+        LoadData();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if (other.CompareTag("Player"))*/ Collect();
+        /*if (other.CompareTag("Player"))*/
+        Collect();
     }
 
     private void Collect()
@@ -30,7 +31,10 @@ public class MemoryCollectable : MonoBehaviour, ISaveObject
 
     public void LoadData()
     {
-        SaveData temp = SaveManager.Instance.LoadedData;
-        if (temp.MemoryCollectables.Contains(_memoryID)) Destroy(gameObject);
+        if (SaveManager.Instance.LoadedData != null)
+        {
+            SaveData temp = SaveManager.Instance.LoadedData;
+            if (temp.MemoryCollectables.Contains(_memoryID)) Destroy(gameObject);
+        }
     }
 }

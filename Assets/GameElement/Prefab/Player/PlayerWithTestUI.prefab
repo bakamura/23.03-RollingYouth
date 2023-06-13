@@ -127,21 +127,6 @@ PrefabInstance:
       propertyPath: PlayerUI
       value: 
       objectReference: {fileID: 3925581249469288141}
-    - target: {fileID: 1281917385343864482, guid: 48095bdddc90d5d43bdcbda6905fc65b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1281917385343864482, guid: 48095bdddc90d5d43bdcbda6905fc65b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1281917385343864482, guid: 48095bdddc90d5d43bdcbda6905fc65b,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 1281917385452669614, guid: 48095bdddc90d5d43bdcbda6905fc65b,
         type: 3}
       propertyPath: m_RootOrder

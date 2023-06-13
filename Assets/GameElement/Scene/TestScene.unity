@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugText: 0
+  _canLoadData: 0
 --- !u!1 &194361578
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,15 +565,20 @@ PrefabInstance:
       propertyPath: far clip plane
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 783834120199791504, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
-      propertyPath: _useKeyboard
-      value: 0
+      propertyPath: m_LocalPosition.x
+      value: 7.93
       objectReference: {fileID: 0}
-    - target: {fileID: 783834120199791507, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
-      propertyPath: _useKeyboard
-      value: 0
+      propertyPath: m_LocalPosition.y
+      value: 1.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.05
       objectReference: {fileID: 0}
     - target: {fileID: 783834120399430592, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
@@ -891,6 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugText: 0
+  _canLoadData: 0
 --- !u!4 &1283341285
 Transform:
   m_ObjectHideFlags: 0
@@ -1838,6 +1845,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5856405440605401106, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
+        type: 3}
+      propertyPath: _debugDraw
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856405440605401106, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
+        type: 3}
+      propertyPath: _landingPoint.z
+      value: -17.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5856405440605401109, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
         type: 3}
       propertyPath: m_Name
@@ -1846,7 +1863,7 @@ PrefabInstance:
     - target: {fileID: 5856405440605401109, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5856405440605401119, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
         type: 3}

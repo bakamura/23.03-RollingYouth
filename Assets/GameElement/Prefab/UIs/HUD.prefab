@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -310}
+  m_AnchoredPosition: {x: -100, y: -410}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &305789184147445771
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5019f33745c55144a90242d6ca7720cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _containerAnimDuration: 1
+  _containerAnimDuration: 0.25
   _pauseImageBtn: {fileID: 305789184683029106}
   _controlImageBtn: {fileID: 9119376757256665608}
   _backgroundImage: {fileID: 4842081594420057539}
@@ -237,7 +237,7 @@ MonoBehaviour:
   _pauseContainer:
     RectTransform: {fileID: 305789184147445774}
     ClosedSize: {x: 0, y: 0}
-    OpenSize: {x: 200, y: 200}
+    OpenSize: {x: 200, y: 400}
     IsOpen: 0
     IsAnimating: 0
   _settingsContainer:
@@ -292,6 +292,7 @@ MonoBehaviour:
   _androidGameId: 5297105
   _iOSGameId: 5297104
   _testMode: 1
+  _debugText: 0
 --- !u!1 &305789184683029105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,7 +1198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -663}
+  m_AnchoredPosition: {x: -100, y: -863}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1089835159342385634

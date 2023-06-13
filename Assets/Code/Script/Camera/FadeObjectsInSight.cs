@@ -80,9 +80,9 @@ public class FadeObjectsInSight : MonoBehaviour
                 {
                     _previousHits.Add(temp);
                     _previousMaterials.Add(temp.material);
-                    _instanceFadeMat.SetTexture("_MainTex", hits[i].collider.GetComponent<MeshRenderer>().material.GetTexture("_MainTex"));
-                    _instanceFadeMat.SetTexture("_MetallicGlossMap", hits[i].collider.GetComponent<MeshRenderer>().material.GetTexture("_MetallicGlossMap"));
-                    hits[i].collider.GetComponent<MeshRenderer>().material = _instanceFadeMat;
+                    _instanceFadeMat.SetTexture("_MainTex", temp.material.GetTexture("_MainTex"));
+                    _instanceFadeMat.SetTexture("_MetallicGlossMap", temp.material.GetTexture("_MetallicGlossMap"));
+                    temp.material = _instanceFadeMat;
                 }
             }
             yield return _delay;

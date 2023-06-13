@@ -6,22 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/GameElement/Scene/BaseScene.unity
+    path: Assets/GameElement/ScenesAndBakes/BaseScene.unity
     guid: b62cb398f80c909449e043e649fef486
   - enabled: 1
-    path: Assets/GameElement/Scene/0.MainMenu.unity
+    path: Assets/GameElement/ScenesAndBakes/0.MainMenu.unity
     guid: 3d5675f75b1975e4a9b908551efb8f33
   - enabled: 1
-    path: Assets/GameElement/Scene/0.RoomBase.unity
+    path: Assets/GameElement/ScenesAndBakes/0.RoomBase.unity
     guid: 8b57620b6d92fe943b07fb78003edd2d
   - enabled: 1
-    path: Assets/GameElement/Scene/1.Table.unity
+    path: Assets/GameElement/ScenesAndBakes/1.Table.unity
     guid: d539c746ee34d20459f6024d2fc562d8
   - enabled: 1
-    path: Assets/GameElement/Scene/2.Floor.unity
+    path: Assets/GameElement/ScenesAndBakes/2.Floor.unity
     guid: 09558378c2781784fb25abe9d7916a5e
   - enabled: 1
-    path: Assets/GameElement/Scene/3.Chest.unity
+    path: Assets/GameElement/ScenesAndBakes/3.Chest.unity
     guid: c221cdf74997fac4da94aea23a1c6138
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ab51733a750857641b4e0208ace32f98,

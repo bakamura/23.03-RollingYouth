@@ -222,11 +222,6 @@ PrefabInstance:
       propertyPath: _behaviourList.Array.data[1].Actions.Array.data[1]
       value: 
       objectReference: {fileID: 783834120199791504}
-    - target: {fileID: 1281917385487999252, guid: 48095bdddc90d5d43bdcbda6905fc65b,
-        type: 3}
-      propertyPath: _minSize
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48095bdddc90d5d43bdcbda6905fc65b, type: 3}
 --- !u!4 &783834120168130612 stripped

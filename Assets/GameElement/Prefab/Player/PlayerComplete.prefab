@@ -602,7 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectToGrow: {fileID: 1281917385343864482}
   _objectPhysics: {fileID: 1281917385487999246}
-  _minSize: 1
+  _minSize: 0.7
   _maxSize: 100
   _minRequiredSizeToEatPercentage: 0.9
   _massIncreaseFactor: 1
@@ -623,7 +623,7 @@ MonoBehaviour:
   _maxVelocity: 100
   _cameraRotation: {fileID: 1281917383749192122}
   _isGyroActive: 1
-  _useKeyboard: 0
+  _useKeyboard: 1
 --- !u!114 &1281917385487999242
 MonoBehaviour:
   m_ObjectHideFlags: 0

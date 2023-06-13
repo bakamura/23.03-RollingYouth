@@ -16,7 +16,7 @@ public class ObjectGrow : MonoBehaviour
     [SerializeField] private float _massIncreaseFactor = 1f;
 
     private float _currentSize;
-    //private float _initialMass;
+    private float _initialMass;
 
     public Transform ObjectToGrow => _objectToGrow;
     public Rigidbody ObjectPhysics => _objectPhysics;
@@ -25,7 +25,7 @@ public class ObjectGrow : MonoBehaviour
     private void Awake()
     {
         _currentSize = _objectToGrow.localScale.magnitude;
-        //_initialMass = _objectPhysics.mass;
+        _initialMass = _objectPhysics.mass;
     }
 
     public bool UpdateSize(float objectSize, float objectMass = 0, bool checkForMinimalSize = true)
@@ -56,6 +56,7 @@ public class ObjectGrow : MonoBehaviour
             Mathf.Clamp(_objectToGrow.localScale.x + objectSize, _minSize, _maxSize),
             Mathf.Clamp(_objectToGrow.localScale.y + objectSize, _minSize, _maxSize),
             Mathf.Clamp(_objectToGrow.localScale.z + objectSize, _minSize, _maxSize));
+            _objectPhysics.mass = Mathf.Clamp(_objectPhysics.mass + objectMass, _initialMass, float.MaxValue);
         }
         else
         {
@@ -63,11 +64,11 @@ public class ObjectGrow : MonoBehaviour
             Mathf.Clamp(finalVolume, _minSize, _maxSize),
             Mathf.Clamp(finalVolume, _minSize, _maxSize),
             Mathf.Clamp(finalVolume, _minSize, _maxSize));
+            _objectPhysics.mass += finalVolume * _massIncreaseFactor;
         }
         //if (_objectPhysics.mass + objectMass > _initialMass) _objectPhysics.mass += finalVolume * _sizeIncreaseFactor;
         //else _objectPhysics.mass = _initialMass;
-        //_objectPhysics.mass += objectMass;
-        _objectPhysics.mass += finalVolume * _massIncreaseFactor;
+        //_objectPhysics.mass += objectMass;        
         _currentSize = _objectToGrow.localScale.magnitude;
         OnObjectGrow?.Invoke();
     }

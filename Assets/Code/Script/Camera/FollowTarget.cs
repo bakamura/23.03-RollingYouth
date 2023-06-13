@@ -79,11 +79,5 @@ public class FollowTarget : MonoBehaviour
             //Gizmos.DrawLine(_playerPosition.position, -_cameraPosition.forward * _currentMaxDistance) ;
         }
     }
-
-    [ContextMenu("Locat")]
-    private void Print()
-    {
-        Debug.Log(_cameraPosition.localPosition);
-    }
 #endif
 }

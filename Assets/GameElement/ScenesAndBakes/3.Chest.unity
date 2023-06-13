@@ -5,11 +5,11 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 2
+    smallestOccluder: 3
     smallestHole: 0.25
     backfaceThreshold: 100
   m_SceneGUID: c221cdf74997fac4da94aea23a1c6138
-  m_OcclusionCullingData: {fileID: 36300000, guid: 246a19433efa7c64f88d6d3ee45a2349,
+  m_OcclusionCullingData: {fileID: 36300000, guid: e0db765f96d3f5b4c93518fdb86cff44,
     type: 2}
 --- !u!104 &2
 RenderSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: edc48288cb3fe694b9135ad7a1d4dab1,
+  m_LightingDataAsset: {fileID: 112000000, guid: ca7a6f4d58c33c647b856b2baad80ae0,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: d7a49e7433a42a94aa260bde39d21548,
     type: 2}
@@ -902,7 +902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &188151872
 Light:
   m_ObjectHideFlags: 0
@@ -921,7 +921,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

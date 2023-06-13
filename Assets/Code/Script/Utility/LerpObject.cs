@@ -20,9 +20,9 @@ public class LerpObject : BaseSingleton<LerpObject>
         if (_lerpPositionCoroutine == null) _lerpPositionCoroutine = StartCoroutine(LerpCoroutine(target, duration, finalPosition, onLerpEnd));
     }
 
-    public void SlerpObjectPosition(Transform target, float duration, Vector3 finalPosition, Action onLerpEnd)
+    public void SlerpObjectPosition(Transform target, float duration, Vector3 finalPosition, Vector3 angle, Action onLerpEnd)
     {
-        if (_slerpPositionCoroutine == null) _slerpPositionCoroutine = StartCoroutine(SlerpCoroutine(target, duration, finalPosition, onLerpEnd));
+        if (_slerpPositionCoroutine == null) _slerpPositionCoroutine = StartCoroutine(SlerpCoroutine(target, duration, finalPosition, angle, onLerpEnd));
     }
 
     private IEnumerator LerpCoroutine(Transform target, float duration, Vector3 finalPosition, Action onLerpEnd)
@@ -39,13 +39,17 @@ public class LerpObject : BaseSingleton<LerpObject>
         _lerpPositionCoroutine = null;
     }
 
-    private IEnumerator SlerpCoroutine(Transform target, float duration, Vector3 finalPosition, Action onLerpEnd)
+    private IEnumerator SlerpCoroutine(Transform target, float duration, Vector3 finalPosition, Vector3 angle, Action onLerpEnd)
     {
         float delta = 0;
         Vector3 initialPosition = target.position;
+        Vector3 midllePoint = ((initialPosition + finalPosition) * .5f) - angle;
+        initialPosition -= midllePoint;
+        finalPosition -= midllePoint;
         while (delta < 1)
         {
             target.position = Vector3.Slerp(initialPosition, finalPosition, delta);
+            target.position += midllePoint;
             delta += _tickFrequence / duration;
             yield return _delay;
         }

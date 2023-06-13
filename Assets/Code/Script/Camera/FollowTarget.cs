@@ -19,7 +19,6 @@ public class FollowTarget : MonoBehaviour
 #endif
 
     private Vector3 _cameraFocusPosition => _playerPosition.position + _cameraLookOffset;
-    private Vector3 _initialForward;
     private Vector3 _currentCamPosition;
     private float _currentMaxDistance;
     private float _lastPlayerSize;
@@ -27,8 +26,6 @@ public class FollowTarget : MonoBehaviour
     private void Awake()
     {
         _playerPosition.GetComponentInParent<PlayerComponents>().ObjectGrow.OnObjectGrow += RecalculateCameraPosition;
-        _initialForward = new Vector3(0, _cameraPosition.forward.y, _cameraPosition.forward.z);
-        //_initialForward = _cameraPosition.forward;
         _currentCamPosition = _cameraPosition.localPosition;
         _currentMaxDistance = Vector3.Distance(_cameraFocusPosition, _cameraPosition.position);
         _lastPlayerSize = _playerPosition.localScale.sqrMagnitude;
@@ -43,9 +40,17 @@ public class FollowTarget : MonoBehaviour
     private void RecalculateCameraPosition()
     {
         //Debug.Log(_target.localScale.magnitude * -_initialForward);
-        _currentCamPosition += (_playerPosition.localScale.sqrMagnitude - _lastPlayerSize) * -_initialForward;
+        _currentCamPosition += (_playerPosition.localScale.sqrMagnitude - _lastPlayerSize) * -CalculateForwardVector()/*-_initialForward*/;
+        _currentCamPosition = new Vector3(0, _currentCamPosition.y, _currentCamPosition.z);
         _currentMaxDistance = Vector3.Distance(_cameraFocusPosition, _cameraPosition.position);
         _lastPlayerSize = _playerPosition.localScale.sqrMagnitude;
+    }
+
+    private Vector3 CalculateForwardVector()
+    {
+        Vector3 temp = (_playerPosition.position - _cameraPosition.position).normalized;
+        temp = new Vector3(0, temp.y, temp.z);
+        return _cameraPosition.transform.TransformDirection(_cameraPosition.forward);
     }
 
     private void UpdateCameraLocation()

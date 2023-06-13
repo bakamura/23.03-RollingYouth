@@ -20,6 +20,7 @@ public class Plunger : CameraUser
     /// </summary>
     [Header("LaunchValues")]
     //[SerializeField] private float _force;
+    [SerializeField] private float _angleSize;
     [SerializeField] private float _cameraLaunchAnimDuration;
     [SerializeField] private float _launchDuration;
     [SerializeField] private Vector3 _landingPoint;
@@ -74,7 +75,7 @@ public class Plunger : CameraUser
                     EndCameraUseWithDynamicPoints(_playerComponents.PlayerTransform, _initialCameraRotation, _initialCameraLocalPosition, _cameraLaunchAnimDuration);
                     _leaver.position = _initialLeaverPosition;
                     //_playerComponents.PlayerRigidbody.AddForce(transform.up * _force, ForceMode.Impulse);
-                    LerpObject.Instance.SlerpObjectPosition(_playerComponents.PlayerTransform, _launchDuration, _playerComponents.PlayerTransform.position + _landingPoint, OnEndLaunchSlerp);
+                    LerpObject.Instance.SlerpObjectPosition(_playerComponents.PlayerTransform, _launchDuration, _playerComponents.PlayerTransform.position + _landingPoint, new Vector3(0, _angleSize, 0), OnEndLaunchSlerp);
                 }
                 else if (_currentDelta < 1)
                 {

@@ -31,11 +31,12 @@ public class FollowTarget : MonoBehaviour
         //_initialForward = _cameraPosition.forward;
         _currentCamPosition = _cameraPosition.localPosition;
         _currentMaxDistance = Vector3.Distance(_cameraFocusPosition, _cameraPosition.position);
+        _lastPlayerSize = _playerPosition.localScale.sqrMagnitude;
     }
 
     private void Update()
     {
-        _cameraRotation.position = _cameraFocusPosition;
+        _cameraRotation.position = _playerPosition.position;
         UpdateCameraLocation();
     }
 
@@ -62,7 +63,7 @@ public class FollowTarget : MonoBehaviour
 #if UNITY_EDITOR
     public void RepositionCam()
     {
-        _cameraPosition.position = _playerPosition.position + _initialDesiredLocation;        
+        _cameraPosition.localPosition = /*_playerPosition.position + */_initialDesiredLocation;        
         _cameraPosition.LookAt(_playerPosition.position + _cameraLookOffset);
     }
     private void OnDrawGizmosSelected()
@@ -77,6 +78,12 @@ public class FollowTarget : MonoBehaviour
             //Gizmos.color = Color.green;
             //Gizmos.DrawLine(_playerPosition.position, -_cameraPosition.forward * _currentMaxDistance) ;
         }
+    }
+
+    [ContextMenu("Locat")]
+    private void Print()
+    {
+        Debug.Log(_cameraPosition.localPosition);
     }
 #endif
 }

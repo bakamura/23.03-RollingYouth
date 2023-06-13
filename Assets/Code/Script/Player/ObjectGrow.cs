@@ -14,6 +14,9 @@ public class ObjectGrow : MonoBehaviour
     [SerializeField] private float _maxSize;
     [SerializeField, Range(0f, 1f), Tooltip("the minimum size to eat something in percentage")] private float _minRequiredSizeToEatPercentage;
     [SerializeField] private float _massIncreaseFactor = 1f;
+#if UNITY_EDITOR
+    [SerializeField] private bool _testMode;
+#endif
 
     private float _currentSize;
     private float _initialMass;
@@ -21,6 +24,7 @@ public class ObjectGrow : MonoBehaviour
     public Transform ObjectToGrow => _objectToGrow;
     public Rigidbody ObjectPhysics => _objectPhysics;
     public Action OnObjectGrow;
+    public float CurrentSize => _currentSize;
 
     private void Awake()
     {
@@ -31,6 +35,13 @@ public class ObjectGrow : MonoBehaviour
     public bool UpdateSize(float objectSize, float objectMass = 0, bool checkForMinimalSize = true)
     {
         //Debug.Log($"current size {_currentSize} , required size {objectSize * _minRequiredSizeToEatPercentage}");
+#if UNITY_EDITOR
+        if (_testMode)
+        {
+            ChangeSizeAndMass(objectSize, objectMass);
+            return true;
+        }
+#endif
         if (checkForMinimalSize)
         {
             if (_currentSize >= objectSize * _minRequiredSizeToEatPercentage)

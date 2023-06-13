@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -568,17 +568,52 @@ PrefabInstance:
     - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.93
+      value: -3.77
       objectReference: {fileID: 0}
     - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.54
+      value: -0.44
       objectReference: {fileID: 0}
     - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.05
+      value: 2.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.87985605
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.47524038
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120168130612, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -56.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120199791502, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: _testMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783834120199791507, guid: 44fdd5c9a9caef243ba9e31b423dd640,
+        type: 3}
+      propertyPath: _maxVelocity
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 783834120399430592, guid: 44fdd5c9a9caef243ba9e31b423dd640,
         type: 3}

@@ -48,9 +48,10 @@ public class FollowTarget : MonoBehaviour
 
     private Vector3 CalculateForwardVector()
     {
-        Vector3 temp = (_playerPosition.position - _cameraPosition.position).normalized;
-        temp = new Vector3(0, temp.y, temp.z);
-        return _cameraPosition.transform.TransformDirection(_cameraPosition.forward);
+        Vector3 temp = (_cameraLookOffset - _cameraPosition.localPosition).normalized;
+        //temp = new Vector3(0, temp.y, temp.z);
+        //_cameraPosition.transform.TransformDirection(_cameraPosition.forward)
+        return temp;
     }
 
     private void UpdateCameraLocation()

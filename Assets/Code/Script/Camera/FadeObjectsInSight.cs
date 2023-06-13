@@ -8,8 +8,9 @@ public class FadeObjectsInSight : MonoBehaviour
     [SerializeField] private LayerMask _layersToCollideWith;
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private float _checkFrequence;
-    [SerializeField] private float _raycastCheckRadius;
+    //[SerializeField] private float _raycastCheckRadius = .2f;
     [SerializeField] private Material _fadeMaterial;
+    [SerializeField] private PlayerComponents _playerComponents;
 
     private WaitForSeconds _delay;
     private List<MeshRenderer> _previousHits = new List<MeshRenderer>();
@@ -71,7 +72,7 @@ public class FadeObjectsInSight : MonoBehaviour
                 _previousHits.Clear();
             //}
 
-            RaycastHit[] hits = Physics.SphereCastAll(_cameraTransform.position, _raycastCheckRadius, _rayDirection, _rayDirection.magnitude * .9f, _layersToCollideWith);
+            RaycastHit[] hits = Physics.SphereCastAll(_cameraTransform.position, _playerComponents.ObjectGrow.ObjectToGrow.localScale.x / 2f/*_raycastCheckRadius*/, _rayDirection.normalized, _rayDirection.magnitude * .95f, _layersToCollideWith);
             for (int i = 0; i < hits.Length; i++)
             {
                 MeshRenderer temp = hits[i].collider.GetComponent<MeshRenderer>();
@@ -96,7 +97,7 @@ public class FadeObjectsInSight : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawLine(_cameraTransform.position, _cameraTransform.position + _rayDirection);
             Gizmos.color = Color.black;
-            Gizmos.DrawSphere(_cameraTransform.position + _rayDirection, _raycastCheckRadius);
+            Gizmos.DrawSphere(_cameraTransform.position + _rayDirection * .95f, _playerComponents.ObjectGrow.ObjectToGrow.localScale.x / 2f/*_raycastCheckRadius*/);
         }
     }
 #endif

@@ -12,6 +12,7 @@ public class Flipper : MonoBehaviour
     [SerializeField, Tooltip("if true, the flipper will rotate towards +X, else will rotate towards -X")] private bool _useBaseRight = true;
 #if UNITY_EDITOR
     [Header("Debug")]
+    [SerializeField] private bool _debugText;
     [SerializeField] private bool _debugDraw;
     [SerializeField] private Color _debugColor = Color.red;
     [SerializeField] private float _debugDuration;
@@ -63,8 +64,8 @@ public class Flipper : MonoBehaviour
                     _currentDelta = 0;
                     _currentRb.AddForce(_useBaseRight ? _launchDirection * _extraForce : -_launchDirection * _extraForce, ForceMode.Impulse);
 #if UNITY_EDITOR
-                    Debug.DrawLine(_currentRb.position, _useBaseRight ? transform.position + _launchDirection * _extraForce : transform.position + -_launchDirection * _extraForce, _debugColor, _debugDuration);
-                    Debug.Log($"Target Position {_currentRb.position}, direction {_launchDirection * 3f }");
+                    if (_debugDraw) Debug.DrawLine(_currentRb.position, _useBaseRight ? transform.position + _launchDirection * _extraForce : transform.position + -_launchDirection * _extraForce, _debugColor, _debugDuration);
+                    if (_debugText) Debug.Log($"Target Position {_currentRb.position}, direction {_launchDirection * 3f }");
 #endif
                 }
             }

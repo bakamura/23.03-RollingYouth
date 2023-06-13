@@ -170,6 +170,7 @@ MonoBehaviour:
   _checkFrequence: 0.5
   _raycastCheckRadius: 0.2
   _fadeMaterial: {fileID: 2100000, guid: e187e7eceb5417c4eacfab25536571f7, type: 2}
+  _playerComponents: {fileID: 1281917385343864481}
 --- !u!1 &1281917384312629522
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +607,7 @@ MonoBehaviour:
   _maxSize: 100
   _minRequiredSizeToEatPercentage: 0.9
   _massIncreaseFactor: 1
+  _testMode: 0
 --- !u!114 &1281917385487999241
 MonoBehaviour:
   m_ObjectHideFlags: 0

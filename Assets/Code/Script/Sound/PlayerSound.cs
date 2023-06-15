@@ -7,15 +7,15 @@ public class PlayerSound : MonoBehaviour
 {
     [SerializeField] private PlayerComponents _playerComponents;
     [SerializeField] private float _soundsInterval = .2f;
+    [SerializeField] private float _maxSoundVolume;
     [SerializeField] private SfxConfigs[] _soundsConfigurations;
-
     [Serializable]
     private struct SfxConfigs
     {
         public PhysicMaterial SurfaceType;
         public float[] RandomizePicth;
         public AudioClip AudioClip;
-        [Min(1f)] public float VolumeMultiplier;
+        [Range(0f, 1f)] public float VolumeMultiplier;
         //public SoundManager.SfxAudioData AudioData;
     }
 
@@ -44,8 +44,8 @@ public class PlayerSound : MonoBehaviour
         {
             if(_soundsConfigurations[i].SurfaceType == physicMaterial)
             {
-                //Debug.Log($"play sound with volume {volume}");
-                SoundManager.Instance.PlaySoundEffectInComponent(volume * _soundsConfigurations[i].VolumeMultiplier, false, _soundsConfigurations[i].AudioClip, _soundsConfigurations[i].RandomizePicth, _audioSource);
+                //Debug.Log($"play sound with volume: {volume * _soundsConfigurations[i].VolumeMultiplier}, player speed: {volume}");
+                SoundManager.Instance.PlaySoundEffectInComponent(Mathf.Clamp(volume * _soundsConfigurations[i].VolumeMultiplier, 0f, _maxSoundVolume), false, _soundsConfigurations[i].AudioClip, _soundsConfigurations[i].RandomizePicth, _audioSource);
                 //SoundManager.Instance.PlaySoundEffect(_soundsConfigurations[i].AudioData);
                 break;
             }

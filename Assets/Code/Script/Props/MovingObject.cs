@@ -74,7 +74,7 @@ public class MovingObject : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        Vector3 pos = UnityEditor.EditorApplication.isPlaying ? _initialPosition : transform.position;
+        Vector3 pos = UnityEditor.EditorApplication.isPlaying ? _initialPosition : GetComponent<Transform>().position;
         for(int i = 0; i < _points.Length; i++)
         {
             Gizmos.color = _pointColor;

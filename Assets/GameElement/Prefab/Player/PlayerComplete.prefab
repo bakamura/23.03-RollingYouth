@@ -168,7 +168,6 @@ MonoBehaviour:
     m_Bits: 1
   _cameraTransform: {fileID: 1281917384312629521}
   _checkFrequence: 0.5
-  _raycastCheckRadius: 0.2
   _fadeMaterial: {fileID: 2100000, guid: e187e7eceb5417c4eacfab25536571f7, type: 2}
   _playerComponents: {fileID: 1281917385343864481}
 --- !u!1 &1281917384312629522
@@ -658,7 +657,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerComponents: {fileID: 1281917385343864481}
   _soundsInterval: 0.2
-  _soundsConfigurations: []
+  _maxSoundVolume: 5
+  _soundsConfigurations:
+  - SurfaceType: {fileID: 13400000, guid: 891a599711eb4874e8b81af52edc632b, type: 2}
+    RandomizePicth: []
+    AudioClip: {fileID: 8300000, guid: 579b48d5c10ab49418d9c5cfbd5f6e6c, type: 3}
+    VolumeMultiplier: 0.5
+  - SurfaceType: {fileID: 13400000, guid: fa1fe0c66ea4c024da8060111a5ddc7f, type: 2}
+    RandomizePicth: []
+    AudioClip: {fileID: 8300000, guid: f09cadcbef605fd4bb1b4c792820c00f, type: 3}
+    VolumeMultiplier: 0.5
+  - SurfaceType: {fileID: 13400000, guid: 3a19d7cca19cdd146b7349b31d5d8f94, type: 2}
+    RandomizePicth: []
+    AudioClip: {fileID: 8300000, guid: 32b68b4e4dbc9054ebf12f3264a97703, type: 3}
+    VolumeMultiplier: 0.5
 --- !u!82 &7997994159991713830
 AudioSource:
   m_ObjectHideFlags: 0

@@ -66,7 +66,7 @@ public class FadeObjectsInSight : MonoBehaviour
             //{
                 for (int i = 0; i < _previousHits.Count; i++)
                 {
-                    _previousHits[i].material = _previousMaterials[i];
+                    if(_previousHits[i]) _previousHits[i].material = _previousMaterials[i];
                 }
                 _previousMaterials.Clear();
                 _previousHits.Clear();

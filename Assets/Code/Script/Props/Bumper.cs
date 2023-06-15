@@ -10,7 +10,8 @@ public class Bumper : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody rb = collision.rigidbody;
-        rb.AddForce(-collision.GetContact(0).normal * _force, ForceMode.Acceleration);
+        Vector3 direction = collision.GetContact(0).normal;
+        rb.AddForce(-new Vector3(direction.x, 0, direction.z) * _force, ForceMode.Acceleration);
         if (_loseMass) rb.mass -= _massLoss;
     }
 }

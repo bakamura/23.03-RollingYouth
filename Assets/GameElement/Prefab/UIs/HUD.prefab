@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &305789184147445774
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -25, y: -300}
-  m_SizeDelta: {x: 250, y: 525}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &305789184147445771
 CanvasRenderer:
@@ -223,18 +223,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _containerAnimDuration: 0.1
-  _pauseImageBtn: {fileID: 305789184683029106}
-  _controlImageBtn: {fileID: 9119376757256665608}
+  _twoModeBtns:
+  - ButtonID: pause
+    ButtonIcon: {fileID: 305789184683029106}
+    Icons:
+    - {fileID: 21300000, guid: 8fd7af9fb6c25c440a4a072647deb4da, type: 3}
+    - {fileID: 21300000, guid: 3d92eedb36e6fb0499b47238583f6e02, type: 3}
+    CurrentIconIndex: 0
+  - ButtonID: sfx
+    ButtonIcon: {fileID: 2227187745656189030}
+    Icons:
+    - {fileID: 21300000, guid: 1778f012fbd05e54ca2f626c9e725478, type: 3}
+    - {fileID: 21300000, guid: 6d11acc33c32a8c4c887121d75c38110, type: 3}
+    CurrentIconIndex: 0
+  - ButtonID: music
+    ButtonIcon: {fileID: 4834234006941779247}
+    Icons:
+    - {fileID: 21300000, guid: 9af78487090d14c45866e54e38f211a2, type: 3}
+    - {fileID: 21300000, guid: 6d11acc33c32a8c4c887121d75c38110, type: 3}
+    CurrentIconIndex: 0
+  - ButtonID: controls
+    ButtonIcon: {fileID: 9119376757256665608}
+    Icons:
+    - {fileID: 21300000, guid: 9cd16870836c43f44a2c930afbeaa965, type: 3}
+    - {fileID: 21300000, guid: 70f5ef18c1bbbb34ea625b99afb241b1, type: 3}
+    CurrentIconIndex: 0
   _backgroundImage: {fileID: 4842081594420057539}
   _controlsUI: {fileID: 0}
-  _pauseIcons:
-  - {fileID: 21300000, guid: 8fd7af9fb6c25c440a4a072647deb4da, type: 3}
-  - {fileID: 21300000, guid: 3d92eedb36e6fb0499b47238583f6e02, type: 3}
-  _controlIcons:
-  - ControlType: 0
-    Icon: {fileID: 21300000, guid: 9cd16870836c43f44a2c930afbeaa965, type: 3}
-  - ControlType: 1
-    Icon: {fileID: 21300000, guid: 70f5ef18c1bbbb34ea625b99afb241b1, type: 3}
   _pauseContainer:
     RectTransform: {fileID: 305789184147445774}
     ClosedSize: {x: 250, y: 525}
@@ -417,13 +432,13 @@ MonoBehaviour:
       - m_Target: {fileID: 305789184389780087}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
         m_MethodName: PauseMenu
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: pause
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &305789185408999280
@@ -576,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6127679722281665773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -681,13 +696,13 @@ MonoBehaviour:
       - m_Target: {fileID: 305789184389780087}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
         m_MethodName: ChangeControlersBtn
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: controls
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &527728173850130186
@@ -839,7 +854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4339542526517346953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1067,7 +1082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &785095422513512170
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1198,7 +1213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7260270001127729347
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1323,7 +1338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 467c04e2c7b7a6840b5dfa6688a5eb94, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10190d7fbcdf2ad4d9d016229a6c1651, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1406,7 +1421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3859179732239431543
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1483,7 +1498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2108628399398049484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1588,13 +1603,13 @@ MonoBehaviour:
       - m_Target: {fileID: 305789184389780087}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
         m_MethodName: MusicSoundButton
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: music
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8004395458187315282
@@ -1615,7 +1630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4477603931497955646
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1720,13 +1735,13 @@ MonoBehaviour:
       - m_Target: {fileID: 305789184389780087}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
         m_MethodName: SfxSoundButton
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: sfx
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8171204141175427694
@@ -1769,7 +1784,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -25, y: -300}
-  m_SizeDelta: {x: 250, y: 250}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &1089835159342385634
 CanvasRenderer:

@@ -361,6 +361,41 @@ PrefabInstance:
       propertyPath: _controlsUI
       value: 
       objectReference: {fileID: 783834120399430592}
+    - target: {fileID: 5502307344210694756, guid: 5c2d63376dc21f24b924754a6ba7050e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502307344210694756, guid: 5c2d63376dc21f24b924754a6ba7050e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502307344210694756, guid: 5c2d63376dc21f24b924754a6ba7050e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 783834120399430595}
+    - target: {fileID: 5502307344210694756, guid: 5c2d63376dc21f24b924754a6ba7050e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502307344210694756, guid: 5c2d63376dc21f24b924754a6ba7050e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetGyro
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502307344210694756, guid: 5c2d63376dc21f24b924754a6ba7050e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RecalculateGyro, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502307344210694756, guid: 5c2d63376dc21f24b924754a6ba7050e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c2d63376dc21f24b924754a6ba7050e, type: 3}
 --- !u!224 &3925581249469288137 stripped
@@ -517,6 +552,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7042397202413925134}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &783834120399430595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7735814216722616525, guid: 6c9a1c2c55b9f2746b51e74097aaad63,
+    type: 3}
+  m_PrefabInstance: {fileID: 7042397202413925134}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783834120399430592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84efe2921cd6f549b5bf5f850bcbe9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &783834119704554650 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7735814216028004244, guid: 6c9a1c2c55b9f2746b51e74097aaad63,

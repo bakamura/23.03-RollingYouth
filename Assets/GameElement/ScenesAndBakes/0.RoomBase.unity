@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 474875182}
   - component: {fileID: 474875181}
   - component: {fileID: 474875180}
+  - component: {fileID: 474875183}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -487,6 +488,19 @@ Transform:
   m_Father: {fileID: 1053677112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!65 &474875183
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474875179}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 89.555824, y: 59.4346, z: 163.55086}
+  m_Center: {x: 4.102466e-14, y: 40.89502, z: -0.111850746}
 --- !u!1 &611380997
 GameObject:
   m_ObjectHideFlags: 0

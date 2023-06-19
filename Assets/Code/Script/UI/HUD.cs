@@ -19,6 +19,7 @@ public class HUD : UI
     [SerializeField] private Container _settingsContainer;
 
     public static bool IsGamePaused;
+    private static Dictionary<string, int> _currentTwoModeBtnsSprite = new Dictionary<string, int>();
 
     //[Serializable]
     //private struct ControlIconsData
@@ -42,6 +43,18 @@ public class HUD : UI
     //{
     //    RoundButton();
     //}
+
+    private void Awake()
+    {
+        for(int i = 0; i < _twoModeBtns.Length; i++)
+        {
+            if (!_currentTwoModeBtnsSprite.ContainsKey(_twoModeBtns[i].ButtonID))
+            {
+                _currentTwoModeBtnsSprite.Add(_twoModeBtns[i].ButtonID, _twoModeBtns[i].CurrentIconIndex);
+            }
+            SetTwoModeBtnImage(_twoModeBtns[i]);
+        }
+    }
 
     public void PauseMenu(string id)
     {
@@ -101,6 +114,13 @@ public class HUD : UI
         temp.CurrentIconIndex++;
         if (temp.CurrentIconIndex == temp.Icons.Length) temp.CurrentIconIndex = 0;
         temp.ButtonIcon.sprite = temp.Icons[temp.CurrentIconIndex];
+        _currentTwoModeBtnsSprite[buttonID] = temp.CurrentIconIndex;
+    }
+
+    private void SetTwoModeBtnImage(TwoModeButtonData buttonData)
+    {
+        buttonData.ButtonIcon.sprite = buttonData.Icons[_currentTwoModeBtnsSprite[buttonData.ButtonID]];
+        buttonData.CurrentIconIndex = _currentTwoModeBtnsSprite[buttonData.ButtonID];
     }
 
     private void UpdateBackground(bool isMenuOpen)

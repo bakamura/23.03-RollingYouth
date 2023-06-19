@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 167721115}
   - component: {fileID: 167721114}
   - component: {fileID: 167721118}
+  - component: {fileID: 167721119}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -336,6 +337,52 @@ MonoBehaviour:
     IsOpen: 0
     IsAnimating: 0
   _initialCutscene: {fileID: 1162212673}
+--- !u!114 &167721119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167721113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5019f33745c55144a90242d6ca7720cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerAnimDuration: 0
+  _twoModeBtns:
+  - ButtonID: sfx
+    ButtonIcon: {fileID: 1623738348}
+    Icons:
+    - {fileID: 21300000, guid: 1778f012fbd05e54ca2f626c9e725478, type: 3}
+    - {fileID: 21300000, guid: 6d11acc33c32a8c4c887121d75c38110, type: 3}
+    CurrentIconIndex: 0
+  - ButtonID: music
+    ButtonIcon: {fileID: 2131365389}
+    Icons:
+    - {fileID: 21300000, guid: 9af78487090d14c45866e54e38f211a2, type: 3}
+    - {fileID: 21300000, guid: 6d11acc33c32a8c4c887121d75c38110, type: 3}
+    CurrentIconIndex: 0
+  - ButtonID: controls
+    ButtonIcon: {fileID: 2128951209}
+    Icons:
+    - {fileID: 21300000, guid: 9cd16870836c43f44a2c930afbeaa965, type: 3}
+    - {fileID: 21300000, guid: 70f5ef18c1bbbb34ea625b99afb241b1, type: 3}
+    CurrentIconIndex: 0
+  _backgroundImage: {fileID: 0}
+  _controlsUI: {fileID: 0}
+  _pauseContainer:
+    RectTransform: {fileID: 0}
+    ClosedSize: {x: 0, y: 0}
+    OpenSize: {x: 0, y: 0}
+    IsOpen: 0
+    IsAnimating: 0
+  _settingsContainer:
+    RectTransform: {fileID: 0}
+    ClosedSize: {x: 0, y: 0}
+    OpenSize: {x: 0, y: 0}
+    IsOpen: 0
+    IsAnimating: 0
 --- !u!1 &202096495
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +578,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272984680}
   m_CullTransparentMesh: 1
+--- !u!1 &335348455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 335348456}
+  - component: {fileID: 335348457}
+  m_Layer: 0
+  m_Name: PlayerController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &335348456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335348455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 335504827}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &335348457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335348455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ba4b0602f4e9a42a8e4adf09e66b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movmentByGyro: {fileID: 0}
+  _movmentBySwipe: {fileID: 0}
+--- !u!1 &335504826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 335504827}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &335504827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335504826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 335348456}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364858373
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,7 +1093,7 @@ AudioSource:
   m_GameObject: {fileID: 814203697}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3659376866744960543, guid: 223a6466b86046147b3e49befe6f766e,
+  OutputAudioMixerGroup: {fileID: 4863761488385641007, guid: 223a6466b86046147b3e49befe6f766e,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 45f3d3635fb33fa40985254e32bf133a, type: 3}
   m_PlayOnAwake: 1
@@ -1395,7 +1518,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1623738348}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 167721119}
+        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+        m_MethodName: SfxSoundButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: sfx
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1623738348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,7 +2043,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2128951209}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 167721119}
+        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+        m_MethodName: ChangeControlersBtn
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: controls
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2128951209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2028,7 +2175,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2131365389}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 167721119}
+        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+        m_MethodName: MusicSoundButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: music
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2131365389
 MonoBehaviour:
   m_ObjectHideFlags: 0

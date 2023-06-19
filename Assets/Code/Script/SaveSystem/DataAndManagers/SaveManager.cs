@@ -81,6 +81,7 @@ public class SaveManager : BaseSingleton<SaveManager>
     private void EraseData()
     {
         PlayerPrefs.DeleteKey(_dataKey);
+        _currentData = null;
     }
 #endif
 }

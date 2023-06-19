@@ -17,7 +17,25 @@ public class FadeObjectsInSight : MonoBehaviour
     //private GameObject _currentTarget;
     //private Material _previousMaterial;
     private List<Material> _previousMaterials =  new List<Material>();
+
+    private Dictionary<int, FadeData> _currentObjects = new Dictionary<int, FadeData>();
+    private Dictionary<int, FadeData> _previousObjects;
     private Material _instanceFadeMat;
+
+    [System.Serializable]
+    private class FadeData
+    {
+        public int ObjectID;
+        public Material Material;
+        public MeshRenderer MeshRenderer;
+
+        public FadeData(Material mat, MeshRenderer meshRenderer, int Id)
+        {
+            Material = mat;
+            MeshRenderer = meshRenderer;
+            ObjectID = Id;
+        }
+    }
 
     private Vector3 _rayDirection => _playerPosition.position - _cameraTransform.position;
 
@@ -39,6 +57,7 @@ public class FadeObjectsInSight : MonoBehaviour
 
     IEnumerator CheckForObstacles()
     {
+        #region For1Object
         // for 1 object only
         //while (true)
         //{
@@ -59,33 +78,92 @@ public class FadeObjectsInSight : MonoBehaviour
         //    }
         //    yield return _delay;
         //}
+        #endregion
+        #region ForMultipleObjects
         // for multiple objects
         while (true)
         {
-            //if (_previousHits.Count > 0)
-            //{
-                for (int i = 0; i < _previousHits.Count; i++)
-                {
-                    if(_previousHits[i]) _previousHits[i].material = _previousMaterials[i];
-                }
-                _previousMaterials.Clear();
-                _previousHits.Clear();
-            //}
-
             RaycastHit[] hits = Physics.SphereCastAll(_cameraTransform.position, _playerComponents.ObjectGrow.ObjectToGrow.localScale.x / 2f/*_raycastCheckRadius*/, _rayDirection.normalized, _rayDirection.magnitude * .95f, _layersToCollideWith);
-            for (int i = 0; i < hits.Length; i++)
+            //Debug.Log(hits.Length);
+            FadeObjects(hits);
+            RemoveFade(hits);
+            #region OldVersion
+            ////if (_previousHits.Count > 0)
+            ////{
+            //for (int i = 0; i < _previousHits.Count; i++)
+            //{
+            //    if (_previousHits[i]) _previousHits[i].material = _previousMaterials[i];
+            //}
+            //_previousMaterials.Clear();
+            //_previousHits.Clear();
+            ////}
+
+            //RaycastHit[] hits = Physics.SphereCastAll(_cameraTransform.position, _playerComponents.ObjectGrow.ObjectToGrow.localScale.x / 2f/*_raycastCheckRadius*/, _rayDirection.normalized, _rayDirection.magnitude * .95f, _layersToCollideWith);
+            //for (int i = 0; i < hits.Length; i++)
+            //{
+            //    MeshRenderer temp = hits[i].collider.GetComponent<MeshRenderer>();
+            //    if (temp)
+            //    {
+            //        _previousHits.Add(temp);
+            //        _previousMaterials.Add(temp.material);
+            //        _instanceFadeMat.SetTexture("_MainTex", temp.material.GetTexture("_MainTex"));
+            //        _instanceFadeMat.SetTexture("_MetallicGlossMap", temp.material.GetTexture("_MetallicGlossMap"));
+            //        temp.material = _instanceFadeMat;
+            //    }
+            //}
+            #endregion
+            yield return _delay;
+        }
+        #endregion
+    }
+
+    private void FadeObjects(RaycastHit[] hits)
+    {        
+        _previousObjects = new Dictionary<int, FadeData>(_currentObjects);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            MeshRenderer mesh = hits[i].collider.GetComponent<MeshRenderer>();
+            FadeData temp = new FadeData(mesh.material, mesh, mesh.gameObject.GetInstanceID());
+            if (!_currentObjects.ContainsKey(temp.ObjectID))
             {
-                MeshRenderer temp = hits[i].collider.GetComponent<MeshRenderer>();
-                if (temp)
+                _currentObjects.Add(temp.ObjectID, temp);
+                _instanceFadeMat.SetTexture("_MainTex", temp.Material.GetTexture("_MainTex"));
+                _instanceFadeMat.SetTexture("_MetallicGlossMap", temp.Material.GetTexture("_MetallicGlossMap"));
+                temp.MeshRenderer.material = _instanceFadeMat;
+                //Debug.Log($"added {temp.MeshRenderer.gameObject.name}");
+            }
+        }
+        //Debug.Log($"current has size {_currentObjects.Values.Count}");
+    }
+
+    private void RemoveFade(RaycastHit[] hits)
+    {
+        //Debug.Log($"previous has size {_previousObjects.Values.Count}");
+        if (_previousObjects != _currentObjects && _previousObjects != null)
+        {
+            for(int i = 0; i < hits.Length; i++)
+            {
+                int temp = hits[i].collider.gameObject.GetInstanceID();
+                if (_previousObjects.ContainsKey(temp))
                 {
-                    _previousHits.Add(temp);
-                    _previousMaterials.Add(temp.material);
-                    _instanceFadeMat.SetTexture("_MainTex", temp.material.GetTexture("_MainTex"));
-                    _instanceFadeMat.SetTexture("_MetallicGlossMap", temp.material.GetTexture("_MetallicGlossMap"));
-                    temp.material = _instanceFadeMat;
+                    _previousObjects.Remove(temp);
                 }
             }
-            yield return _delay;
+
+            foreach (FadeData fadeData in _previousObjects.Values)
+            {
+                _previousObjects[fadeData.ObjectID].MeshRenderer.material = _previousObjects[fadeData.ObjectID].Material;
+                _currentObjects.Remove(fadeData.ObjectID);
+                //Debug.Log($"removed {_previousObjects[fadeData.ObjectID].MeshRenderer.gameObject.name}");
+            }
+        }
+        else if (hits.Length == 0 && _currentObjects.Count > 0)
+        {
+            foreach (FadeData fadeData in _currentObjects.Values)
+            {
+                _currentObjects[fadeData.ObjectID].MeshRenderer.material = _currentObjects[fadeData.ObjectID].Material;
+            }
+            _currentObjects.Clear();
         }
     }
 

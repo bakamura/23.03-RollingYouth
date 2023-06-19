@@ -32,6 +32,5 @@ public class PlayerControlers : BaseSingleton<PlayerControlers>
     {
         if (_movmentByGyro) _movmentByGyro.IsGyroActive = _isGyroActive;
         if (_movmentBySwipe) _movmentBySwipe.IsSwipeActive = _isSwipeActive;
-        Debug.Log($"gyro is {_isGyroActive}, swipe is {_isSwipeActive}");
     }
 }

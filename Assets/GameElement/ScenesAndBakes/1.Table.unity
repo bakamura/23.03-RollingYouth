@@ -1334,12 +1334,17 @@ PrefabInstance:
     - target: {fileID: 5856405440605401106, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
         type: 3}
       propertyPath: _landingPoint.y
-      value: -67.19
+      value: -65.57
       objectReference: {fileID: 0}
     - target: {fileID: 5856405440605401106, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
         type: 3}
       propertyPath: _landingPoint.z
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856405440605401106, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
+        type: 3}
+      propertyPath: _debugLandingPointSize
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5856405440605401109, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
         type: 3}

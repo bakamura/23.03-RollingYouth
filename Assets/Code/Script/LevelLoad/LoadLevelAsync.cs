@@ -29,6 +29,15 @@ public class LoadLevelAsync : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (/*other.CompareTag("Player") &&*/ _isSceneLoaded)
+        {
+            AsyncOperation operation = SceneManager.UnloadSceneAsync(SceneToLoad);
+            operation.completed += OnSceneUnloaded;
+        }
+    }
+
     private void OnSceneLoaded(AsyncOperation operation)
     {
         _isSceneLoaded = true;

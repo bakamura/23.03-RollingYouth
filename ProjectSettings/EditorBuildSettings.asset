@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameElement/ScenesAndBakes/3.Chest.unity
     guid: c221cdf74997fac4da94aea23a1c6138
+  - enabled: 1
+    path: Assets/GameElement/ScenesAndBakes/4.UnderTheBed.unity
+    guid: 1421a59f5df8fd74ea58bd98f41272e9
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ab51733a750857641b4e0208ace32f98,
       type: 2}

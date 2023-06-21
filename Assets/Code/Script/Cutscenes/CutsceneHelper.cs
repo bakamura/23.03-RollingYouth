@@ -5,12 +5,12 @@ using UnityEngine;
 public class CutsceneHelper : MonoBehaviour
 {
     [SerializeField] private MainMenu _mainMenu;
-    [SerializeField] private Animator _animator;
+    //[SerializeField] private Animator _animator;
 
-    private void Awake()
-    {
-        if (!_animator) _animator = GetComponent<Animator>();
-    }
+    //private void Awake()
+    //{
+    //    if (!_animator) _animator = GetComponent<Animator>();
+    //}
 
     public void LoadMainScene()
     {
@@ -21,6 +21,11 @@ public class CutsceneHelper : MonoBehaviour
     {
         FadeUi.Instance.UpdateFade(FadeUi.FadeTypes.FADEIN, LoadMainMenu);
     }
+
+    //public void PlayeFinalCutscene()
+    //{
+    //    if (_animator) _animator.Play("CutsceneFinal");
+    //}
 
     private void LoadMainMenu()
     {

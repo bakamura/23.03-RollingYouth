@@ -4800,7 +4800,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainMenu: {fileID: 0}
-  _animator: {fileID: 0}
 --- !u!114 &536485401
 MonoBehaviour:
   m_ObjectHideFlags: 0

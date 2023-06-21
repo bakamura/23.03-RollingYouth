@@ -123,14 +123,17 @@ public class FadeObjectsInSight : MonoBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             MeshRenderer mesh = hits[i].collider.GetComponent<MeshRenderer>();
-            FadeData temp = new FadeData(mesh.material, mesh, mesh.gameObject.GetInstanceID());
-            if (!_currentObjects.ContainsKey(temp.ObjectID))
+            if (mesh)
             {
-                _currentObjects.Add(temp.ObjectID, temp);
-                _instanceFadeMat.SetTexture("_MainTex", temp.Material.GetTexture("_MainTex"));
-                _instanceFadeMat.SetTexture("_MetallicGlossMap", temp.Material.GetTexture("_MetallicGlossMap"));
-                temp.MeshRenderer.material = _instanceFadeMat;
-                //Debug.Log($"added {temp.MeshRenderer.gameObject.name}");
+                FadeData temp = new FadeData(mesh.material, mesh, mesh.gameObject.GetInstanceID());
+                if (!_currentObjects.ContainsKey(temp.ObjectID))
+                {
+                    _currentObjects.Add(temp.ObjectID, temp);
+                    _instanceFadeMat.SetTexture("_MainTex", temp.Material.GetTexture("_MainTex"));
+                    _instanceFadeMat.SetTexture("_MetallicGlossMap", temp.Material.GetTexture("_MetallicGlossMap"));
+                    temp.MeshRenderer.material = _instanceFadeMat;
+                    //Debug.Log($"added {temp.MeshRenderer.gameObject.name}");
+                }
             }
         }
         //Debug.Log($"current has size {_currentObjects.Values.Count}");
@@ -152,7 +155,7 @@ public class FadeObjectsInSight : MonoBehaviour
 
             foreach (FadeData fadeData in _previousObjects.Values)
             {
-                _previousObjects[fadeData.ObjectID].MeshRenderer.material = _previousObjects[fadeData.ObjectID].Material;
+                if(_previousObjects[fadeData.ObjectID].MeshRenderer) _previousObjects[fadeData.ObjectID].MeshRenderer.material = _previousObjects[fadeData.ObjectID].Material;
                 _currentObjects.Remove(fadeData.ObjectID);
                 //Debug.Log($"removed {_previousObjects[fadeData.ObjectID].MeshRenderer.gameObject.name}");
             }
@@ -161,7 +164,7 @@ public class FadeObjectsInSight : MonoBehaviour
         {
             foreach (FadeData fadeData in _currentObjects.Values)
             {
-                _currentObjects[fadeData.ObjectID].MeshRenderer.material = _currentObjects[fadeData.ObjectID].Material;
+                if (_currentObjects[fadeData.ObjectID].MeshRenderer) _currentObjects[fadeData.ObjectID].MeshRenderer.material = _currentObjects[fadeData.ObjectID].Material;
             }
             _currentObjects.Clear();
         }

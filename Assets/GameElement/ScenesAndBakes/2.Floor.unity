@@ -6923,6 +6923,11 @@ PrefabInstance:
       propertyPath: _landingPoint.z
       value: 144
       objectReference: {fileID: 0}
+    - target: {fileID: 5856405440605401106, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
+        type: 3}
+      propertyPath: _maxPushDistance
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 5856405440605401109, guid: 856ec9035d5b13a47bbc48ec4dc8f427,
         type: 3}
       propertyPath: m_Name

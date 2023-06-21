@@ -33,8 +33,7 @@ public class LoadLevelAsync : MonoBehaviour
     {
         if (/*other.CompareTag("Player") &&*/ _isSceneLoaded)
         {
-            AsyncOperation operation = SceneManager.UnloadSceneAsync(SceneToLoad);
-            operation.completed += OnSceneUnloaded;
+            SceneManager.UnloadSceneAsync(SceneToLoad);
         }
     }
 

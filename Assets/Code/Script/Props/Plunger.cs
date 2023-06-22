@@ -70,7 +70,7 @@ public class Plunger : CameraUser
             //check to see if player pushed enought the leaver to launch
             else
             {
-                if (Vector3.Distance(_leaver.position, _initialLeaverPosition) >= _maxPushDistance)
+                if (Vector3.Distance(_leaver.position, _initialLeaverPosition) >= _maxPushDistance - .2f)
                 {
                     EndCameraUseWithDynamicPoints(_playerComponents.PlayerTransform, _initialCameraRotation, _initialCameraLocalPosition, _cameraLaunchAnimDuration);
                     _leaver.position = _initialLeaverPosition;

@@ -806,6 +806,7 @@ GameObject:
   - component: {fileID: 780077263}
   - component: {fileID: 780077265}
   - component: {fileID: 780077264}
+  - component: {fileID: 780077266}
   m_Layer: 8
   m_Name: LOD-4
   m_TagString: Untagged
@@ -853,6 +854,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 149.12357, y: 33.64994, z: 76.60059}
   m_Center: {x: 68.94133, y: 13.818905, z: 102.89482}
+--- !u!114 &780077266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780077262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806f83100e34b7e49b43adafa3a396b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundType: 0
+  _sfxSoundInterval: 0
+  _soundBasedOnVelocity: 0
+  _baseAudioSourceRangeMultiplyer: 2
+  _playSoundOnTriggerEnter: 1
+  _musicConfigOnTriggerEnter:
+    Clip: {fileID: 8300000, guid: ce19499d7cd5b364e92ff00195522d95, type: 3}
+    Volume: 1
+    TransitionDuration: 1
+  _sfxConfigOnTriggerEnter: []
+  _playSoundOnTriggerExit: 1
+  _musicConfigOnTriggerExit:
+    Clip: {fileID: 8300000, guid: ce19499d7cd5b364e92ff00195522d95, type: 3}
+    Volume: 0
+    TransitionDuration: 1
+  _sfxConfigOnTriggerExit: []
+  _playSoundOnCollisionEnter: 0
+  _musicConfigOnCollisionEnter:
+    Clip: {fileID: 0}
+    Volume: 0
+    TransitionDuration: 0
+  _sfxConfigOnCollisionEnter: []
 --- !u!1 &1005178015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,6 +1162,7 @@ GameObject:
   - component: {fileID: 1260485659}
   - component: {fileID: 1260485661}
   - component: {fileID: 1260485660}
+  - component: {fileID: 1260485662}
   m_Layer: 8
   m_Name: LOD-5
   m_TagString: Untagged
@@ -1160,7 +1196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7807133a36326604e9cceee2190c9127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: 1.Table
+  SceneToLoad: PileOfClothes
 --- !u!65 &1260485661
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1174,6 +1210,40 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 121.0688, y: 9, z: 81.233894}
   m_Center: {x: -87.37116, y: 0, z: -107.28862}
+--- !u!114 &1260485662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260485658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806f83100e34b7e49b43adafa3a396b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundType: 0
+  _sfxSoundInterval: 0
+  _soundBasedOnVelocity: 0
+  _baseAudioSourceRangeMultiplyer: 2
+  _playSoundOnTriggerEnter: 1
+  _musicConfigOnTriggerEnter:
+    Clip: {fileID: 8300000, guid: 60fe756ad0fa22a4f9fc085b193bb963, type: 3}
+    Volume: 1
+    TransitionDuration: 1
+  _sfxConfigOnTriggerEnter: []
+  _playSoundOnTriggerExit: 1
+  _musicConfigOnTriggerExit:
+    Clip: {fileID: 8300000, guid: 60fe756ad0fa22a4f9fc085b193bb963, type: 3}
+    Volume: 0
+    TransitionDuration: 1
+  _sfxConfigOnTriggerExit: []
+  _playSoundOnCollisionEnter: 0
+  _musicConfigOnCollisionEnter:
+    Clip: {fileID: 0}
+    Volume: 0
+    TransitionDuration: 0
+  _sfxConfigOnCollisionEnter: []
 --- !u!1 &1313654243
 GameObject:
   m_ObjectHideFlags: 0

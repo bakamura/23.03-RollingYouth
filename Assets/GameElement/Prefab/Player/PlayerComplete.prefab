@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2d7268670045d4e9d9e1e81d5279da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensitivity: 75
+  _sensitivity: 2
   _minGyroForce: 0.1
   _maxVelocity: 100
   _cameraRotation: {fileID: 1281917383749192122}

@@ -234,13 +234,13 @@ MonoBehaviour:
     ButtonIcon: {fileID: 2227187745656189030}
     Icons:
     - {fileID: 21300000, guid: 1778f012fbd05e54ca2f626c9e725478, type: 3}
-    - {fileID: 21300000, guid: 6d11acc33c32a8c4c887121d75c38110, type: 3}
+    - {fileID: 21300000, guid: c1d112d42d591254f8a19ec451205470, type: 3}
     CurrentIconIndex: 0
   - ButtonID: music
     ButtonIcon: {fileID: 4834234006941779247}
     Icons:
     - {fileID: 21300000, guid: 9af78487090d14c45866e54e38f211a2, type: 3}
-    - {fileID: 21300000, guid: 6d11acc33c32a8c4c887121d75c38110, type: 3}
+    - {fileID: 21300000, guid: 158e97165bed5b6478284db4952d6702, type: 3}
     CurrentIconIndex: 0
   - ButtonID: controls
     ButtonIcon: {fileID: 9119376757256665608}
